@@ -1,0 +1,10 @@
+.selet-counrty > div {
+    height: 34px;
+    background-color: #fff;
+}
+.selet-counrty::placeholder {
+    color: #8f8f8f;
+    font-size: 14px;
+    position: relative;
+    top: 10px;
+}

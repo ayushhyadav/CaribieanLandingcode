@@ -1,0 +1,87 @@
+.black-background {
+  background: black;
+  height: 90px;
+}
+.background-video {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Ya phir, aap apne liye appropriate height set karein */
+  overflow: hidden;
+}
+
+.background-video video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Video ko puri jagah par fit karne ke liye */
+  z-index: -1; /* Background ke piche rakhega */
+}
+
+/* Aapke jo bhi CSS properties aur classes hain, unhe yahaan add karein */
+.imageslogo {
+  width: 180px;
+
+  /* height: 100\\px; */
+}
+
+.card-group {
+  display: flex;
+  width: 100%;
+  padding: 20px 20px;
+  gap: 20px;
+  justify-content: space-between;
+  height: 100%;
+  margin: 5px auto;
+  justify-content: center;
+}
+.card {
+  width: 100%;
+  padding: 10px 50px;
+  /* border: 2px solid gainsboro; */
+  box-shadow: 0px 0px 10px gainsboro;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+.card:hover {
+  color: white;
+  background-color: #ff6b01e0;
+}
+
+.card-body .card-text {
+  color: black;
+  /* font-size: 10px; */
+  font-weight: bold;
+  display: flex;
+  text-align: start;
+  width: 100%;
+  justify-content: start;
+  margin-top: 10px;
+}
+
+.why {
+  font-size: 40px;
+  margin-top: 50px;
+  font-weight: 900;
+  border-bottom: 3px solid orangered;
+  width: 26%;
+  padding: 10px;
+  margin-left: 5.5rem;
+  color: rgb(58, 58, 58);
+}
+
+@media screen and (max-width: 768px) {
+  .card-group {
+    display: block;
+    width: 100%;
+
+    padding: 10px 10px;
+  }
+
+  .why {
+    width: 80%;
+    font-size: 3.5rem;
+    margin-left: 10px;
+  }
+}
