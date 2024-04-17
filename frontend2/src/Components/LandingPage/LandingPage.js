@@ -15,7 +15,7 @@ function LandingPage() {
       <div class="card-group">
       
   <div class="card">
-  <img style={{width:"50px",marginLeft:"-5px" ,color:"red"}} class="card-img-top" src="assets/images/1000_F_205712496_QbG8Z5N5FJqOaARxbUkgOCEbQi0q0UeH-removebg-preview.png" alt="Card image cap"/>
+  <img  style={{width:"50px",marginLeft:"-5px" ,color:"red"}} class="card-img-top" src="assets/images/1000_F_205712496_QbG8Z5N5FJqOaARxbUkgOCEbQi0q0UeH-removebg-preview.png" alt=""/>
     <div class="card-body">
       <h5 style={{fontSize:"15px"}} class="card-title">Early Access</h5>
       <p class="card-text"> Get priority in listing your property and setting
@@ -24,7 +24,7 @@ the stage for memorable stays. </p>
     </div>
   </div>
   <div class="card">
-    <img style={{width:"80px" ,color:"red"}} class="card-img-top" src="assets/images/how-it-works-icon-8-removebg-preview.png" alt="Card image cap"/>
+    <img style={{width:"80px" ,color:"red"}} class="card-img-top" src="assets/images/how-it-works-icon-8-removebg-preview.png" alt=""/>
     <div class="card-body">
       {/* <h5 class="card-title">How It Works</h5> */}
       <p class="card-text">  Sign Up: Quick and<br/> easy-just a few clicks. Stay Informed: Receive updates, tips, and more directly to
@@ -48,7 +48,7 @@ ensuring we meet your needs and exceed expectations.</p>
 
   
   <div class="card">
-  <img className="rocket" style={{width:"70px" ,color:"red"}} class="card-img-top" src="assets/images/free-rocket-icon-3432-thumb.png" alt="Card image cap"/>
+  <img className="rocket" style={{width:"70px" ,color:"red"}} class="card-img-top" src="assets/images/free-rocket-icon-3432-thumb.png" alt=""/>
  
     <div  class="card-body">
       <h5 style={{fontSize:"15px"}}  class="card-title">Launch Ready</h5>

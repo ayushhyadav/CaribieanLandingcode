@@ -95,7 +95,7 @@ function FAQ() {
           </div>
           <div className="imagesFAQ">
 
-            <img src="assets/images/join.png"></img>
+            <img alt='' src="assets/images/join.png"></img>
             {/* <video autoplay loop controls >
   <source src="assets/WhatsAppVideo2024-03-05at7.22.09PM-ezgif.com-video-to-gif-converter.mp4" type="video/mp4"/>
   Your browser does not support the video tag.

@@ -1,14 +1,14 @@
     import "./Register.css";
     import { useState, useEffect } from "react";
     import axios from "axios";
-    import React, { useRef } from 'react';
+    import React from 'react';
     import PhoneInput from "react-phone-input-2";
     import "react-phone-input-2/lib/style.css";
     
     
     function Register() {
     
-      const form = useRef();
+      // const form = useRef();
     
       const [isVisible, setIsVisible] = useState(false);
      
@@ -37,7 +37,7 @@
           behavior: 'smooth' 
         });
       };
-      const [errorMessage, setErrorMessage] = useState("");
+      const [errorMessage,] = useState("");
       const [successMessage, setSuccessMessage] = useState("");
       const [yourname, setYourname] = useState("");
       const [email, setEmail] = useState("");
@@ -79,23 +79,23 @@ axios
             console.error("Error submitting form:", error);
           });
       };
-      const isValidEmail = (email) => {
-        // Basic email validation regex
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-      };
+      // const isValidEmail = (email) => {
+      //   // Basic email validation regex
+      //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      //   return emailRegex.test(email);
+      // };
     
-      const isValidPhoneNumber = (phone) => {
-        // Basic phone number validation regex
-        const phoneRegex = /^\d+$/;
-        return phoneRegex.test(phone);
-      };
+      // const isValidPhoneNumber = (phone) => {
+      //   // Basic phone number validation regex
+      //   const phoneRegex = /^\d+$/;
+      //   return phoneRegex.test(phone);
+      // };
     
-      const clearErrorMessageAfterDelay = () => {
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 3000); 
-      };
+      // const clearErrorMessageAfterDelay = () => {
+      //   setTimeout(() => {
+      //     setErrorMessage("");
+      //   }, 3000); 
+      // };
     
       const clearSuccessMessageAfterDelay = () => {
         setTimeout(() => {

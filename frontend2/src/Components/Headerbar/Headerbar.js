@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './Headerbar.css';
 
 function Headerbar() {
-  const [clicked, setClicked] = useState(false);
-  const [clicked2, setClicked2] = useState(false);
+  const [ setClicked] = useState(false);
+  const [ setClicked2] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ function Headerbar() {
 
                   <i class="fa-solid fa-bars"></i>
                   </button>
-                  <img className="imageslogo" src="assets/images/CARIBBEANEAZE__2_-1-removebg-preview.png"></img>
+                  <img alt='' className="imageslogo" src="assets/images/CARIBBEANEAZE__2_-1-removebg-preview.png"></img>
                   <span></span>
 
                 </div>
