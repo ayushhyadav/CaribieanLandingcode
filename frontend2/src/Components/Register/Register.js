@@ -63,7 +63,7 @@
         data.append("massage", massage);
         data.append("propertyImage", propertyImage);
 axios
-          .post("https://caribbeaneaze.com/api/formdata", data)
+          .post(process.env.REACT_APP_API_URL, data)
           .then((response) => {
             console.log(response);
             setSuccessMessage("Form submitted successfully!");
