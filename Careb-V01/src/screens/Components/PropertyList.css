@@ -1,0 +1,76 @@
+
+
+.Diversify-btn button img {
+    padding: 0px 0px 0 19px;
+    max-width: 46px;
+}
+.Diversify-btn button {
+    display: flex;
+    width: auto !important;
+    justify-content: space-between;
+    font-weight: 700;
+    padding: 8px 10px;
+    position: relative;
+}
+
+.tooltip-box {
+    position: absolute;
+    top: -56px;
+    color: #000;
+    right: 0;
+    left: 0px;
+    font-size: 14px;
+    line-height: 1;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 1px solid #323232;
+    padding: 8px 5px;
+    font-weight: 500;
+    display: none;
+}
+
+.tooltip-box p {
+    margin: 0;
+}
+
+
+
+@media screen and (max-width: 576px) {
+    .list-box {
+        display: block !important;
+        padding: 20px 0 !important;
+    }
+    .list-input {
+        flex-wrap: wrap;
+    }
+    .list-input input {
+        width: 100% !important;
+    }
+    .list-input select {
+        width: 100% !important;
+    }
+    .list-input-number {
+        display: block !important;
+    }
+    .input-fild {
+        width: 100% !important;
+    }
+    .Diversify-btn button img {
+        padding: 0px 0px 0 0px;
+        max-width: 22px;
+    }
+    .Diversify-btn button {
+        font-size: 0;
+        padding: 10px 10px;
+    }
+    .list-box h4 {
+        font-size: 22px !important;
+    }
+    .listing-box {
+        width: 100% !important;
+    }
+    .type-p {
+        width: 100% !important;
+    }
+    
+}

@@ -1,0 +1,40 @@
+.btn-white button {
+    background: transparent;
+}
+.table-Page {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-top: 1px solid rgba(229, 231, 235, 1);
+  }
+
+@media screen and (max-width: 768px) {
+    .user-pro {
+        width: 100% !important;
+        flex-wrap: wrap;
+        margin-bottom: 0 !important;
+    }
+    .user-pro img.img-pro{
+        width: 80px !important;
+        height: 80px !important;
+        margin-bottom: 20px;
+    }
+    .pro-icon label {
+        font-size: 18px !important;
+    }
+    .btn-white {
+        width: 100% !important;
+    }
+    .btn-white button {
+        width: 100% !important;
+        margin-bottom: 0 ;
+    }
+    .box-profile {
+        flex-wrap: wrap;
+    }   
+    .booking-box {
+        height: auto !important;
+        margin-bottom: 30px;
+    }
+    
+}

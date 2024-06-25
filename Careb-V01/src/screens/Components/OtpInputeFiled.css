@@ -1,0 +1,38 @@
+.otp-no p {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+
+@media screen and (max-width: 576px) {
+    .v-phone-number {
+        width: auto !important;
+        padding: 30px 0 !important;
+    }
+    .mo-no {
+        width: 100% !important;
+        flex-wrap: wrap;
+    }
+    .otp-no input {
+        width: 35px !important;
+    }
+    .mo-no button {
+        width: 100% !important;
+        margin: 0 !important;
+        margin-top: 15px !important;
+    }
+    .main-btn {
+        margin-top: 25% !important;
+        margin-right: 10%;
+    }
+    button.back-btn {
+        margin-right: 25px;
+        padding-top: 16px;
+    }
+    .content.content-open {
+        margin: 0 10px;
+    }
+}

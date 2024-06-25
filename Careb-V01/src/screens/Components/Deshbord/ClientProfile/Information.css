@@ -1,0 +1,124 @@
+/* Information.css */
+.information-container {
+    width: 70%;
+    padding: 1.5rem 0; 
+    padding-left: 20px;
+  }
+  
+  .step-label {
+    color: #0f172a;
+    text-align: right;
+    font-weight: 700;
+    float: left;
+  }
+  .section-title {
+    color: #0f172a;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 1rem;
+    float: left;
+    clear: both;
+  }
+  
+  
+  .section-description {
+    color: #0f172a; 
+    font-size: 16px;
+    font-weight: 400;
+    float: left;
+    clear: both;
+    margin-bottom: 40px;
+  }
+  
+  .container.sidebar-open .menu-icon {
+    display: none;
+}
+  .input-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .input-field {
+    width: 100%;
+    margin: 10px 20px 10px 0px;
+    margin-bottom: 1rem;
+  }
+  
+  .input-label {
+    color: #474554;
+  }
+  
+  .input {
+    width: 100%;
+    height: 35px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 0.1px solid #e2e8f0;
+    border-radius: 7px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.625rem;
+  }
+  
+  .next-button {
+    color: white;
+    background: #f15a29;
+    width: 15%;
+    border: none;
+    border-radius: 0.625rem;
+    height: 45px;
+    cursor: pointer;
+    margin-right: 18px;
+  }
+  .input-field input {
+    border: 1px solid rgba(226, 232, 240, 1);
+    margin-top: 10px;
+}
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .information-container {
+      width: 90%; /* Adjust the width for smaller screens */
+    }
+  
+    .section-title {
+      width: 100%; /* Make the title full-width on smaller screens */
+    }
+  
+    .section-description {
+      width: 100%; /* Make the description full-width on smaller screens */
+    }
+  
+    .input-container {
+      width: 100%; /* Make the input fields stack on smaller screens */
+      margin-left: 0; /* Remove left margin */
+    }
+  
+    .input-field {
+      width: 100%; /* Make the input fields full-width on smaller screens */
+    }
+  
+    .next-button {
+      width: 100%; /* Make the button full-width on smaller screens */
+    }
+    .container.sidebar-open .menu-icon {
+      display: block;
+  }
+  .section-title {
+    font-size: 22px;
+  }
+  .information-container {
+    padding-left: 5px;
+}
+.information-container {
+  padding-left: 5px;
+}
+.input-container {
+  flex-wrap: wrap;
+}
+  }
+  

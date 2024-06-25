@@ -1,0 +1,31 @@
+
+
+@media screen and (max-width: 576px){
+    .upload-pic h4 {
+        font-size: 22px !important;
+        margin: 0;
+    }
+    .upload-box {
+        min-height: 200px;
+        max-height: 200px;
+    }
+    label.upload-btn {
+        width: auto !important;
+        padding: 15px;
+    }
+    button.next-btn {
+        width: auto !important;
+        padding: 9px 40px;
+        margin: 18px 0 0 28px;
+    }
+    button.Back-btn {
+        width: auto !important;
+    }
+    button.Back-btn {
+        width: auto !important;
+        padding: 18px;
+    }
+    .upload-pic {
+        padding: 20px 0 !important;
+    }
+}

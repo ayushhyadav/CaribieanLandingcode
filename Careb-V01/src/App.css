@@ -1,0 +1,30 @@
+.box {
+    height: 2682px;
+    width: 818px;
+  }
+  
+  .box .overlap-group-wrapper {
+    border: 1px dashed;
+    border-color: #94a3b8;
+    border-radius: 5px;
+    height: 2682px;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 818px;
+  }
+  
+  .box .overlap-group {
+    border-radius: 5px;
+    height: 50px;
+    position: relative;
+    width: 164px;
+  }
+  
+  .box .button-instance {
+    left: 0 !important;
+    position: absolute !important;
+    top: 0 !important;
+  }
+  

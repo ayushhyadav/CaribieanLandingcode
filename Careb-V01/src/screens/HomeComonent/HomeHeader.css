@@ -1,0 +1,44 @@
+.btn-top {
+    display: none;
+}
+.Become .btn:hover {
+    color: #000;
+}
+
+ul.navbar-nav {
+    margin-left: 80px;
+}
+
+ul.navbar-nav .nav-item a:target {
+    color: #f26436;
+}
+
+img.hind-bs {
+    width: 23px;
+}
+@media screen and (max-width: 576px) {
+    .main-hd {
+        width: 100% !important;
+        padding: 0;
+    }
+    .main-hd .navbar-toggler {
+        width: auto !important;
+    }
+    .main-hd .navbar-nav {
+        flex-direction: column !important;
+        align-items: flex-end;
+    }
+    .main-hd .navbar-collapse ul {
+        margin-top: 15px;
+    }
+.Become{
+    display: none;
+}
+.Signup{
+    display: none;
+}
+.btn-top {
+    display: block;
+}
+}
+

@@ -1,0 +1,31 @@
+@media (max-width: 768px) {
+    .main-section h4 {
+        font-size: 22px !important;
+    }
+    .Extra-Services {
+        flex-direction: column;
+        width: 100% !important;
+    }
+    .Extra-Services ul li {
+        width: 100% !important;
+    }
+    ul.service-ex {
+        width: 100% !important;
+        margin: 10px 0 !important;
+        padding: 0;
+    }
+    .Extra-Services {
+        width: 100% !important;
+        align-items: center;
+    }
+    h3.heding {
+        font-size: 28px !important;
+    }
+    .Passport-ID h4 {
+        font-size: 22px !important;
+    }
+    .Extra-Services img{
+        margin-left: 0 !important;
+    }
+}
+    

@@ -1,0 +1,12 @@
+@media screen and (max-width: 576px){
+    .main-section {
+        width: auto !important;
+        padding: 20px 0 !important;
+    }
+    .opt-Located {
+        flex-direction: column !important;
+    }
+    .min-opt {
+        width: 100% !important;
+    }
+}

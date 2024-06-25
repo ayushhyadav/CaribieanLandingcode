@@ -1,0 +1,246 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+   margin-top: 30px;
+ width: 100%;
+  
+}
+.epmt img {
+  display: none;
+}
+.table-full tr td img {
+  width: 100%;
+  max-width: 60px;
+}
+.table-full tr td {
+  font-weight: 600;
+  font-size: 14px;
+  padding-left: 5px;
+  height: 70px;
+
+}
+.table-full tr td:first-child {
+  padding-left: 20px;
+  width: 70px;
+}
+.table-full tr td p{
+  font-size: 14px;
+}
+.table-full tr td p span{
+  color: #f15a29;
+
+}
+
+.table-full tr td button {
+  width: auto;
+  font-size: 13px;
+  border: none;
+  height: auto;
+  padding: 5px 22px;
+  border-radius: 4px;
+  background: rgba(209, 250, 229, 1);
+  color: rgba(6, 78, 59, 1);
+}
+
+table.table-full tbody th {
+  height: 59px;
+}
+
+.table-full tbody tr {
+  border-bottom: 1px solid rgba(229, 231, 235, 1);
+}
+
+.header {
+  width: 111%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.add-property-button {
+  height: 45px;
+  width: 150px;
+  background: #f15a29;
+  border-radius: 10px;
+  border-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 90%;
+  margin-top: 20px;
+}
+
+.listing-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+ 
+}
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+.edit-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 23%;
+  border-radius: 10px;
+  height: 50px;
+  background: #0F172A;
+  color: #F8FAFC;
+  font-size: 16px;
+  font-weight: 600;
+  border: 0;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+.card-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.card-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.card-rating {
+  font-size: 12px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.card-location {
+  font-size: 14px;
+  color: #f15a29;
+}
+
+.card-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  border-top: 1px solid #E5E7EB;
+  
+}
+
+
+.card-price .card-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  border-top: 1px solid #E5E7EB;
+  
+}
+
+
+
+.card-price .price .price-label {
+ 
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.card-price .price .price-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.card-price .price .price-unit {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.card-price .distance {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #6b7280;
+} .price-unit {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.card-price .distance {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+
+@media (max-width: 576px) {
+  .table-full tr td img{
+    width: auto;
+  }
+  .table-full tr td {
+    white-space: nowrap;
+}
+/* .table-full tr td:first-child{
+  padding-left: 0;
+} */
+.epmt{
+  height: auto !important;
+}
+.topMain {
+  width: 100% !important;
+}
+.table-Page {
+  overflow-x: scroll;
+}
+.table-full tr td {
+  padding-left: 25px;
+}
+.table-full tbody tr {
+  height: 50px;
+}
+.epmt img {
+  width: 50px;
+  display: block;
+}
+.bookinglist {
+  margin-top: 0% !important;
+}
+.table-full tr td p span {
+  font-size: 12px;
+}
+/* .table-full tr th label:first-child {
+  padding-left: 0 !important;
+} */
+table.table-full tbody th label {
+  padding-left: 24px !important;
+}
+}

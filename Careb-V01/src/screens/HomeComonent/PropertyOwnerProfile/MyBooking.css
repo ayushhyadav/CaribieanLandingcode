@@ -1,0 +1,32 @@
+/* Define styles for the booking container */
+.booking-container {
+    display: flex;
+    flex-direction: column; /* Stack components vertically by default */
+    width: 90%;
+    margin: 0 auto;
+    border-top: 1px solid #E2E8F0;
+  }
+
+ 
+  
+  /* Adjust styles for screens larger than 768px */
+  @media screen and (min-width: 768px) {
+    .booking-container {
+      flex-direction: row; /* Display components side by side on larger screens */
+      justify-content: space-between; /* Add space between components */
+      align-items: flex-start; /* Align components to the top */
+    }
+    
+    /* Specific styles for Map and JohnProperties */
+    .booking-container > div {
+      width: 48%; /* Adjust the width as needed */
+    }
+  }
+  
+  /* Adjust styles for screens smaller than 768px */
+  @media screen and (max-width: 767px) {
+    .booking-container {
+      flex-direction: column; /* Stack components vertically on small screens */
+    }
+  }
+  

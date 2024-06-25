@@ -1,0 +1,138 @@
+
+.headingmian h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #000;
+  margin: 35px 20px;
+}
+
+
+.carousel-list {
+  max-width: 90%;
+}
+
+.btn-sub {
+  width: 91.5%;
+}
+
+.btn-sub button {
+  width: auto;
+  padding: 0 40px;
+  background: rgba(241, 90, 41, 1);
+  color: #fff;
+  font-weight: 500;
+  float: right;
+}
+
+.headingmian h1 {
+  font-size: 24px;
+  margin: 20px 20px;
+}
+
+.check-in {
+  display: contents;
+}
+
+.btn-top a button {
+  width: 8.5rem !important;
+  margin: 0 !important;
+}
+
+.advance-filter-button button {
+  width: auto !important;
+  padding: 0 20px !important;  
+}
+/* Styles for larger screens */
+@media (min-width: 768px) {
+    /* Example: Set a minimum width for the Crousel */
+    .carousel-container {
+      min-width: 50%;
+      margin: 0 auto;
+    }
+  
+    /* Example: Adjust font size for the HomeHeader */
+    .home-header {
+      font-size: 24px;
+    }
+  
+    /* Add other responsive styles for larger screens here */
+  }
+  
+  /* Styles for smaller screens */
+  @media (max-width: 767px) {
+    /* Example: Center the Crousel and set its width to 100% */
+    .carousel-container {
+      width: 100%;
+      margin: 0 auto;
+    }
+  
+    /* Example: Adjust font size for the HomeHeader */
+    .home-header {
+      font-size: 20px;
+    }
+    .content-section {
+      background-size: cover;
+    }
+    .advance-filter-button button {
+      width: 100% !important;
+  }
+  .btn-top {
+    text-align: center;
+    margin-top: 15px;
+}
+.hind-bs{
+  display: none;
+}
+  }
+  
+  @media screen and (max-width: 576px) {
+    .slider-box {
+      width: 100% !important;
+  }
+  .main-title {
+    font-size: 26px;
+    margin-bottom: 1.4rem;
+    margin-left: 1.1rem;
+    padding: 0;
+    margin-top: 0;
+}
+.filter-container{
+  height: auto;
+}
+.filter-item {
+  flex: 1 1;
+  margin-bottom: 10px;
+   margin-right: 0px;
+  border-left:none !important;
+  box-sizing: border-box;
+  padding-left: 10px;
+  margin: 10px 10px;
+}
+.check-in {
+  display: flex;
+}
+.input {
+
+  padding: 5px;
+
+  }
+  .filter-container .filter-item:last-child {
+    margin: 10px 0px 0 0;
+}
+.Email-support {
+  flex-wrap: wrap;
+}
+.emailsupt {
+  width: 100% !important;
+  display: block !important;
+  padding-left: 35px;
+  border-bottom: 1px solid #323232;
+  border-right: 0 !important;
+  padding-bottom: 15px;
+}
+.support {
+  width: 100% !important;
+  margin-left: 0 !important;
+  padding: 0 20px;
+}
+}

@@ -1,0 +1,201 @@
+.popup-content {
+    height: 100vh !important;
+}
+.top-btn button {
+    width: auto !important;
+}
+.Amenities ul li {
+    padding: 10px 12px;
+    margin: 5px;
+    height: auto !important;
+    cursor: pointer;
+}
+.popup-country .carousel-list {
+    max-width: 100%;
+    padding: 0;
+}
+
+.Amenities ul {
+    width: auto !important;
+    padding: 0;
+    margin: 5px;
+}
+.Amenities {
+    flex-wrap: wrap;
+    margin: 0 !important;
+}
+
+@media (max-width: 576px) {
+    .popup-content {
+        width: 100%;
+        height: 100vh !important;
+    }
+    .top-btn button {
+        width: auto !important;
+    }
+    .Amenities ul li {
+        padding: 10px 12px;
+        margin: 5px;
+        height: auto !important;
+    }
+    .Amenities ul {
+        width: auto !important;
+        padding: 0;
+        margin: 5px;
+    }
+    .Amenities {
+        flex-wrap: wrap;
+        margin: 0 !important;
+    }
+}
+
+.ourworks-box{
+    width: 60%;
+    justify-content: center;
+    text-align: center;
+}
+
+.our-works-head{
+    font-size: 30px;
+    font-weight: 400;
+    color: black;
+}
+.introduce{
+    height: 250px;
+    background-color:white;
+    box-shadow: 0 3px 10px #5969f642;
+    border-bottom: 4px solid #5969f6;
+    color: black;
+}
+
+.introduce:hover{
+    box-shadow: 0 3px 15px #5969f666;
+    border-bottom: 4px solid #B122e5;
+    color: black;
+    text-decoration: none;
+}
+.flex-column-1{
+    height: 70%;
+    width: 100%;
+
+}
+.flex-column-2{
+    height: 30%;
+    width: 100%;
+    align-items:center;
+}
+.text-gray{
+    color: gray;
+}
+.pic{
+    height: 70px;
+    width: 70px;
+    margin-left: 20px;
+    border-radius: 50%;
+    transition: all .2s ease-in-out;
+}
+
+.introduce:hover .pic{
+    transform: scale(1.1);
+}
+.carousel-indicators .active{
+    background-color: #46eeaa;
+}
+.carousel-indicators li{
+    background-color: #c8e5ff;
+}
+.carousel-indicators{
+    bottom: -50px;
+}
+.p1{
+    background-image: url("http://lorempixel.com/150/150/nature");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.p2{
+    background-image: url("http://lorempixel.com/150/150/people");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.p3{
+    background-image: url("http://lorempixel.com/150/150/cats");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* CSS Styles */
+.field-containerH {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.labelH {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.input-containerH {
+    width: 100%;
+    height: 45px;
+    border-radius: 10px;
+    background: white;
+    /* border: 1px solid #000; */
+    background: transparent;
+}
+
+.inputH {
+    width: 100%;
+    height: 45px;
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid grey;
+}
+
+.select-personH {
+    width: 100%;
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .field-containerH {
+        margin-top: 10px;
+        padding: 5px;
+    }
+
+    .labelH {
+        font-size: 25px;
+    }
+
+    .inputH, .select-personH {
+        height: 40px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .field-containerH {
+        margin-top: 5px;
+        padding: 2px;
+    }
+
+    .labelH {
+        font-size: 14px;
+    }
+
+    .inputH, .select-personH {
+        height: 45px;
+        padding: 3px;
+        background: white;
+    }
+    .input-containerH{
+        background: white;
+    }
+}

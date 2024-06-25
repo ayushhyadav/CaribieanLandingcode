@@ -1,0 +1,206 @@
+/* Default styles for the container */
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  /* border-left: 1px solid #E2E8F0; */
+  width: 100%; /* Adjust width for larger screens */
+  margin: 0 auto;
+}
+
+/* Header styles */
+.header {
+  width: 100%; /* Adjust to full width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0; /* Add padding for spacing */
+}
+
+
+
+.title {
+  margin-top: 20px; /* Decrease margin for smaller screens */
+  font-size: 24px; /* Increase font size for larger screens */
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Adjust button size for larger screens */
+.add-property-button {
+  height: 45px; /* Decrease height for smaller screens */
+  width: 150px;
+  font-size: 16px;
+}
+
+/* Grid container styles */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust column sizes for responsiveness */
+  gap: 20px;
+  width: 100%; /* Adjust to full width */
+  margin-top: 0px;
+  margin-bottom: 20px; /* Add margin to bottom for spacing */
+  padding: 10px 0; /* Add padding for spacing */
+}
+
+/* Listing card styles */
+.listing-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+}
+
+/* Adjust edit button size for larger screens */
+.edit-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30%; /* Decrease width for smaller screens */
+  height: 50px;
+  font-size: 16px; /* Increase font size for larger screens */
+}
+
+/* Card content styles */
+.card-content {
+  padding: 10px;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Card heading styles */
+.card-heading {
+  font-size: 14px; /* Increase font size for larger screens */
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Card rating styles */
+.card-rating {
+  font-size: 14px; /* Increase font size for larger screens */
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Card description styles */
+.card-description {
+  font-size: 14px; /* Increase font size for larger screens */
+  color: #6b7280;
+}
+
+/* Card location styles */
+.card-location {
+  font-size: 14px; /* Increase font size for larger screens */
+  color: #f15a29;
+}
+
+/* Card price styles */
+.card-price {
+  display: flex;
+  /* flex-direction: column; Stack price and distance on top of each other for smaller screens */
+  margin-top: 10px; /* Increase margin for spacing */
+  border-top: 1px solid #E5E7EB;
+  padding: 10px 0; /* Add padding for spacing */
+}
+
+/* Price label styles */
+.card-price .price-label {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Price value styles */
+.card-price .price-value {
+  font-size: 18px; /* Increase font size for larger screens */
+  font-weight: 700;
+  color: #16a34a;
+}
+
+/* Price unit styles */
+.card-price .price-unit {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Distance styles */
+.card-price .distance {
+  margin-top: 10px; /* Increase margin for spacing */
+  font-size: 14px; /* Increase font size for larger screens */
+  color: #6b7280;
+}
+
+/* Price unit styles */
+.price-unit {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Apply styles for screens smaller than 768px (adjust breakpoints as needed) */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 95%; /* Adjust width for smaller screens */
+  }
+
+  .title {
+    margin-top: 10px; /* Decrease margin for smaller screens */
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+
+  .add-property-button {
+    height: 40px; /* Decrease height for smaller screens */
+    width: 130px; /* Decrease width for smaller screens */
+    font-size: 14px; /* Decrease font size for smaller screens */
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust column sizes for smaller screens */
+    gap: 15px; /* Decrease gap for smaller screens */
+    padding: 5px; /* Add padding for spacing */
+    margin-top: 80%;
+
+  }
+
+  .edit-button {
+    width: 25%; /* Decrease width for smaller screens */
+    height: 40px; /* Decrease height for smaller screens */
+    font-size: 14px; /* Decrease font size for smaller screens */
+  }
+
+  .card-heading {
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+
+  .card-rating {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  .card-description {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .card-location {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .card-price .price-label,
+  .card-price .price-value,
+  .card-price .price-unit,
+  .card-price .distance,
+  .price-unit {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+  .container {
+    padding: 20px 10px;
+  }
+}

@@ -1,0 +1,58 @@
+
+@media (max-width: 768px) {
+    .sidebar {
+      display: block;
+      width: 100%;
+    }
+
+    .container.sidebar-open {
+      margin-left: 0;
+    }
+  
+    .menu-bar {
+      display: none;
+    }
+  
+    .menu-icon {
+      display: block;
+    }
+  }
+
+  
+  @media (min-width: 770px) {
+    .sidebar {
+      display: none;
+    }
+  
+    .menu-bar {
+      display: flex;
+      width: 25%;
+    }
+  
+    .container {
+      margin-left: 25%;
+    }
+  
+    .menu-icon {
+      display: none;
+    }
+  
+    .large-screen-content {
+      width: 25%;
+    }
+  }
+
+  
+  .container {
+    display: flex;
+  }
+
+  
+  .sidebar {
+    width: 25%;
+  }
+
+
+
+
+  

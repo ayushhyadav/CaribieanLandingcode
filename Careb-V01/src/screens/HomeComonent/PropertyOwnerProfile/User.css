@@ -1,0 +1,151 @@
+/* Default styles for larger screens */
+.user-card {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  height: 120px;
+
+}
+
+.user-info {
+  width: 80%;
+  display: flex;
+}
+
+.user-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+}
+.header label.title {
+  font-size: 20px;
+  color: #0f172a;
+}
+.user-details {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 23px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.user-address {
+  color: #64748B;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.user-ratings {
+  display: flex;
+  align-items: center;
+}
+
+.star-rating {
+  width: 19px;
+  height: 18px;
+}
+
+.rating-count {
+  color: #64748B;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.view-location-button {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0F172A;
+  margin-left: 20px;
+  margin-top: 20px;
+  border: 1px solid #0F172A;
+  background: none;
+  padding: 7px 15px;
+}
+
+.message-button {
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-top: 20px;
+  background: #0F172A;
+  padding: 6px 30px;
+}
+
+.main-map>div {
+  width: 100% !important;
+  margin-right: 0 !important;
+}
+
+.map-heading label {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 30px 0px 20px;
+  color: rgba(15, 23, 42, 1);
+}
+
+.side-map {
+  position: relative;
+}
+
+.side-map>div {
+  width: auto !important;
+  position: static !important;
+  height: auto !important;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .user-card {
+    margin-left: 20px;
+  }
+
+  .user-card {
+    width: auto;
+}
+  .user-info {
+    flex-direction: row;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .user-image {
+    margin-bottom: 10px;
+  }
+
+  .view-location-button {
+    margin-bottom: 90px;
+  }
+
+  .message-button {
+    /* margin-top: 90px; */
+    width: 100%;
+    max-width: 200px;
+    /* Adjust max-width as needed */
+  }
+
+  .buttons-row {
+    margin-top: 20px;
+    /* Add some top margin for smaller screens */
+  }
+
+  .small-screen-image-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .small-screen-image {
+    width: 35px;
+    /* Adjust the image width as needed */
+    height: 35px;
+    /* Adjust the image height as needed */
+    margin-right: 1px;
+    /* Add some spacing between images on small screens */
+    margin-left: 20px;
+  }
+}

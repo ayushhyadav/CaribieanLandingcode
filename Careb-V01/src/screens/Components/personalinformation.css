@@ -1,0 +1,17 @@
+
+@media screen and (max-width: 576px) {
+
+    .side-icon {
+        width: 100% !important;
+    }
+    .side-profile {
+        width: 32px !important;
+        height: 31px !important;
+        margin-right: 15px;
+    }
+    .input-field input.input {
+        background: transparent;
+        background-color: transparent;
+    }
+    
+}

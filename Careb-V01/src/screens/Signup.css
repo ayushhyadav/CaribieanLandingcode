@@ -1,0 +1,164 @@
+.signup-descap p {
+    color: #F8FAFC;
+    font-size: 13px;
+    line-height: 19px;
+    margin-top: 20px;
+    padding: 0 4px;
+}
+
+img {
+    width: 100%;
+}
+
+.regis-heading button {
+    width: auto;
+    background: transparent;
+    color: #000;
+    font-weight: 700;
+    padding: 0px 10px;
+    font-size: 14px;
+
+}
+
+.team\& {
+    height: 300px !important;
+    scrollbar-color: rgba(241, 90, 41, 1) rgba(226, 232, 240, 1);
+    scrollbar-width: thin;
+}
+
+
+.regis-heading p {
+    font-size: 30px;
+    font-weight: 700;
+    color: #000;
+}
+
+.detail {
+    position: absolute;
+    width: 100%;
+    background-image: linear-gradient(195.42deg, #56BBFF -63.22%, rgba(85, 187, 255, 0.21) -63.2%, #061BEB 87.54%);
+    background-size: cover;
+    bottom: 0;
+}
+
+.signup-img img:first-child {
+    height: 100vh;
+}
+
+
+.SignuPdetail {
+    height: "100%";
+    width: '100%';
+    background-image: linear-gradient(195.42deg, #56BBFF -63.22%, rgba(85, 187, 255, 0.21) -63.2%, #061BEB 87.54%);
+}
+
+.Main-Container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.signup-img {
+    position: relative;
+}
+.or > div {
+    width: 100%;
+    margin-bottom: 8px;
+}
+.or h6 {
+    margin: 0 15px;
+    color: #a4a4a4;
+}
+
+@media screen and  (max-width: 576px) {
+    .signup-img img:first-child {
+        height: auto;
+    }
+    .signup-descap p {
+        font-size: 12px;
+    }
+    .signup-descap p {
+        margin-top: 7px;
+    }
+    .detail {
+        padding: 10px 15px !important;
+    }
+    .regis-heading p {
+        font-size: 26px;
+        font-weight: 700;
+        color: #000;
+    }
+    .regis-heading button {
+        width: auto;
+        background: transparent;
+        color: #000;
+        font-weight: 700;
+        padding: 0px 12px;
+        font-size: 11px;
+        border: 1.7px solid black;
+        height: 41px;
+    }
+
+    .social-btn img {
+        margin-left: 0 !important;
+    }
+    .social-btn {
+        width: 40% !important;
+        margin: 0px  10px 0 0!important;
+        padding: 10px;
+        justify-content:center !important;
+        margin: 0px 13px !important;
+    }
+    .social-media {
+        margin-top: 18px !important;
+    }
+    .robot {
+        width: auto !important;
+    }
+    .accounr-reg {
+        margin-bottom: 30px;
+    }
+    .top-log {
+        margin-top: 15px !important;
+    }
+    .top-log p {
+        font-size: 26px;
+    }
+    .top-log button {
+        height: 36px !important;
+    }
+    .social-media label {
+        font-size: 14px !important;
+    }
+    .socical-mo label {
+        font-size: 15px !important;
+        font-weight: 700;
+        margin-left: 11px !important;
+    }
+    .socical-mo img {
+        width: 20px;
+        height: 20px;
+    }
+    .socical-mo {
+        justify-content: center !important;
+        margin-left: 0 !important;
+    }
+    .social-btn label {
+        font-size: 16px !important;
+    }
+    .btn-accpt {
+        margin-top: 14px !important;
+    }
+    .btn-accpt button {
+        width: auto !important;
+    }
+    .btn-accpt a {
+        width: auto !important;
+    }
+    .team\& {
+        height: 55vh !important;
+
+    }
+    ol, ul {
+        padding-left: 0rem !important;
+    }
+}

@@ -1,0 +1,32 @@
+.main-headin h2 {
+    font-size: 32px;
+}
+
+@media screen and (max-width: 768px) {
+    .main-headin h2 {
+        font-size: 26px;
+    }
+    .box-width {
+        width: 100% !important;
+    }
+    .box-width h4 {
+        font-size: 23px !important;
+    }
+    .box-width label {
+        width: 100% !important;
+    }
+    .meid-box {
+        width: 100% !important;
+        padding: 20px 0 !important;
+    }
+    .drop-box {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+    .drop-main {
+        display: block !important;
+    }
+    .word-align {
+        text-align: center;
+    }
+}
