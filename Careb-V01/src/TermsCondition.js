@@ -476,7 +476,7 @@ class TermsComponent extends React.Component {
                 <div style={{ width: '80%', overflow: 'hidden', minHeight: '100%' }}>
                     <label style={{ fontSize: '2rem', fontWeight: '600', textAlign: 'center', display: 'block', marginTop: '50px' }}>We are almost there</label>
                     <div style={{ display: 'flex', marginTop: '20px', alignItems: 'center', justifyContent: 'center' }}>
-                        {/*<img style={{ width: '50px', height: '50px', marginRight: '10px' }} alt='' src={require('../assets/Document.png')} />*/}
+                        <img style={{ width: '50px', height: '50px', marginRight: '10px' }} alt='' src={require('../assets/Document.png')} />
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <label style={{ fontSize: '1.25rem', fontWeight: '700' }}>Term and Condition</label>
                             <label style={{ fontSize: '0.75rem', fontWeight: '400' }}>Last Update 25 june 2024</label>
@@ -498,49 +498,49 @@ class TermsComponent extends React.Component {
                             <button style={{ width: '100%', maxWidth: '150px', color: 'white', background: '#F15A29', borderRadius: '4px', height: '35px', border: 'none', fontSize: '1rem' }}>Accept All</button>
                         </NavLink>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', flexWrap: 'wrap', gap: '10px' }}>
-                        {this.renderPopupButton('Host Terms & conditions', HostTerms)}
-                        {this.renderPopupButton('Refund Policy', RefundPolicy)}
-                        {this.renderPopupButton('Cookie Policy', CookiePolicy)}
-                        {this.renderPopupButton('Privacy Policy', PrivacyPolicy)}
-                        {this.renderPopupButton('Service Fee', ServiceFee)}
-                    </div>
+                    {/*<div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', flexWrap: 'wrap', gap: '10px' }}>*/}
+                    {/*    {this.renderPopupButton('Host Terms & conditions', HostTerms)}*/}
+                    {/*    {this.renderPopupButton('Refund Policy', RefundPolicy)}*/}
+                    {/*    {this.renderPopupButton('Cookie Policy', CookiePolicy)}*/}
+                    {/*    {this.renderPopupButton('Privacy Policy', PrivacyPolicy)}*/}
+                    {/*    {this.renderPopupButton('Service Fee', ServiceFee)}*/}
+                    {/*</div>*/}
                 </div>
             </div>
         );
     }
 
-    renderPopupButton(title, Component) {
-        return (
-            <div className="advance-filter-button" style={{ margin: '5px' }}>
-                <Popup
-                    shouldCloseOnOverlayClick={false}
-                    closeOnDocumentClick={false}
-                    trigger={
-                        <button style={{
-                            color: 'white',
-                            background: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%)',
-                            borderRadius: '4px',
-                            height: '35px',
-                            border: 'none',
-                            fontSize: '1rem',
-                            padding: '0 10px',
-                        }}>
-                            {title}
-                        </button>
-                    }
-                    modal
-                    contentStyle={{ height: '90vh', overflow: 'auto' }}
-                >
-                    {close => (
-                        <div>
-                            <Component closeModule={() => close()} />
-                        </div>
-                    )}
-                </Popup>
-            </div>
-        );
-    }
+    // renderPopupButton(title, Component) {
+    //     return (
+    //         <div className="advance-filter-button" style={{ margin: '5px' }}>
+    //             <Popup
+    //                 shouldCloseOnOverlayClick={false}
+    //                 closeOnDocumentClick={false}
+    //                 trigger={
+    //                     <button style={{
+    //                         color: 'white',
+    //                         background: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%)',
+    //                         borderRadius: '4px',
+    //                         height: '35px',
+    //                         border: 'none',
+    //                         fontSize: '1rem',
+    //                         padding: '0 10px',
+    //                     }}>
+    //                         {title}
+    //                     </button>
+    //                 }
+    //                 modal
+    //                 contentStyle={{ height: '90vh', overflow: 'auto' }}
+    //             >
+    //                 {close => (
+    //                     <div>
+    //                         <Component closeModule={() => close()} />
+    //                     </div>
+    //                 )}
+    //             </Popup>
+    //         </div>
+    //     );
+    // }
 }
 
 export default TermsComponent;

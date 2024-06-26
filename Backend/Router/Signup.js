@@ -43,38 +43,64 @@ router.post("/auth/signup", async (req, res) => {
     }
 });
 
-// Update user information
-
-router.put("/auth/update/:userId", async (req, res) => {
+// Get user by user_id
+router.get("/auth/user", async (req, res) => {
     try {
-        const userId = req.params.userId;
-        const { email, password, first_name, last_name, dob } = req.body;
+        const { user_id } = req.query;
 
-        const existingUser = await Users.findOne({ user_id: userId });
+        if (!user_id) {
+            return res.status(400).json({ message: 'User ID is required' });
+        }
 
-        if (!existingUser) {
+        const user = await Users.findOne({ user_id });
+
+        if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Update fields if provided in the request body
-        if (password) {
-            const encrypt_password = await bcrypt.hash(password, 10);
-            existingUser.password = encrypt_password;
-        }
-        if (email) {
-            existingUser.email = email;
-        }
-        if (first_name) {
-            existingUser.first_name = first_name;
-        }
-        if (last_name) {
-            existingUser.last_name = last_name;
-        }
-        if (dob) {
-            existingUser.dob = dob;
+        // Exclude sensitive fields from the response
+        const { password, confirm_password, ...userWithoutSensitiveFields } = user.toObject();
+
+        res.status(200).json({ user: userWithoutSensitiveFields });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// Update user details
+router.put("/auth/user", async (req, res) => {
+    try {
+        const { email, first_name, last_name, dob, password, confirm_password, current_password } = req.body;
+
+        if (!email) {
+            return res.status(400).json({ message: 'Email is required' });
         }
 
-        const updatedUser = await existingUser.save();
+        const user = await Users.findOne({ email: email });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const updatedDetails = {};
+
+        if (first_name) updatedDetails.first_name = first_name;
+        if (last_name) updatedDetails.last_name = last_name;
+        if (dob) updatedDetails.dob = dob;
+
+        // If new password is provided, verify current password and hash new password
+        if (password || confirm_password) {
+            if (!current_password || !(await bcrypt.compare(current_password, user.password))) {
+                return res.status(400).json({ message: 'Password must we same as Login Password' });
+            }
+            if (password !== confirm_password) {
+                return res.status(400).json({ message: 'Passwords do not match' });
+            }
+            updatedDetails.password = await bcrypt.hash(password, 10);
+        }
+
+        const updatedUser = await Users.findOneAndUpdate({ email: email }, updatedDetails, { new: true });
 
         res.status(200).json({ message: 'User updated successfully', user: updatedUser });
     } catch (error) {

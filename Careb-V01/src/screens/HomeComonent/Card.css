@@ -6,6 +6,11 @@
   margin: 0 auto;
   margin-top: 15px;
 }
+.card-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .label-container {
   width: 87%;
   margin: 0 auto;

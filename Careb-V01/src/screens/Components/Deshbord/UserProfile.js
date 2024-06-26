@@ -45,7 +45,7 @@ console.log(userid,'userid')
         <img
         className='img-pro'
           style={{ width: 120, height: 120 ,}}
-          src={`http://localhost:4000/${userData?.profile_url}`}
+          src={`${BaseUrl.Baseurl}/${userData?.profile_url}`}
           alt='Profile'
         />
       )}

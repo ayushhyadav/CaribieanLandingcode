@@ -770,11 +770,7 @@ export default class PropertyBooking extends Component {
                     min={new Date().toISOString().split('T')[0]}
                 />
 
-                {selectedValue && (
-                    <div className="selected-value">
-                      Selected Value: {selectedValue.startDate}
-                    </div>
-                )}
+
 
                 <label style={{ fontSize: 14, marginTop: 20 }} htmlFor="checkOut">Check Out</label>
                 <input
@@ -786,11 +782,12 @@ export default class PropertyBooking extends Component {
                     min={new Date().toISOString().split('T')[0]}
                 />
 
-                {selectedValue && (
-                    <div className="selected-value">
-                      Selected Value: {selectedValue.startDate}
-                    </div>
-                )}
+                {/*{selectedValue && (*/}
+                {/*    <div className="selected-value">*/}
+                {/*      Selected Value: {selectedValue.startDate.toDateString()} - {selectedValue.endDate.toDateString()}*/}
+                {/*    </div>*/}
+                {/*)}*/}
+
               </div>
 
               <div className="service-options">

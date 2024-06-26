@@ -58,23 +58,33 @@ function Login() {
             <div className='signup-img'>
               <img style={{}} src={require('../assets/Rectangle 61.png')} />
               <div className='detail' style={{ padding: 20 }}>
-                <div style={{ flexDirection: 'row', display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                  <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img style={{ width: 45, height: 40, marginTop: 5 }} src={logo} alt='' />
-                    <img src={LogoText} alt='' />
+                <div style={{
+                  flexDirection: 'row',
+                  display: 'flex',
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: '100%'
+                }}>
+                  <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <img style={{width: 45, height: 40, marginTop: 5}} src={logo} alt=''/>
+                    <img src={LogoText} alt=''/>
                   </div>
-                  <div style={{ flexDirection: 'row', display: 'flex' }}>
-                    <img style={{ width: 25, height: 25, marginRight: 10 }} src={Faceboos} alt='' />
-                    <img style={{ width: 25, height: 25, marginRight: 10 }} src={Twitter} alt='' />
-                    <img style={{ width: 25, height: 25, marginRight: 10 }} src={Instagram} alt='' />
+                  <div style={{flexDirection: 'row', display: 'flex'}}>
+                    <a href='https://www.facebook.com/profile.php?id=61557976032264&mibextid=ZbWKwL'> <img
+                        style={{width: 25, height: 25, marginRight: 10}} src={Faceboos} alt=''/></a>
+                    <a href='https://x.com/caribbeaneaze?t=2E6AWgzQswNNT2x_gdjYLw&s=08'> <img
+                        style={{width: 25, height: 25, marginRight: 10}} src={Twitter} alt=''/></a>
+                    <a href='https://www.instagram.com/caribbeaneaze?igsh=MWZ2eTR0M3ByZ21h'> <img
+                        style={{width: 25, height: 25, marginRight: 10}} src={Instagram} alt=''/></a>
                   </div>
                 </div>
                 <div className='signup-descap'>
                   <p>
-                    Welcome to Caribbeaneaze – A Free Mind to Your Journey<br />
+                    Welcome to Caribbeaneaze – A Free Mind to Your Journey<br/>
                     Discover our collection of Caribbean properties, from luxurious villas and cozy cottages to
                     beachfront homes and budget-friendly stays. Whether you seek tranquility or adventure,
-                    Caribbeaneaze connects you with unique hosts and unforgettable experiences< br />
+                    Caribbeaneaze connects you with unique hosts and unforgettable experiences< br/>
                     Log in or create an account to start your journey. Follow us on social media for the latest
                     listings and offers.</p>
                 </div>

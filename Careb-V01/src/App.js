@@ -1,6 +1,9 @@
 import React from 'react'
 import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 import {Routes,Route} from 'react-router-dom'
 import Signup from './screens/Signup'
 import Login from './screens/Login'
@@ -21,7 +24,9 @@ import AddProperty from './screens/Components/AddNewProperty/AddProperty';
 import VarifyBooking from './screens/HomeComonent/PropertyOwnerProfile/VarifyBooking';
 import Diversifysidebar from './screens/Components/Deshbord/Diversify property/Diversifysidebar.js';
 import PandingApprovalProperty from '../src/screens/Components/Deshbord/PendingApprovalProperty'
-
+import UserSignup from './screens/UserSignup'
+import UserLogin from  './screens/UserLogin'
+import TermConditionUser from './TermConditionUser'
 
 
 
@@ -42,6 +47,7 @@ const App = () => {
      <Route path='/Signup' element={<Signup />} style={{width: '100vw'}}/>
      <Route path='/TermsCondition' element={<TermsCondition />} style={{width: '100vw'}}/>
      <Route path='/' element={<Home />} style={{width: '100vw'}}/>
+        <Route path='/TermsConditionuser' element={<TermConditionUser />} style={{width: '100vw'}}/>
     
      <Route path="/PropertyPage/:propertyId" element={<PropertyPage />} style={{width: '100vw'}} />
 
@@ -57,7 +63,8 @@ const App = () => {
         {/*<Route path='/PandingApproval/:userid' element={<TermsCondition />} style={{width: '100vw'}}/>*/}
      {/* <Route path='/Propertylist' element={<Propertylist />} style={{width: '100vw'}}/> */}
      {/* <Route path='/earning/:userId ' element={<EarningScreen/>}/> */}
-
+         <Route path='/userlogin' element={<UserLogin/>}/>
+         <Route path='/usersignup' element={<UserSignup/>}/>
      </Routes>
  
   )

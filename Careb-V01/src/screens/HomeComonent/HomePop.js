@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Slider from '@material-ui/core/Slider';
 import './HomePop.css'
-
+import BaseUrl from '../Server/BaseUrl'
 
 const list = [
   {
@@ -83,58 +83,93 @@ const Feature = [
 ];
 
 export default class HomePop extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: [2, 10],
-      selectedAmenities: [],
-      selectedUserItems: [],
-      selectedFeatures: [],
-    };
-  }
-
-  // Changing State when volume increases/decreases
-  rangeSelector = (event, newValue) => {
-    this.setState({ value: newValue });
-    console.log(newValue);
-  };
-
-  toggleSelection = (category, item) => {
-    const { selectedAmenities, selectedUserItems, selectedFeatures } = this.state;
-
-    switch (category) {
-      case 'amenities':
-        this.setState({
-          selectedAmenities: selectedAmenities.includes(item)
-              ? selectedAmenities.filter((selectedItem) => selectedItem !== item)
-              : [...selectedAmenities, item],
-        });
-        break;
-      case 'userItems':
-        this.setState({
-          selectedUserItems: selectedUserItems.includes(item)
-              ? selectedUserItems.filter((selectedItem) => selectedItem !== item)
-              : [...selectedUserItems, item],
-        });
-        break;
-      case 'features':
-        this.setState({
-          selectedFeatures: selectedFeatures.includes(item)
-              ? selectedFeatures.filter((selectedItem) => selectedItem !== item)
-              : [...selectedFeatures, item],
-        });
-        break;
-      default:
-        break;
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: [2, 10],
+            selectedAmenities: [],
+            selectedUserItems: [],
+            selectedFeatures: [],
+            filteredProperties: [],
+        };
     }
-  };
 
+    rangeSelector = (event, newValue) => {
+        this.setState({ value: newValue });
+    };
+
+    toggleSelection = (category, item) => {
+        const { selectedAmenities, selectedUserItems, selectedFeatures } = this.state;
+
+        switch (category) {
+            case 'amenities':
+                this.setState({
+                    selectedAmenities: selectedAmenities.includes(item)
+                        ? selectedAmenities.filter(selectedItem => selectedItem !== item)
+                        : [...selectedAmenities, item],
+                });
+                break;
+            case 'userItems':
+                this.setState({
+                    selectedUserItems: selectedUserItems.includes(item)
+                        ? selectedUserItems.filter(selectedItem => selectedItem !== item)
+                        : [...selectedUserItems, item],
+                });
+                break;
+            case 'features':
+                this.setState({
+                    selectedFeatures: selectedFeatures.includes(item)
+                        ? selectedFeatures.filter(selectedItem => selectedItem !== item)
+                        : [...selectedFeatures, item],
+                });
+                break;
+            default:
+                break;
+        }
+    };
+
+    filterProperties = async () => {
+        const { value, selectedAmenities, selectedUserItems, selectedFeatures } = this.state;
+
+        const filters = {
+            country: this.state.selectedCountry,
+            city: this.state.selectedCity,
+            property_type: this.state.selectedPropertyType,
+            person: this.state.selectedPerson,
+            minimum_budget: value[0],
+            maximum_budget: value[1],
+            select_view: this.state.selectedView,
+            amenities: selectedAmenities,
+            extra_service: selectedUserItems.concat(selectedFeatures),
+            check_in_date: this.state.checkInDate,
+            check_out_date: this.state.checkOutDate,
+        };
+        // fetch(BaseUrl.BaseUrl + '/get_all_propertys')
+        try {
+            const response = await fetch(BaseUrl.BaseUrl + `/api/properties/filter`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(filters),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const responseData = await response.json();
+            this.setState({ filteredProperties: responseData.message.data });
+        } catch (error) {
+            console.error('Error filtering properties:', error);
+        }
+    };
 
 
 
 
   render() {
-    const { value, selectedAmenities, selectedUserItems, selectedFeatures } = this.state;
+    const { value, selectedAmenities, selectedUserItems, selectedFeatures , filteredProperties } = this.state;
 
     return (
         <div style={{ width: '95%', margin: '0 auto' }}>
@@ -152,9 +187,10 @@ export default class HomePop extends Component {
                 }}
                 className="me-2 btn btn-outline-dark"
                 type="submit"
+                onClick={this.filterProperties}
 
             >
-              View 889 Result
+                View {filteredProperties.length} Result
             </button>
           </div>
           <div className='popup-country' style={{ marginTop: 30, fontWeight: 500, marginBottom: 10 }}>

@@ -10,7 +10,6 @@ const data = require('./SignupModule/UserDataModule')
 const multer  = require('multer')
 const app = express()
 const path = require('path')
-
 app.get('/', (req, res) => {
   res.send('Hello World!')
 
@@ -89,9 +88,8 @@ app.use(FilterApi)
 app.use(Search)
 app.use(ownerDeshborad)
 app.use('/api', OwnerDashboard)
-
 const url = process.env.MONGODB_URI;
-`mongodb://4tuners:12345@ac-qnxikpe-shard-00-00.lranesa.mongodb.net:27017,ac-qnxikpe-shard-00-01.lranesa.mongodb.net:27017,ac-qnxikpe-shard-00-02.lranesa.mongodb.net:27017/Carribean?ssl=true&replicaSet=atlas-yjmn84-shard-0&authSource=admin&retryWrites=true&w=majority`;
+// const url = `mongodb://4tuners:12345@ac-qnxikpe-shard-00-00.lranesa.mongodb.net:27017,ac-qnxikpe-shard-00-01.lranesa.mongodb.net:27017,ac-qnxikpe-shard-00-02.lranesa.mongodb.net:27017/Carribean?ssl=true&replicaSet=atlas-yjmn84-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
 mongoose.connect(url)
     .then( () => {

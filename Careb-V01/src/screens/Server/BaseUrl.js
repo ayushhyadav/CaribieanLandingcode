@@ -1,6 +1,6 @@
-// const BaseUrl = "https://api-nw34.onrender.com"
-const
- BaseUrl="http://localhost:4000"
+const BaseUrl = "https://sher9522.caribbeaneaze.com"
+// const
+//  BaseUrl="http://localhost:4000"
 export default {
     BaseUrl
 }

@@ -1,35 +1,52 @@
-import React, { Component } from 'react';
-import './RegistrationHeader.css'
-export default class RegistrationHeader extends Component {
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './RegistrationHeader.css';
 
-  constructor(props) {
-    super(props)
-    this.state = {
+const RegistrationHeader = () => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const navigate = useNavigate();
 
-    }
-  }
-  render() {
-    return (
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
+  const handleBecomeUserClick = () => {
+    navigate('/');
+  };
+
+  return (
       <div className='top-nav'>
-        <nav style={{ borderBottom: '1px solid #E5E7EB' }} className="navbar navbar-expand-lg navbar-white  ">
-          <div  style={{ width: '90%', height: 70 }} className="container-fluid ">
-            <img style={{ width: 40, height: 38, }} alt=''
-              src={require('../Image/Group1.png')} />
-            <a style={{ color: '#F15A29', fontSize: 25, fontWeight: 'bold', marginLeft: 5 }} className="navbar-brand" href="/">CARIBBEANEAZE</a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <nav style={{ borderBottom: '1px solid #E5E7EB' }} className="navbar navbar-expand-lg navbar-white">
+          <div style={{width: '90%', height: 70}} className="container-fluid">
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <img style={{width: 50, height: 45}} alt='' src={require('../Image/Group1.png')}/>
+              <Link to='/' style={{height: '30px', width: '155px', marginTop: 6}}>
+                <img style={{height: '28px', width: '165px', marginLeft: 10}} alt="Group"
+                     src={require('../../assets/name logo.png')}/>
+              </Link>
+            </div>
+            <button
+                className="navbar-toggler"
+                type="button"
+                aria-controls="navbar"
+                aria-expanded={isNavOpen}
+                aria-label="Toggle navigation"
+                onClick={toggleNav}
+            >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div style={{ justifyContent: 'flex-end' }} className="collapse navbar-collapse" id="navbar">
-
+            <div style={{justifyContent: 'flex-end'}} className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`}
+                 id="navbar">
               <div className='submit-btn'>
-                <button className=" me-2 btn btn-outline-dark " type="submit">Become a User</button>
+                <button className="me-2 btn btn-outline-dark" type="button" onClick={handleBecomeUserClick}>Become a
+                  User
+                </button>
               </div>
             </div>
           </div>
         </nav>
       </div>
-    )
-  }
-}
+  );
+};
 
-
+export default RegistrationHeader;

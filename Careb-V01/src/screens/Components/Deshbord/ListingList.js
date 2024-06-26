@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./List.css";
 import { Link } from "react-router-dom";
+import BaseUrl from '../../Server/BaseUrl'
 
 export default class ListingList extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ export default class ListingList extends Component {
     src={
       property.property_images &&
       property.property_images[0]?.filename &&
-      `http://localhost:4000/Images/${property.property_images[0]?.filename}`
+      `${BaseUrl.Baseurl}/Images/${property.property_images[0]?.filename}`
     }
     alt="Background"
   />

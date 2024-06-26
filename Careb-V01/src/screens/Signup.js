@@ -80,11 +80,11 @@ export default function Signup() {
                     <img style={{ width: 45, height: 40, marginTop: 5 }} src={logo} alt='' />
                     <img src={LogoText} alt='' />
                   </div>
-                  <div style={{ flexDirection: 'row', display: 'flex' }}>
-                    <img style={{ width: 25, height: 25, marginRight: 10 }} src={Faceboos} alt='' />
-                    <img style={{ width: 25, height: 25, marginRight: 10 }} src={Twitter} alt='' />
-                    <img style={{ width: 25, height: 25, marginRight: 10 }} src={Instagram} alt='' />
-                  </div>
+                    <div style={{flexDirection: 'row', display: 'flex'}}>
+                        <a href='https://www.facebook.com/profile.php?id=61557976032264&mibextid=ZbWKwL'> <img style={{width: 25, height: 25, marginRight: 10}} src={Faceboos} alt=''/></a>
+                        <a href='https://x.com/caribbeaneaze?t=2E6AWgzQswNNT2x_gdjYLw&s=08'> <img style={{width: 25, height: 25, marginRight: 10}} src={Twitter} alt=''/></a>
+                        <a href='https://www.instagram.com/caribbeaneaze?igsh=MWZ2eTR0M3ByZ21h'> <img style={{width: 25, height: 25, marginRight: 10}} src={Instagram} alt=''/></a>
+                    </div>
                 </div>
                 <div className='signup-descap'>
                   <p>

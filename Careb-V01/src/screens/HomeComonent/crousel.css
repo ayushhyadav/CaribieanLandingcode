@@ -19,13 +19,11 @@
   border: none;
   outline: none;
   margin-right: 15px;
-  justify-content: space-between;
 }
 
 .list-item-img {
   width: 35px;
   height: 35px;
-  filter: grayscale(100%);
 }
 
 .list-item-label {
@@ -65,42 +63,33 @@
 }
 
 .filter-container {
-  width: 100%;
-  max-width: 1220px;
-  /* display: flex; */
+  display: flex;
+  width: 90%;
   flex-wrap: wrap;
   justify-content: space-between;
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 20px 15px;
+  align-items: center;
+  padding: 8px 15px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  height: 87px;
-}
-
-.filter-item input::placeholder {
-  font-weight: 600;
-  color: #000;
+  max-width: 100%;
+  margin: auto;
 }
 
 .filter-item {
-  flex: 1;
+  flex: 1 1 150px; /* Adjust flex basis to fit the layout */
   margin-bottom: 10px;
-  height: 50px;
+  padding: 0 10px;
 }
-.filter-container .filter-item:last-child {
-  margin: 0;
-  border: none;
-}
-.filter-container .filter-item:first-child {
-  border: none;
-}
-.filter-item {
-  flex: 1 1;
+.filter-item2 {
+  flex: 1 1 150px; /* Adjust flex basis to fit the layout */
   margin-bottom: 10px;
-  margin-right: 39px;
+  padding: 0 10px;
+}
+
+
+.check-in, .check-out {
   border-left: 1px solid #b8b8b8;
-  box-sizing: border-box;
-  padding-left: 10px;
 }
 
 .select-container {
@@ -113,6 +102,13 @@
   height: 23px;
 }
 
+.input-field2{
+  border: 1px solid rgb(217, 214, 214);
+  padding: 1%;
+  /*margin-top: 10px;*/
+  border-radius: 6px
+}
+
 .select-box,
 .input {
   width: 100%;
@@ -121,10 +117,15 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   line-height: 17.64px;
-  margin-top: -6px;
-  background: transparent;
+  color: rgb(147, 145, 145);
+  /* margin-top: -6px; */
+  background: white;
+  border: 1px solid rgb(217, 214, 214);
+  padding: 5%;
+  border-radius: 6px
 }
-.select-box-country{
+
+.select-box-country {
   width: 100%;
   height: -130px;
   border: none;
@@ -132,7 +133,7 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   line-height: 17.64px;
-  margin-top: -6px;
+  margin-top: -3px;
   background: transparent;
 }
 
@@ -146,13 +147,55 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  /* margin-top: 20px; Adjust vertical margin as needed */
 }
 
 .search-icon {
   width: 25px;
   height: 25px;
 }
+
+.span-spacing {
+  margin-right: 20px;
+
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .carousel-list {
+    overflow: scroll;
+  }
+
+  .arrow-icon img {
+    display: none;
+  }
+
+  .carousel-list {
+    max-width: 100%;
+  }
+
+  .filter-container {
+    background-color: #ffffffa1;
+  }
+
+  .filter-item span {
+    margin-left: 0 !important;
+  }
+
+}
+
+@media (max-width: 576px) {
+  .content-section {
+    background-image: url(../../assets/Discover\ Saint\ Lucia.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+  }
+}
+
 
 .advance-filter-button {
   display: flex;
@@ -163,12 +206,13 @@
 
 .carousel-list {
   display: flex;
+  justify-content: space-between;
   padding: 10px;
   max-width: 100%;
   margin: 0 auto;
   align-items: center;
   overflow: hidden;
-  justify-content: space-between;
+  filter:grayscale(100%);
 
 }
 
@@ -194,6 +238,7 @@
 
 .span-spacing {
   margin-right: 20px; /* Adjust the margin as needed */
+
   white-space: nowrap;
 }
 
@@ -215,7 +260,13 @@
     margin-left: 0 !important;
   }
 }
-
+.check-in{
+  width: 100%;
+}
+.check-in, .check-out {
+  border-left: 1px solid #b8b8b8;
+  width: 100%;
+}
 
 @media (max-width: 576px) {
   .content-section {

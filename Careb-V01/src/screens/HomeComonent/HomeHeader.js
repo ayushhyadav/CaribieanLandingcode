@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import './HomeHeader.css';
+
+import BaseUrl from '../Server/BaseUrl'
 
 const HomeHeader = () => {
     const navigate = useNavigate();
     const [hasProperty, setHasProperty] = useState(false);
+    const [isNavOpen, setIsNavOpen] = useState(false);
     const userId = localStorage.getItem("user_id");
 
     useEffect(() => {
         const checkUserProperties = async () => {
             if (userId) {
                 try {
-                    const response = await fetch(`http://localhost:4000/user_profile/${userId}`);
+                    const response = await fetch(`${BaseUrl.BaseUrl}/user_profile/${userId}`);
                     const data = await response.json();
                     console.log('data', data);
                     setHasProperty(data.property_list && data.property_list.length > 0);
@@ -26,7 +29,7 @@ const HomeHeader = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("user_id");
-        navigate("/login");
+        navigate("/");
     };
 
     const handleBecomeHostClick = () => {
@@ -40,12 +43,20 @@ const HomeHeader = () => {
             navigate('/login');
         }
     };
+
     const handleBecomeuserClick = () => {
-
-            navigate('/');
-
+        navigate('/');
     };
 
+    const toggleNav = () => {
+        setIsNavOpen(!isNavOpen);
+    };
+    const handleBookingClick = (event) => {
+        if (!userId) {
+            event.preventDefault(); // Prevent the default link behavior
+            navigate('/login'); // Redirect to login if userId is not present
+        }
+    };
     return (
         <nav style={{ borderBottom: '1px solid #E5E7EB', padding: 20 }} className="navbar navbar-expand-lg navbar-white">
             <div style={{ width: '90%', justifyContent: 'space-between' }} className="container-fluid main-hd">
@@ -55,22 +66,30 @@ const HomeHeader = () => {
                         <img style={{ height: '28px', width: '165px', marginLeft: 10 }} alt="Group" src={require('../../assets/name logo.png')} />
                     </Link>
                 </div>
-                <button style={{ width: '120px' }} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button
+                    style={{ width: '120px' }}
+                    className="navbar-toggler"
+                    type="button"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded={isNavOpen}
+                    aria-label="Toggle navigation"
+                    onClick={toggleNav}
+                >
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul style={{ display: 'flex', flexDirection: 'row' }} className="navbar-nav">
+                <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`} id="navbarSupportedContent">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ display: 'flex', flexDirection: 'row' }}>
                         {hasProperty ? (
                             <>
                                 <li className="nav-item">
                                     <Link to={`/dashboard/${userId}`} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link active" aria-current="page">Dashboard</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to={`/booking/${userId}`} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Booking History</Link>
+                                    <Link  to={userId ? `/booking/${userId}` : '/login'} onClick={handleBookingClick} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Booking History</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to={`/`} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Earnings</Link>
+                                    <Link style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Earnings</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to={`/mylisting/${userId}`} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">My Listings</Link>
@@ -79,7 +98,7 @@ const HomeHeader = () => {
                         ) : (
                             <>
                                 <li className="nav-item">
-                                    <Link to={`/booking/${userId}`} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link active" aria-current="page">My Booking</Link>
+                                    <Link  to={userId ? `/booking/${userId}` : '/login'} onClick={handleBookingClick} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link active" aria-current="page">My Booking</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to='/EmailSupport' style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Support</Link>
@@ -87,57 +106,47 @@ const HomeHeader = () => {
                             </>
                         )}
                     </ul>
+                </div>
 
-                    <div style={{ justifyContent: 'flex-end', display: 'flex' }} className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <Link className='hind-bs' to='/Message'><img src={require('../../assets/sms.png')} alt='' /></Link>
-
-                        <img className='hind-bs' style={{ marginLeft: 15 }} src={require('../../assets/notification.png')} alt='' />
-                        {hasProperty ? (
+                <div className='ahost' style={{ display: 'flex', alignItems: 'center' }}>
+                    <Link className='hind-bs' to='/'><img src={require('../../assets/sms.png')} alt='' /></Link>
+                    <img className='hind-bs' style={{ marginLeft: 15 }} src={require('../../assets/notification.png')} alt='' />
+                    {hasProperty ? (
                         <div className='Become'>
                             <button onClick={handleBecomeuserClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '2px solid #000', padding: 0, fontWeight: 700, borderRadius: 11 }} className="me-2 btn host" type="submit">Become a User</button>
                         </div>
-                        ) : (
-                            <div className='Become'>
-                                <button onClick={handleBecomeHostClick} style={{
-                                    marginLeft: 10,
+                    ) : (
+                        <div className='Become'>
+                            <button onClick={handleBecomeHostClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '1px solid #000', padding: 0, borderRadius: 11 }} className="me-2 btn host" type="submit">Become a Host</button>
+                        </div>
+                    )}
+                    {userId ? (
+                        <Link onClick={handleLogout} style={{ marginLeft: 20 }} >
+                            <button style={{
+                                height: 48,
+                                width: '10rem',
+                                border: 'none',
+                                borderRadius: 11,
+                                color: 'white',
+                                background: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%)'
+                            }} className="me-2 btn btn-outline-dark" type="submit">Logout
+                            </button>
+                        </Link>
+                    ) : (
+                        <div className='Signup'>
+                            <Link style={{ marginLeft: 20 }} to='/usersignup'>
+                                <button style={{
                                     height: 48,
-                                    background: 'none',
-                                    border: '2px solid #000',
-                                    padding: 0,
-                                    fontWeight: 700,
-                                    borderRadius: 11
-                                }} className="me-2 btn host" type="submit">Become a Host
-                                </button>
-                            </div>
-                        )}
-                        {userId ? (
-                            <Link onClick={handleLogout} style={{marginLeft: 20}} to='/Signup'>
-                        <button style={{
-                            height: 48,
-                            width: '10rem',
-                            border: 'none',
+                                    width: '10rem',
+                                    border: 'none',
                                     borderRadius: 11,
                                     color: 'white',
                                     background: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%)'
-                                }} className="me-2 btn btn-outline-dark" type="submit">Logout
+                                }} className="me-2 btn btn-outline-dark" type="submit">Sign Up
                                 </button>
                             </Link>
-                        ) : (
-                            <div className='Signup'>
-                                <Link style={{ marginLeft: 20 }} to='/Signup'>
-                                    <button style={{
-                                        height: 48,
-                                        width: '10rem',
-                                        border: 'none',
-                                        borderRadius: 11,
-                                        color: 'white',
-                                        background: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%)'
-                                    }} className="me-2 btn btn-outline-dark" type="submit">Sign Up
-                                    </button>
-                                </Link>
-                            </div>
-                        )}
-                    </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </nav>

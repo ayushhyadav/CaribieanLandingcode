@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RegistrationHeader from './HomeHeader';
 import { Link, useParams } from 'react-router-dom';
 import './Checkout.css'
+import BaseUrl from '../Server/BaseUrl'
 
 
 export default class Checkout extends Component {
@@ -23,7 +24,7 @@ export default class Checkout extends Component {
   componentDidMount() {
 
     const userId = useParams.userId;
-    fetch(`https://localhost:4000/booking/${userId}`)
+    fetch(`${BaseUrl.Baseurl}/booking/${userId}`)
       .then(response => {
         this.setState({ apiData: response.data });
       })

@@ -3,6 +3,7 @@ import Popup from 'reactjs-popup';
 import { useParams } from 'react-router-dom';
 import 'reactjs-popup/dist/index.css';
 import './List.css';
+import BaseUrl from '../../Server/BaseUrl'
 
 const ActiveBookingList = () => {
   const [cancellationReason, setCancellationReason] = useState('');
@@ -19,7 +20,7 @@ const ActiveBookingList = () => {
   }, [userid, state.activeBt]);
 
   const fetchData = async () => {
-    const API_URL = `http://localhost:4000/active_booking/${userid}`;
+    const API_URL = `${BaseUrl.BaseUrl}/active_booking/${userid}`;
 
     try {
       const response = await fetch(API_URL);
@@ -29,7 +30,7 @@ const ActiveBookingList = () => {
       const data = await response.json();
       setState(prevState => ({
         ...prevState,
-        apiData: data.message.active_bookings || [], // Ensure apiData is an array
+        apiData: data?.message?.active_bookings || [], // Ensure apiData is an array
         loading: false,
       }));
       console.log('data1111', data);
@@ -39,7 +40,7 @@ const ActiveBookingList = () => {
         error: error.message,
         loading: false,
       }));
-      alert(error.message);
+      // alert(error.message);
     }
   };
 
@@ -47,7 +48,7 @@ const ActiveBookingList = () => {
     console.log('booking', booking_id);
 
     try {
-      const response = await fetch('http://localhost:4000/booking_cancel', {
+      const response = await fetch(`${BaseUrl.BaseUrl}/booking_cancel`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,10 +64,10 @@ const ActiveBookingList = () => {
 
       if (data.error) {
         console.error(data.error || 'An error occurred');
-        alert(data.error);
+        // alert(data.error);
       } else {
         console.log(data.message);
-        alert(data.message);
+        // alert(data.message);
         closePopup();
       }
     } catch (error) {
@@ -110,9 +111,9 @@ const ActiveBookingList = () => {
                           style={{borderRadius:200,height:50,width:50}}
                           src={
                             item.user_type === 'User'
-                                ? `http://localhost:4000/${item.user_image}`
+                                ? `${BaseUrl.Baseurl}/${item.user_image}`
                                 : (item.property_image && item.property_image.length > 0
-                                    ? `http://localhost:4000/Images/${item.property_image[0].filename
+                                    ? `${BaseUrl.Baseurl}/Images/${item.property_image[0].filename
                                     }`
                                     : '')
                           }

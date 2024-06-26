@@ -1,0 +1,154 @@
+
+/* Add this to your CSS file */
+/* .property-slide {
+    scrollbar-width: thin; 
+    scrollbar-color: transparent transparent; 
+  }
+  
+  .property-slide::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .property-slide::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  
+  .property-slide::-webkit-scrollbar-track {
+    background: transparent;
+  } */
+  /* @media (max-width: 768px) {
+    .property-slide img {
+      display: none;
+    }
+    
+    .property-slide img:first-child {
+      display: block;
+    }
+  } */
+
+  /* .property-slide {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .property-image {
+    width: 31.7%;
+    height: 300px;
+    margin-right: 30px;
+    scroll-snap-align: start;
+  }
+  
+  .property-slide::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .property-slide::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  
+  .property-slide::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  @media (max-width: 768px) {
+    .property-slide {
+      display: block;
+      overflow-x: scroll;
+    }
+  
+    .property-image {
+      display: none;
+    }
+  
+    .property-image:first-child {
+      display: block;
+      width: 100%;
+    }
+  }
+  
+  
+  .property-slide {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+  }
+  
+  .property-image {
+    width: 31.7%;
+    height: 300px;
+    margin-right: 30px;
+    flex-shrink: 0;
+  }
+  
+  .property-slide::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .property-slide::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  
+  .property-slide::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  @media (max-width: 768px) {
+    .property-slide {
+      overflow-x: scroll;
+      white-space: nowrap;
+    }
+  
+    .property-image {
+      display: inline-block;
+      width: 100%;
+      height: auto;
+    }
+  }
+   */
+
+   .property-slide {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .property-image {
+    width: 31.7%;
+    height:400px;
+    margin-right: 30px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+  
+  .property-slide::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .property-slide::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  
+  .property-slide::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  @media (max-width: 768px) {
+    .property-slide {
+      overflow-x: scroll;
+      white-space: nowrap;
+      display: block;
+    }
+  
+    .property-image {
+      display: inline-block;
+      width: 100%;
+      /*height: auto;*/
+      height: 350px;
+      object-fit: cover;
+    }
+  }
+  
