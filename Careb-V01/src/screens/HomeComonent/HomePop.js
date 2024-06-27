@@ -86,7 +86,7 @@ export default class HomePop extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: [2, 10],
+            value: [100, 10000],
             selectedAmenities: [],
             selectedUserItems: [],
             selectedFeatures: [],
@@ -190,11 +190,12 @@ export default class HomePop extends Component {
                 onClick={this.filterProperties}
 
             >
-                View {filteredProperties.length} Result
+                View Result
+                {/* {filteredProperties.length} */}
             </button>
           </div>
           <div className='popup-country' style={{ marginTop: 30, fontWeight: 500, marginBottom: 10 }}>
-            <label>Select Carrbean Country</label>
+            <label>Select Caribbean Country</label>
             <div className="carousel-list">
               {list.map((item) => (
                   <div className="list-item" key={item.title}>
@@ -210,11 +211,11 @@ export default class HomePop extends Component {
 
           </div>
           <div style={{ marginTop: 30 }}>
-            <label style={{ marginTop: 20, fontWeight: 500, marginBottom: 10 }}>Select Antigua City</label> <br />
+            <label style={{ marginTop: 20, fontWeight: 500, marginBottom: 10 }}>Select City</label> <br />
             <select style={{ width: '55%', height: 45, borderRadius: 10, background: 'white', padding: 10, border: '1px solid #000' }}>
-              <option>Select Country</option>
-              <option>Select Country</option>
-              <option>Select Country</option>
+              {/* <option>Select City</option> */}
+              {/* <option>Select Country</option>
+              <option>Select Country</option> */}
             </select>
           </div>
           <div
@@ -303,7 +304,8 @@ export default class HomePop extends Component {
                   onChange={this.rangeSelector}
                   valueLabelDisplay="auto"
                   style={{ color: '#F15A29', width: '100%' }}
-                  scaleLength={50}
+                  min={100} // Set min value
+                  max={10000} // Set max value
               />
               <div style={{ justifyContent: 'space-between', textAlign: 'center', fontWeight: 'bold', fontSize: 17 }}>
                 ${value[0]} <span style={{ border: '2px solid white', padding: 15 }}> To</span>  ${value[1]}

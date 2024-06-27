@@ -123,12 +123,12 @@ function PassportVerification(props) {
             cursor: 'pointer',
           }}
         >
-          <div style={{ display: 'flex' }}>
-            <label style={{ fontSize: 16, fontWeight: '600', color: '#94A3B8' }}>Drag your files or Browse</label>
+          <div  htmlFor="fileInput" style={{ display: 'flex' }}>
+            <label  htmlFor="fileInput" style={{ fontSize: 16, fontWeight: '600', color: '#94A3B8' }}>Drag your files or Browse</label>
             <input type="file" id="fileInput" style={{ display: 'none' }} onChange={handleFileChange} />
-            {selectedFile && <p>Selected file: {selectedFile.name}</p>}
+            {selectedFile && <p >Selected file: {selectedFile.name}</p>}
           </div>
-          <label style={{ fontSize: 12, fontWeight: '400', color: '#94A3B8' }}>Add Both Side Image of Certificate</label>
+          <label  htmlFor="fileInput" style={{ fontSize: 12, fontWeight: '400', color: '#94A3B8' }}>Add Both Side Image of Certificate</label>
         </label>
       </div>
       <div

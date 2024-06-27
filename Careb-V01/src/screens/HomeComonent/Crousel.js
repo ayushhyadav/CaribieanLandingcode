@@ -241,14 +241,74 @@ import { Link } from 'react-router-dom';
 import CountryList from 'react-select-country-list';
 import Select, { components } from 'react-select';
 import ReactCountryFlag from 'react-country-flag';
+import { getCountries, getCities } from 'countries-cities';
+import Flag from 'react-world-flags';
+// import 'react-select/dist/react-select.css';
 
 const Crousel = ({ CallBackFun }) => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedPropertyType, setSelectedPropertyType] = useState('');
-  const [persons, setPersons] = useState('');
+  const [persons, setPersons] = useState('Add Person');
   const [selectedCountry2, setSelectedCountry2] = useState('');
   const [tropicalCountries, setTropicalCountries] = useState([]);
+  const [showBox, setShowBox] = useState(false);
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [counts, setCounts] = useState({
+    adults: 0,
+    children: 0,
+    infants: 0,
+    pets: 0,
+  });
+  // const [persons, setPersons] = useState(1); // Initialize with the default adult count
+  useEffect(() => {
+    // Fetch countries and set country options
+    const countries = getCountries();
+    const countryOptions = countries.map((country) => ({
+      value: country,
+      label: country,
+      icon: <Flag code={country.toLowerCase()} style={{ width: 20, marginRight: 10 }} />
+    }));
+    setCountryOptions(countryOptions);
+  }, []);
+
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    const cities = getCities(selectedOption.value);
+    if (cities) {
+      const cityOptions = cities.map((city) => ({
+        value: city,
+        label: city
+        
+      }));
+      setCityOptions(cityOptions);
+    } else {
+      setCityOptions([]); // Reset city options if no cities found
+    }
+    setSelectedCity(''); // Reset city selection when country changes
+  };
+
+
+  useEffect(() => {
+    const totalPersons = counts.adults + counts.children + counts.infants + counts.pets;
+    setPersons(totalPersons);
+  }, [counts]);
+
+  const handleIncrement = (type) => {
+    setCounts((prevCounts) => ({
+      ...prevCounts,
+      [type]: prevCounts[type] + 1,
+    }));
+  };
+
+  const handleDecrement = (type) => {
+    setCounts((prevCounts) => ({
+      ...prevCounts,
+      [type]: prevCounts[type] > 0 ? prevCounts[type] - 1 : 0,
+    }));
+  };
+
 
   useEffect(() => {
     const fetchTropicalCountries = async () => {
@@ -259,11 +319,12 @@ const Crousel = ({ CallBackFun }) => {
           throw new Error('Failed to fetch data');
         }
         const data = await response.json();
+        console.log("country",data)
 
         // Filter tropical countries based on criteria (e.g., countries in tropical regions)
         const filteredCountries = data.filter(country => {
           // Replace with your specific criteria for tropical countries
-          return country.region === 'Americas' || country.region === 'Asia' || country.subregion === 'Oceania';
+          // return country.region === 'Americas' || country.region === 'Asia' || country.subregion === 'Oceania';
         }).map(country => country.name.common); // Extract country names
 
         setTropicalCountries(filteredCountries);
@@ -274,7 +335,7 @@ const Crousel = ({ CallBackFun }) => {
 
     fetchTropicalCountries();
   }, []);
-
+  console.log("country222",tropicalCountries)
 
   // List of Caribbean countries
   const caribbeanCountries = [
@@ -312,7 +373,7 @@ const Crousel = ({ CallBackFun }) => {
 
   // Fetching all country options and filtering for Caribbean countries
   const allCountryOptions = CountryList().getData();
-  const countryOptions = allCountryOptions.filter(country => caribbeanCountries.includes(country.value));
+  // const countryOptions = allCountryOptions.filter(country => caribbeanCountries.includes(country.value));
 
   const customSingleValue = ({ data }) => (
       <div style={{ marginTop: '-25px' }}>
@@ -331,10 +392,10 @@ const Crousel = ({ CallBackFun }) => {
     );
   };
 
-  const handleCountryChange = (country) => {
-    setSelectedCountry(country);
-    setSelectedCity(''); // Reset city when country changes
-  };
+  // const handleCountryChange = (country) => {
+  //   setSelectedCountry(country);
+  //   setSelectedCity(''); // Reset city when country changes
+  // };
 
   const handleButtonClick = () => {
     if (CallBackFun) {
@@ -347,7 +408,7 @@ const Crousel = ({ CallBackFun }) => {
     }
   };
 
-  const cityOptions = selectedCountry ? caribbeanCities[selectedCountry.value] : [];
+  // const cityOptions = selectedCountry ? caribbeanCities[selectedCountry.value] : [];
 
   const list = [
     { img: require('../../assets/Country.png'), title: 'Antigua' },
@@ -386,20 +447,33 @@ const Crousel = ({ CallBackFun }) => {
           <h1 className="main-title">A Free Mind To your Journey</h1>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="filter-container">
-              <div className="filter-item">
-                <span className="span-spacing">Caribbean Country</span>
-                <div className="select-container">
-                  <Select
-                      className="select-box-country"
-                      value={selectedCountry}
-                      onChange={handleCountryChange}
-                      options={countryOptions}
-                      components={{ SingleValue: customSingleValue, Option: customOption }}
-                  />
-                </div>
+            <div className="filter-item">
+        <span className="span-spacing">Warm Stay</span>
+        <div className="select-container">
+          <Select
+            className="select-box-country"
+            value={selectedCountry}
+            onChange={handleCountryChange}
+            options={countryOptions}
+            getOptionLabel={(option) => (
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                {option.icon} {option.label}
               </div>
-
-              <div className="filter-item" style={{ borderLeft: '1px solid #E5E7Eb' }}>
+            )}
+            getOptionValue={(option) => option.value}
+          />
+        </div>
+      </div>
+      <div className="filter-item">
+        <span className="span-spacing">Select City</span>
+        <Select
+          className=""
+          value={selectedCity}
+          onChange={(selectedOption) => setSelectedCity(selectedOption)}
+          options={cityOptions}
+        />
+      </div>
+ {/* <div className="filter-item" style={{ borderLeft: '1px solid #E5E7Eb' }}>
                 <span className="span-spacing">Tropical Countries</span>
                 <select
                     className="select-box"
@@ -411,23 +485,8 @@ const Crousel = ({ CallBackFun }) => {
                       <option key={index} value={country}>{country}</option>
                   ))}
                 </select>
-              </div>
-
-              <div className="filter-item" style={{ borderLeft: '1px solid #E5E7Eb' }}>
-                <span className="span-spacing">Select City</span>
-                <select
-                    className="select-box"
-                    value={selectedCity}
-                    onChange={(e) => setSelectedCity(e.target.value)}
-                >
-                  <option value="">Select</option>
-                  {cityOptions.map((city, index) => (
-                      <option key={index} value={city}>{city}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="filter-item" style={{ borderLeft: '1px solid #E5E7Eb' }}>
+              </div> */}
+              <div className="filter-item" >
                 <span className="span-spacing">Select Property Type</span>
                 <select
                     className="select-box"
@@ -441,39 +500,67 @@ const Crousel = ({ CallBackFun }) => {
                 </select>
               </div>
 
-              <div className="filter-item" style={{ borderLeft: '1px solid #E5E7Eb' }}>
-               <div style={{height:40,paddingTop:6}}><label style={{paddingTop:5,}} className="">Person</label></div>
-                <input
-                    type="number"
-                    placeholder="Add Person"
-                    className="input-field2"
-                    value={persons}
-                    onChange={(e) => setPersons(e.target.value)}
-                    style={{ height:36 ,marginTop:'-6px',width:180}}
-                />
+              <div className="guest-stay-container">
+      <div
+        className="filter-item"
+        style={{ borderLeft: '1px solid #E5E7Eb', paddingBottom: -5 }}
+        onClick={() => setShowBox(!showBox)}
+      >
+        <span className="span-spacing">Guest Stay</span>
+        <input
+          type="number"
+          placeholder="Add Person"
+          className="input-field2"
+          value={persons}
+          readOnly
+          style={{ height: 30, width: 140, padding: 10 }}
+        />
+      </div>
+      {showBox && (
+        <div className="guest-box">
+          {['adults', 'children', 'infants', 'pets'].map((type, index) => (
+            <div className="guest-row" key={index}>
+              <span className="guest-label">
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+                <span className="age-range">
+                  {type === 'adults' && 'Ages 13 or above'}
+                  {type === 'children' && 'Ages 2–12'}
+                  {type === 'infants' && 'Under 2'}
+                  {type === 'pets' && <a href="#"> Bringing a service animal?</a>}
+                </span>
+              </span>
+              <div className="guest-counter">
+                <button onClick={() => handleDecrement(type)}>-</button>
+                <span>{counts[type]}</span>
+                <button onClick={() => handleIncrement(type)}>+</button>
               </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
 
               <div className="check-in">
-                <div className="filter-item2" style={{ borderLeft: '1px solid #E5E7Eb' }}>
+                <div className="filter-item2" >
                   <span className="span-spacing" style={{ marginLeft: '8px' }}>Check In</span><br/>
                   <input
                       className="input"
                       type="date"
                       placeholder="dd/mm/yyyy"
-                      style={{ background: 'white' }}
+                      style={{ background: 'white', marginLeft: '8px', }}
                   />
                 </div>
-                <div className="filter-item2" style={{ borderLeft: '1px solid #E5E7Eb' }}>
+                <div className="filter-item2" >
                   <span className="span-spacing" style={{ marginLeft: '8px' }}>Check Out</span><br/>
                   <input
                       className="input"
                       type="date"
-                      style={{ background: 'white', }}
+                      style={{ background: 'white', marginLeft: '8px' }}
                   />
                 </div>
               </div>
 
-              <div className="filter-item d-flex justify-content-center">
+              <div className="filter-itemss d-flex justify-content-center">
                 <a onClick={handleButtonClick} className="search-button">
                   <img src={require('../../assets/search-normal.png')} className="search-icon" alt="search" />
                 </a>

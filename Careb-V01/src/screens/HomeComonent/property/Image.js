@@ -70,7 +70,9 @@ export default class Image extends Component {
                     src={`${BaseUrl.BaseUrl}/Images/${propertyImage.filename}`}
                     alt={`Image ${index}`}
                 />
+                
             ))}
+           
           </div>
         </div>
     );

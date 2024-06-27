@@ -71,7 +71,7 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div style={{ width: '100%', height: '100vw' }}>
+            <div style={{ width: '100%', height: 'auto' }}>
                 <HomeHeader />
                 <Crousel
                     GetResponceFun={(res) => this.setState({ near_by_you: res })}
@@ -99,10 +99,12 @@ export default class Home extends Component {
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
+                            width:'60%',
+                            // background:'transparent'
                         },
                     }}
                 >
-                    <div style={{ width: '100%', textAlign: 'center' }}>
+                    <div style={{ width: '90%', textAlign: 'center' }}>
                         <img
                             src={require('../../assets/Some.png')}
                             alt="Alert"

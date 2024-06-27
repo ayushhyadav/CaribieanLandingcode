@@ -162,9 +162,9 @@ class TermsComponent extends React.Component {
                 <div style={{ width: '80%', overflow: 'hidden', minHeight: '100%' }}>
                     <label style={{ fontSize: '2rem', fontWeight: '600', textAlign: 'center', display: 'block', marginTop: '50px' }}>We are almost there</label>
                     <div style={{ display: 'flex', marginTop: '20px', alignItems: 'center', justifyContent: 'center' }}>
-                        {/*<img style={{ width: '50px', height: '50px', marginRight: '10px' }} alt='' src={require('../assets/Document.png')} />*/}
+                        <img style={{ width: '50px', height: '50px', marginRight: '10px' }} alt='' src={require('./assets/Document.png')} />
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <label style={{ fontSize: '1.25rem', fontWeight: '700' }}>Term and Condition</label>
+                            <label style={{ fontSize: '1.25rem', fontWeight: '700' }}>Terms and Condition</label>
                             <label style={{ fontSize: '0.75rem', fontWeight: '400' }}>Last Update 25 june 2024</label>
                         </div>
                     </div>

@@ -476,17 +476,17 @@ class TermsComponent extends React.Component {
                 <div style={{ width: '80%', overflow: 'hidden', minHeight: '100%' }}>
                     <label style={{ fontSize: '2rem', fontWeight: '600', textAlign: 'center', display: 'block', marginTop: '50px' }}>We are almost there</label>
                     <div style={{ display: 'flex', marginTop: '20px', alignItems: 'center', justifyContent: 'center' }}>
-                        <img style={{ width: '50px', height: '50px', marginRight: '10px' }} alt='' src={require('../assets/Document.png')} />
+                        <img style={{ width: '50px', height: '50px', marginRight: '10px' }} alt='' src={require('./assets/Document.png')} />
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <label style={{ fontSize: '1.25rem', fontWeight: '700' }}>Term and Condition</label>
+                            <label style={{ fontSize: '1.25rem', fontWeight: '700' }}>Terms and Condition</label>
                             <label style={{ fontSize: '0.75rem', fontWeight: '400' }}>Last Update 25 june 2024</label>
                         </div>
                     </div>
-                    <div style={{ height: '50vh', width: '100%', marginTop: '45px', overflowY: 'scroll', borderTop: '1px solid #E2E8F0' }}>
+                    <div style={{ height: '50vh', width: '100%', marginTop: '15px', overflowY: 'scroll', borderTop: '1px solid #E2E8F0' }}>
                         {items.map((item, index) => (
-                            <ul key={index} style={{ listStyleType: 'none', padding: '0' }}>
-                                <li style={{ fontSize: '1.4rem', fontWeight: 'bold', marginTop: '15px' }}>{item.title}</li>
-                                <li style={{ fontSize: '1rem', textAlign: 'justify', marginRight: '3%' }}>{item.desc}<br />{item.desc2}<br />{item.desc3}<br />{item.desc4}<br />{item.desc5}<br /></li>
+                            <ul key={index} style={{ listStyleType: 'none', padding: 10 ,}}>
+                                <li style={{ fontSize: '1.5rem', fontWeight: 'bold', }}>{item.title}</li>
+                                <li style={{ fontSize: '1.2rem', textAlign: 'justify', marginRight: '3%' }}>{item.desc}<br />{item.desc2}<br />{item.desc3}<br />{item.desc4}<br />{item.desc5}<br /></li>
                             </ul>
                         ))}
                     </div>
