@@ -1,37 +1,33 @@
-
 const express = require('express');
-const router =express.Router()
-const Users = require('../../SignupModule/Signupmodules')
+const router = express.Router();
+const Users = require('../../SignupModule/Signupmodules');
 const bcrypt = require('bcrypt');
 
 router.post("/auth/change_password", async (req, res) => {
-    const { user_id,new_password,confirm_password} = req.body;
-    if(new_password == confirm_password){
+    const { email, new_password, confirm_password } = req.body;
+    
+    if (new_password === confirm_password) {
+        const encrypt_password = await bcrypt.hash(new_password, 10);
 
-        const encrypt_password = await bcrypt.hash(password, 10);
-        await Users.findOneAndUpdate({user_id:user_id }, 
-            { $set: { password:encrypt_password } }, { //options
-              returnNewDocument: true,
-              new: true,
-              strict: false
-            }
-          )
+        await Users.findOneAndUpdate(
+            { email: email }, 
+            { $set: { password: encrypt_password } }, 
+            { returnNewDocument: true, new: true, strict: false }
+        )
         .then((value) => {
-          if(value == null){
-            res.send({error:'User Not Found'})
-          }
-          else{
-            // res.send({message:value})
-            res.send({ message:"password update Sucessfully"})
-          }
+            if (value == null) {
+                res.send({ error: 'User Not Found' });
+            } else {
+                res.send({ message: "Password updated successfully" });
+            }
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send({ error: 'Internal Server Error' });
+        });
+    } else {
+        res.send({ error: "New password and confirm password do not match" });
     }
-    else{
-        res.send({error:"not match new password confirm password"})
-    }
-     
+});
 
-    });
-
- module.exports=router
+module.exports = router;

@@ -40,9 +40,9 @@ router.post('/help/support',ImagesPath,async (req,res)=>{
     else if(message == undefined || message ==""){
         res.send({message:'Message Required'})
     }
-    else if(req?.file?.path == undefined || req?.file?.path ==""){
-        res.send({message:'National Id Card Required'})
-    }
+    // else if(req?.file?.path == undefined || req?.file?.path ==""){
+    //     res.send({message:'National Id Card Required'})
+    // }
     else{
         Help.create(userDetail, (err, result) => {
             if (err) {

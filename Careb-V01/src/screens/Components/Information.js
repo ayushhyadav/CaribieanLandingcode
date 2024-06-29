@@ -17,7 +17,7 @@ export default class Information extends Component {
       last_name: '',
       email: '',
       dob: '',
-      password: '',
+      current_password: '',
       confirm_password: '',
       errorMessage: '',
       user_id: localStorage.user_id,
@@ -45,8 +45,8 @@ export default class Information extends Component {
           last_name: data.user.last_name,
           email: data.user.email,
           dob: data.user.dob,
-          password: '', // Clear password fields for security
-          confirm_password: '' // Clear password fields for security
+          current_password: '',
+          confirm_password: ''
         });
       } else {
         this.setState({ errorMessage: data.message });
@@ -69,24 +69,18 @@ export default class Information extends Component {
       last_name,
       email,
       dob,
-      password,
+      current_password,
       confirm_password,
       user_id,
     } = this.state;
 
-    if (!first_name || !last_name || !email || !dob) {
+    if (!first_name || !last_name || !email || !dob || !current_password || !confirm_password) {
       this.setState({ errorMessage: 'All fields are required.' });
       alert('All fields are required.');
       return;
     }
 
-    if ((password && !confirm_password) || (!password && confirm_password)) {
-      this.setState({ errorMessage: 'Both password fields are required if updating password.' });
-      alert('Both password fields are required if updating password.');
-      return;
-    }
-
-    if (password && password !== confirm_password) {
+    if (current_password !== confirm_password) {
       this.setState({ errorMessage: 'Passwords must match.' });
       alert('Passwords must match.');
       return;
@@ -98,13 +92,9 @@ export default class Information extends Component {
       last_name,
       email,
       dob,
+      current_password,
+      confirm_password
     };
-
-    // Only add password fields if they are provided
-    if (password) {
-      userData.password = password;
-      userData.confirm_password = confirm_password;
-    }
 
     try {
       const response = await fetch(BaseUrl.BaseUrl + `/auth/user`, {
@@ -124,7 +114,7 @@ export default class Information extends Component {
           id: 2,
           type: 'Next',
         });
-        this.fetchUserData(); // Refresh data after update
+        this.fetchUserData();
       } else {
         this.setState({ errorMessage: data.message });
         alert(data.message);
@@ -137,88 +127,90 @@ export default class Information extends Component {
 
   render() {
     return (
-        <div className="information-container">
-          <label className="step-label">Step 1/8</label>
-          <h4 className="section-title">Personal Information</h4>
-          <div className="input-container">
-            <div className="input-field">
-              <label className="input-label">First Name</label>
-              <input
-                  className="input"
-                  type="text"
-                  placeholder="First Name"
-                  name="first_name"
-                  value={this.state.first_name}
-                  onChange={this.handleInputChange}
-                  required
-              />
-            </div>
-            <div className="input-field">
-              <label className="input-label">Last Name</label>
-              <input
-                  className="input"
-                  type="text"
-                  placeholder="Last Name"
-                  name="last_name"
-                  value={this.state.last_name}
-                  onChange={this.handleInputChange}
-              />
-            </div>
+      <div className="information-container">
+        <label className="step-label">Step 1/8</label>
+        <h4 className="section-title">Personal Information</h4>
+        <div className="input-container">
+          <div className="input-field">
+            <label className="input-label">First Name</label>
+            <input
+              className="input"
+              type="text"
+              placeholder="First Name"
+              name="first_name"
+              value={this.state.first_name}
+              onChange={this.handleInputChange}
+              required
+            />
           </div>
-          <div className="input-container">
-            <div className="input-field">
-              <label className="input-label">Email</label>
-              <input
-                  className="input"
-                  type="Email"
-                  placeholder="Enter Email"
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.handleInputChange}
-                  required
-              />
-            </div>
-            <div className="input-field">
-              <label className="input-label">Date of Birth</label>
-              <input
-                  className="input"
-                  type="date"
-                  placeholder="DD/MM/YYYY"
-                  name="dob"
-                  value={this.state.dob}
-                  onChange={this.handleInputChange}
-                  required
-              />
-            </div>
-          </div>
-          <div className="input-container">
-            <div className="input-field">
-              <label className="input-label">Password</label>
-              <input
-                  className="input"
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.handleInputChange}
-              />
-            </div>
-            <div className="input-field">
-              <label className="input-label">Confirm Password</label>
-              <input
-                  className="input"
-                  type="password"
-                  placeholder="Confirm Password"
-                  name="confirm_password"
-                  value={this.state.confirm_password}
-                  onChange={this.handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="button-container" onClick={this.handleNextClick}>
-            <button className="next-button">Next</button>
+          <div className="input-field">
+            <label className="input-label">Last Name</label>
+            <input
+              className="input"
+              type="text"
+              placeholder="Last Name"
+              name="last_name"
+              value={this.state.last_name}
+              onChange={this.handleInputChange}
+            />
           </div>
         </div>
+        <div className="input-container">
+          <div className="input-field">
+            <label className="input-label">Email</label>
+            <input
+              className="input"
+              type="email"
+              placeholder="Enter Email"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleInputChange}
+              required
+            />
+          </div>
+          <div className="input-field">
+            <label className="input-label">Date of Birth</label>
+            <input
+              className="input"
+              type="date"
+              placeholder="DD/MM/YYYY"
+              name="dob"
+              value={this.state.dob}
+              onChange={this.handleInputChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="input-container">
+          <div className="input-field">
+            <label className="input-label">Current Password</label>
+            <input
+              className="input"
+              type="password"
+              placeholder="Current Password"
+              name="current_password"
+              value={this.state.current_password}
+              onChange={this.handleInputChange}
+              required
+            />
+          </div>
+          <div className="input-field">
+            <label className="input-label">Confirm Password</label>
+            <input
+              className="input"
+              type="password"
+              placeholder="Confirm Password"
+              name="confirm_password"
+              value={this.state.confirm_password}
+              onChange={this.handleInputChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="button-container" onClick={this.handleNextClick}>
+          <button className="next-button">Next</button>
+        </div>
+      </div>
     );
   }
 }

@@ -142,7 +142,7 @@ const HomeHeader = () => {
                                     borderRadius: 11,
                                     color: 'white',
                                     background: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%)'
-                                }} className="me-2 btn btn-outline-dark" type="submit">Sign Up
+                                }} className="me-2 btn btn-outline-dark" type="submit">Guest Sign Up
                                 </button>
                             </Link>
                         </div>

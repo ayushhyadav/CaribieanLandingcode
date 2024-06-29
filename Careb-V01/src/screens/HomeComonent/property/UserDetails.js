@@ -197,7 +197,7 @@
 //         <div style={{ width: '90%', margin: '0 auto' }}>
 //           <label style={{ fontSize: 20, fontSize: 18, fontWeight: 600, marginTop: 30 }}>Extra Services</label>
 
-//           <div style={{ display: 'flex', width: '80%', marginTop: 10 }}>
+//           {/* <div style={{ display: 'flex', width: '80%', marginTop: 10 }}>
 //             {propertyData?.extra_service.split(',').map((Extra, index) => (
 //               <ul
 //                 key={index}
@@ -232,7 +232,7 @@
 //                 </li>
 //               </ul>
 //             ))}
-//           </div>
+//           </div> */}
 
 //           {/* Additional message */}
 //           {this.state.Active_extra_service ? <div>
@@ -263,7 +263,7 @@
 //         )} */}
 
 
-//           <label style={{ marginTop: 20, fontSize: 18, fontWeight: 600, marginTop: 30 }}>Amenities</label>
+//           {/* <label style={{ marginTop: 20, fontSize: 18, fontWeight: 600, marginTop: 30 }}>Amenities</label>
 //           <div style={{ display: 'flex', width: '100%', marginTop: 10, flexWrap: 'wrap' }}>
 //             {propertyData?.amenties.split(',').map((Amenities) => (
 //               <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
@@ -272,7 +272,7 @@
 
 //               </ul>
 //             ))}
-//           </div>
+//           </div> */}
 
 //         </div>
 //         <div style={{ marginTop: 20, width: '90%', margin: '0 auto' }}>
@@ -301,7 +301,7 @@
 //           >
 //             {(close) => (
 //               <div style={{height:'1000px'}} >
-//                 <PropertyBooking propertyData={propertyData} selectedValue={selectedValue}  />
+//                 <PropertyBooking propertyData={propertyData}  />
 //               </div>
 //             )}
 //           </Popup>
@@ -329,7 +329,7 @@ import Popup from 'reactjs-popup';
 import PropertyBooking from './PropertyBooking';
 import 'reactjs-popup/dist/index.css';
 import BaseUrl from '../../Server/BaseUrl'
-
+import './userDetails.css'
 i18nIsoCountries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 const Amenities = [
@@ -537,6 +537,23 @@ class UserDetails extends Component {
                 <div style={{ width: '90%', margin: '0 auto' }}>
                     <h3 style={{ fontSize: 18, marginTop: 30 }}>Availability Calendar</h3>
                     <Calander callBack={(value) => { this.props.callBackFun(value) }} />
+                    <Popup
+    trigger={
+        <div>
+            <button className='userbooking'>Book Property</button>
+        </div>
+    }
+    modal
+    closeOnDocumentClick={false}
+    contentStyle={{ minHeight: "100px", width: '90%', overflow: 'scroll' }}
+>
+    {(close) => (
+        <div style={{ height: 'auto', overflow: 'scroll' }}>
+            <PropertyBooking propertyData={propertyData?.property} onClose={close} />
+        </div>
+    )}
+</Popup>
+
 
                 </div>
                 <div className='booking-date' style={{ width: '90%', display: 'flex', justifyContent: 'space-between', margin: '0 auto' }}>

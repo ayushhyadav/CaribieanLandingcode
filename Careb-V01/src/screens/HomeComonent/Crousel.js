@@ -499,7 +499,7 @@ const Crousel = ({ CallBackFun }) => {
                   <option value="Higheaze">Higheaze</option>
                 </select>
               </div>
-
+              {/* favicon.ico */}
               <div className="guest-stay-container">
       <div
         className="filter-item"
@@ -513,7 +513,7 @@ const Crousel = ({ CallBackFun }) => {
           className="input-field2"
           value={persons}
           readOnly
-          style={{ height: 30, width: 140, padding: 10 }}
+          style={{ height: 30, width: 120, padding: 10 }}
         />
       </div>
       {showBox && (

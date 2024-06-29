@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './Signup.css';
 import LogoText from '../assets/LogoText.png';
 import logo from '../screens/Image/Group.png';
-import Facebook from '../assets/Face.png';
 import Faceboos from '../assets/Faceboos.png';
 import Twitter from '../screens/Image/Twitter.png';
 import Instagram from '../screens/Image/Instagram.png';
@@ -10,13 +9,14 @@ import Google from '../assets/Goo.png';
 import reCAPTCHA from '../screens/Image/reCAPTCHA.png';
 import { NavLink, useNavigate } from 'react-router-dom'; // Fix import statement
 import BaseUrl from './Server/BaseUrl';
-
+import ForgotPasswordModal from './ForgotPasswordModal';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   const loginMethod = () => {
     console.log('base url  ', email, password);
@@ -37,18 +37,45 @@ function Login() {
           alert(JSON.stringify(responseJson?.error));
         } else {
           console.log("checkkk", responseJson);
-          localStorage.setItem('user_id', responseJson.user_id)
+          localStorage.setItem('user_id', responseJson.user_id);
 
-          console.log('local storage ', localStorage.user_id)
-          navigate("/TermsCondition")
+          console.log('local storage ', localStorage.user_id);
+          navigate("/TermsCondition");
         }
       })
       .catch((error) => {
         alert(JSON.stringify(error));
-
       });
   };
 
+  const handlePasswordChange = (email, newPassword, confirmPassword) => {
+    const data = {
+      email: email,
+      new_password: newPassword,
+      confirm_password: confirmPassword,
+    };
+  
+    fetch(BaseUrl.BaseUrl + '/auth/change_password', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (responseJson?.error) {
+          alert(JSON.stringify(responseJson?.error));
+        } else {
+          alert(responseJson.message);
+          setModalIsOpen(false);
+        }
+      })
+      .catch((error) => {
+        alert(JSON.stringify(error));
+      });
+  };
+  
 
   return (
     <div className="Main-Container">
@@ -149,7 +176,14 @@ function Login() {
                   />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginTop: 8 }}>
-                  <label style={{ fontSize: 14, color: '#0F172A', fontWeight: '500', alignSelf: 'flex-end', marginTop: 5 }}>Forgot password? </label>
+                  {/* <label style={{ fontSize: 14, color: '#0F172A', fontWeight: '500', alignSelf: 'flex-end', marginTop: 5 }}>Forgot password? </label> */}
+                  <button
+style={{ fontSize: 14, color: '#0F172A', fontWeight: '500', alignSelf: 'flex-end', marginTop: 5 ,background:'none',width:150,border:'none'}}
+onClick={() => setModalIsOpen(true)}
+>
+Forgot password?
+</button>
+               
                 </div>
                 <div className='robot' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width: '60%', marginTop: 10, height: 75, boxShadow: `1px 1px 2px 2px ${'#D3D3D3'}`, background: '#F9F9F9' }}>
                   <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
@@ -168,6 +202,11 @@ function Login() {
           </div>
         </div>
       </div>
+      <ForgotPasswordModal
+isOpen={modalIsOpen}
+onRequestClose={() => setModalIsOpen(false)}
+onPasswordChange={handlePasswordChange}
+/>
     </div>
 
   );

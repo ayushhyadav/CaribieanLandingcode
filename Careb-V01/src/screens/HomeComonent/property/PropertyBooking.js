@@ -14,7 +14,7 @@ const Order2 = [
   { item2: 'BreakFast', price: 250 },
 ];
 
-const PropertyBooking = ({ propertyData, selectedValue, closeModule }) => {
+const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
@@ -90,6 +90,15 @@ const PropertyBooking = ({ propertyData, selectedValue, closeModule }) => {
       return;
     }
   
+    // Check if user is logged in or user ID is available (replace with your actual check)
+    const isLoggedIn = localStorage.getItem('userId'); // Example: Check if userId exists in localStorage or your auth context
+  
+    if (!isLoggedIn) {
+      // Redirect user to login page if not logged in
+      navigate('/login');
+      return;
+    }
+  
     const bookingData = {
       checkInDate,
       checkOutDate,
@@ -104,7 +113,7 @@ const PropertyBooking = ({ propertyData, selectedValue, closeModule }) => {
     localStorage.setItem('bookingData', JSON.stringify(bookingData));
   
     // Navigate to VerifyBooking component
-    navigate('/VarifyBooking');
+    navigate('/VerifyBooking');
   };
   
 
@@ -119,7 +128,7 @@ const PropertyBooking = ({ propertyData, selectedValue, closeModule }) => {
               <label className="night-label">/night</label>
             </div>
             <div className='close-btn'>
-              <button style={{ border: 'none', background: 'none' }} onClick={closeModule}>
+              <button style={{ border: 'none', background: 'none' }} onClick={onClose}>
                 <img style={{ float: 'left' }} src={require('../../../assets/close-circle.png')} alt="Close" />
               </button>
             </div>

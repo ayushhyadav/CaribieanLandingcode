@@ -170,7 +170,7 @@ class PhoneAuth extends Component {
                                 marginLeft: 10,
                                 border: 'none'
                             }}
-                            // this.props.NextCallBack({ navigationTo: 'Veri_Phone', id: 3, bt_type: 'Next' });
+                            onClick={() => this.props.NextCallBack({ navigationTo: 'Pasport_veri', id: 4, bt_type: 'Next' })}
                             // onClick={() => this.verifyOTP()}
                     >
                         Next

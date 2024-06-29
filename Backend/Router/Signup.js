@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Users = require('../SignupModule/Signupmodules');
 const bcrypt = require('bcrypt');
+// const router = express.Router();
+// const bcrypt = require('bcrypt');
 
 // User signup
 router.post("/auth/signup", async (req, res) => {
@@ -69,12 +71,17 @@ router.get("/auth/user", async (req, res) => {
 });
 
 // Update user details
+
+
 router.put("/auth/user", async (req, res) => {
     try {
-        const { email, first_name, last_name, dob, password, confirm_password, current_password } = req.body;
+        const { email, first_name, last_name, dob, current_password, confirm_password } = req.body;
 
         if (!email) {
             return res.status(400).json({ message: 'Email is required' });
+        }
+        if (!current_password || !confirm_password) {
+            return res.status(400).json({ message: 'Both current password and confirm password are required' });
         }
 
         const user = await Users.findOne({ email: email });
@@ -83,22 +90,19 @@ router.put("/auth/user", async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
+        if (!(await bcrypt.compare(current_password, user.password))) {
+            return res.status(400).json({ message: 'Password must be same as login/signup password ' });
+        }
+
+        if (current_password !== confirm_password) {
+            return res.status(400).json({ message: 'Passwords does not match' });
+        }
+
         const updatedDetails = {};
 
         if (first_name) updatedDetails.first_name = first_name;
         if (last_name) updatedDetails.last_name = last_name;
         if (dob) updatedDetails.dob = dob;
-
-        // If new password is provided, verify current password and hash new password
-        if (password || confirm_password) {
-            if (!current_password || !(await bcrypt.compare(current_password, user.password))) {
-                return res.status(400).json({ message: 'Password must we same as Login Password' });
-            }
-            if (password !== confirm_password) {
-                return res.status(400).json({ message: 'Passwords do not match' });
-            }
-            updatedDetails.password = await bcrypt.hash(password, 10);
-        }
 
         const updatedUser = await Users.findOneAndUpdate({ email: email }, updatedDetails, { new: true });
 
@@ -108,5 +112,7 @@ router.put("/auth/user", async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+
+
 
 module.exports = router;

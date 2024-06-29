@@ -33,7 +33,7 @@ const CustomCalendar = (props) => {
             <DateRange
                 ranges={dateRange}
                 onChange={handleSelect}
-                months={window.innerWidth > 600 ? 2 : 1} // Number of months to display
+                months={window.innerWidth > 600 ? 1 : 1} // Number of months to display
                 direction="horizontal" // Display direction
             />
         </div>

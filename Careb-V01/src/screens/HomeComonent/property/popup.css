@@ -1,0 +1,18 @@
+/* styles.css */
+.usebooking{
+    border: 2px solid red;
+    height: 1000px;
+}
+.contentStyle{
+    border: 2px solid blue;
+}
+.popups{
+    border:3px solid red;
+}
+/* Hide button on screens smaller than 600px */
+@media (max-width: 600px) {
+    .userbooking {
+      display: none;
+    }
+  }
+  
