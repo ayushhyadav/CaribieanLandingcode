@@ -1,63 +1,56 @@
 import React, { Component } from 'react';
 import BaseUrl from '../Server/BaseUrl';
 import './ProfileUpload.css';
+
 class ProfileUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedImage: null, 
-      
-      user_id:localStorage.user_id
-      
-
+      selectedImage: null,
+      user_id: localStorage.user_id
     };
   }
 
   handleFileUpload = (e) => {
     const file = e.target.files[0];
-    console.log('file image  ',file)
-    this.setState({selectedImage:file})
- 
-    // this.setState({ selectedImage: URL.createObjectURL(file) });
+    console.log('file image  ', file);
+    this.setState({ selectedImage: file });
   };
 
   sendImageToServer = () => {
-    const { selectedImage,user_id } = this.state;
-
-    console.log('user id ',user_id)
-
-
-      const formData = new FormData();
-      // formData.append('profile_url', selectedImage);
-      formData.append('user_id', user_id);
-    console.log('selcted image ',selectedImage)
-      formData.append('profile_url',selectedImage);
+    const { selectedImage, user_id } = this.state;
   
-      fetch(BaseUrl.BaseUrl + '/profile/upload', {
-        method: 'POST',
-        body: formData,
+    if (!selectedImage) {
+      alert("Please select a profile image.");
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append('user_id', user_id);
+    formData.append('profile_url', selectedImage);
+  
+    fetch(BaseUrl.BaseUrl + '/profile/upload', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => {
+        console.log('Response status:', response.status);
+        return response.json();
       })
-        .then((response) => {
-          console.log('Response status:', response.status);
-          return response.json(); // If you expect JSON response, otherwise use response.text() or response.blob()
-        })
-        .then((data) => {
-          console.log('Response data:', data);
-          if (data?.message) {
-            console.log('Image uploaded successfully');
-            this.props.NextCallBack({ navigationTo: 'Veri_Phone', id: 3, bt_type: 'Next' });
-            // Perform any actions you need upon successful upload
-          } 
-          else {
-            this.props.NextCallBack({ navigationTo: 'Veri_Phone', id: 3, bt_type: 'Next' });
-
-            console.log(data.error,'Image upload failed');
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-  }
+      .then((data) => {
+        console.log('Response data:', data);
+        if (data?.message) {
+          console.log('Image uploaded successfully');
+          this.props.NextCallBack({ navigationTo: 'Veri_Phone', id: 3, bt_type: 'Next' });
+        } else {
+          console.log('Image upload failed', data.error);
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+  
 
   render() {
     const { selectedImage } = this.state;
@@ -65,11 +58,10 @@ class ProfileUpload extends Component {
     return (
       <div className='upload-pic' style={{ width: '75%', padding: 20 }}>
         <label>Step 2/8</label>
-        <h4 style={{ fontSize: 25, fontWeight: '700'}}>Upload Profile Picture</h4>
-        <label style={{ fontSize: 13, fontWeight: '400', color: '#0F172A'}}>
-
-        </label>
-        <div className='upload-box'
+        <h4 style={{ fontSize: 25, fontWeight: '700' }}>Upload Profile Picture</h4>
+        <label style={{ fontSize: 13, fontWeight: '400', color: '#0F172A' }}></label>
+        <div
+          className='upload-box'
           style={{
             textAlign: 'center',
             height: '40%',
@@ -112,8 +104,9 @@ class ProfileUpload extends Component {
             onChange={this.handleFileUpload}
             id="fileInput"
           />
-          <label className='upload-btn'
-            htmlFor="fileInput" 
+          <label
+            className='upload-btn'
+            htmlFor="fileInput"
             style={{
               height: 40,
               width: '20%',
@@ -124,14 +117,15 @@ class ProfileUpload extends Component {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: '#E2E8F0',
-              cursor: 'pointer', 
+              cursor: 'pointer',
             }}
           >
             Upload Photo
           </label>
         </div>
         <div style={{ display: 'flex', marginTop: '1%', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <button  className='Back-btn'
+          <button
+            className='Back-btn'
             style={{
               width: '10%',
               borderRadius: 10,
@@ -146,7 +140,8 @@ class ProfileUpload extends Component {
           >
             Back
           </button>
-          <button className='next-btn'
+          <button
+            className='next-btn'
             style={{
               color: 'white',
               background: '#F15A29',
@@ -154,12 +149,10 @@ class ProfileUpload extends Component {
               borderRadius: 10,
               height: '45px',
               marginLeft: 10,
-              border: 'none'
+              border: 'none',
             }}
-            onClick={() => {
-              this.sendImageToServer();
-              // this.props.NextCallBack({ navigationTo: 'Veri_Phone', id: 3, bt_type: 'Next' });
-            }}
+            onClick={this.sendImageToServer}
+            disabled={!selectedImage}
           >
             Next
           </button>

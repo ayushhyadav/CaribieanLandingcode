@@ -18,23 +18,28 @@ export default class Located extends Component {
   }
 
   handleSaveDataToLocalStorage = () => {
+    const { currentLocation, countryRegion, state, city, streetAddress } = this.state;
+
+    // Check if streetAddress is empty
+    if (!streetAddress) {
+        alert('Street Address is required!');
+        return; // Exit function if streetAddress is empty
+    }
 
     const dataToSave = {
-
-      currentLocation: this.state.currentLocation,
-      countryRegion: this.state.countryRegion,
-      state: this.state.state,
-      city: this.state.city,
-      streetAddress: this.state.streetAddress
-
+        currentLocation,
+        countryRegion,
+        state,
+        city,
+        streetAddress
     };
 
     localStorage.setItem('propertyData', JSON.stringify(dataToSave));
 
-
+    this.props.NextCallBack({ navigationTo: 'property_Images', id: 7, bt_type: 'Next' });
     console.log('Data saved to localStorage:', dataToSave);
+};
 
-  };
 
 
   handleUseCurrentLocation = () => {
@@ -189,7 +194,7 @@ export default class Located extends Component {
             style={{ color: 'white', background: '#F15A29', width: '10%', borderRadius: 10, height: '45px', marginLeft: 10 }}
             onClick={() => {
               this.handleSaveDataToLocalStorage(); // Call the function to save the data
-              this.props.NextCallBack({ navigationTo: 'property_Images', id: 7, bt_type: 'Next' });
+              
             }} >
             Next
           </button>

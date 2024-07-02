@@ -1,76 +1,72 @@
-
-
 .Diversify-btn button img {
-    padding: 0px 0px 0 19px;
-    max-width: 46px;
+    padding: 0px 0px 0 19px; /* Adjusted padding for the image */
+    max-width: 46px; /* Maximum width for the image */
 }
+
 .Diversify-btn button {
-    display: flex;
-    width: auto !important;
-    justify-content: space-between;
-    font-weight: 700;
-    padding: 8px 10px;
-    position: relative;
+    display: flex; /* Ensures button is a flex container */
+    width: auto !important; /* Allows button width to adjust automatically */
+    justify-content: space-between; /* Space between content */
+    font-weight: 700; /* Font weight */
+    padding: 8px 10px; /* Padding */
+    position: relative; /* Relative positioning */
 }
 
 .tooltip-box {
-    position: absolute;
-    top: -56px;
-    color: #000;
-    right: 0;
-    left: 0px;
-    font-size: 14px;
-    line-height: 1;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    border: 1px solid #323232;
-    padding: 8px 5px;
-    font-weight: 500;
-    display: none;
+    position: absolute; /* Absolute positioning for tooltip */
+    top: -56px; /* Positioned above */
+    color: #000; /* Text color */
+    right: 0; /* Right aligned */
+    left: 0px; /* Left position */
+    font-size: 14px; /* Font size */
+    line-height: 1; /* Line height */
+    background-color: #f9f9f9; /* Background color */
+    border-radius: 10px; /* Border radius */
+    border: 1px solid #323232; /* Border */
+    padding: 8px 5px; /* Padding */
+    font-weight: 500; /* Font weight */
+    display: none; /* Initially hidden */
 }
 
 .tooltip-box p {
-    margin: 0;
+    margin: 0; /* Margin for paragraphs inside tooltip */
 }
-
-
 
 @media screen and (max-width: 576px) {
     .list-box {
-        display: block !important;
-        padding: 20px 0 !important;
+        display: block !important; /* Change display to block */
+        padding: 20px 0 !important; /* Adjust padding */
     }
     .list-input {
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Allow inputs to wrap */
     }
     .list-input input {
-        width: 100% !important;
+        width: 100% !important; /* Full width for inputs */
     }
     .list-input select {
-        width: 100% !important;
+        width: 100% !important; /* Full width for selects */
     }
     .list-input-number {
-        display: block !important;
+        display: block !important; /* Display block for number inputs */
     }
     .input-fild {
-        width: 100% !important;
+        width: 100% !important; /* Full width for input fields */
     }
     .Diversify-btn button img {
-        padding: 0px 0px 0 0px;
-        max-width: 22px;
+        padding: 0px 0px 0 0px; /* Adjusted padding for image */
+        max-width: 22px; /* Reduced max width for image */
     }
     .Diversify-btn button {
-        font-size: 0;
-        padding: 10px 10px;
+        font-size: 0; /* Hidden font size */
+        padding: 10px 10px; /* Adjusted padding */
     }
     .list-box h4 {
-        font-size: 22px !important;
+        font-size: 22px !important; /* Adjusted font size for heading */
     }
     .listing-box {
-        width: 100% !important;
+        width: 100% !important; /* Full width for listing box */
     }
     .type-p {
-        width: 100% !important;
+        width: 100% !important; /* Full width for type paragraph */
     }
-    
 }

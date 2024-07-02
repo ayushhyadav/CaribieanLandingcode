@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import countryList from 'react-select-country-list';
 import BaseUrl from '../Server/BaseUrl';
-import  './PassportVarification.css'
+import './PassportVarification.css';
 
 function PassportVerification(props) {
   const [value, setValue] = useState('');
@@ -25,8 +25,23 @@ function PassportVerification(props) {
   };
 
   const handleSubmit = async () => {
+    if (!value) {
+      alert('Please select a country.');
+      return;
+    }
+
+    if (!identity_type) {
+      alert('Please select an identity type.');
+      return;
+    }
+
+    if (!selectedFile) {
+      alert('Please upload a file.');
+      return;
+    }
+
     console.log('user id', user_id);
-    const country = value;
+    const country = value.label;
 
     console.log('Country:', country);
     console.log('Identity Type:', identity_type);
@@ -39,26 +54,24 @@ function PassportVerification(props) {
     formData.append('card_image', selectedFile);
 
     try {
-      const response = await fetch(BaseUrl.BaseUrl + '/identity_verification', {
+      const response = await fetch(`${BaseUrl.BaseUrl}/identity_verification`, {
         method: 'POST',
         body: formData,
       });
 
       if (response.ok) {
         const data = await response.json();
-      
         console.log('API response:', data);
-          props.NextCallBack({ navigationTo: 'List_property', id: 5, bt_type: 'Next' })
- 
+        props.NextCallBack({ navigationTo: 'List_property', id: 5, bt_type: 'Next' });
       } else {
         console.error('API request failed:', response.status, response.statusText);
-   
+        alert(`API request failed: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
       console.error('API request error:', error);
+      alert(`API request error: ${error.message}`);
     }
   };
-
   return (
     <div className='Passport-ID' style={{ width: '100%', padding: 30, justifyContent: 'center' }}>
       <label style={{ marginLeft: 20 }}>Step 4/8</label>
@@ -72,7 +85,6 @@ function PassportVerification(props) {
           width: '70%',
           color: '#0F172A',
           marginLeft: 20,
-          
         }}
       >
         Upload a government-issued ID that clearly shows your full name and complete photo. The document must be a
@@ -104,7 +116,6 @@ function PassportVerification(props) {
         National ID <br />
       </div>
       <div style={{ width: '100%', height: '30%', padding: 20 }}>
-   
         <label
           htmlFor="fileInput"
           style={{
@@ -123,12 +134,12 @@ function PassportVerification(props) {
             cursor: 'pointer',
           }}
         >
-          <div  htmlFor="fileInput" style={{ display: 'flex' }}>
-            <label  htmlFor="fileInput" style={{ fontSize: 16, fontWeight: '600', color: '#94A3B8' }}>Drag your files or Browse</label>
+          <div htmlFor="fileInput" style={{ display: 'flex' }}>
+            <label htmlFor="fileInput" style={{ fontSize: 16, fontWeight: '600', color: '#94A3B8' }}>Drag your files or Browse</label>
             <input type="file" id="fileInput" style={{ display: 'none' }} onChange={handleFileChange} />
-            {selectedFile && <p >Selected file: {selectedFile.name}</p>}
+            {selectedFile && <p>Selected file: {selectedFile.name}</p>}
           </div>
-          <label  htmlFor="fileInput" style={{ fontSize: 12, fontWeight: '400', color: '#94A3B8' }}>Add Both Side Image of Certificate</label>
+          <label htmlFor="fileInput" style={{ fontSize: 12, fontWeight: '400', color: '#94A3B8' }}>Add Both Side Image of Certificate</label>
         </label>
       </div>
       <div
@@ -168,7 +179,3 @@ function PassportVerification(props) {
 }
 
 export default PassportVerification;
-
-
-        
-         

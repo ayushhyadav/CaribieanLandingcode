@@ -500,13 +500,34 @@ const Crousel = ({ CallBackFun }) => {
                 </select>
               </div>
               {/* favicon.ico */}
+         
+              <div className="check-in">
+                <div className="filter-item2" >
+                  <span className="span-spacing" style={{ marginLeft: '8px' }}>Check In</span><br/>
+                  <input
+                      className="input"
+                      type="date"
+                      placeholder="dd/mm/yyyy"
+                      style={{ background: 'white', marginLeft: '8px', }}
+                  />
+                </div>
+                <div className="filter-item2" >
+                  <span className="span-spacing" style={{ marginLeft: '8px' }}>Check Out</span><br/>
+                  <input
+                      className="input"
+                      type="date"
+                      style={{ background: 'white', marginLeft: '8px' }}
+                  />
+                </div>
+                
+              </div>
               <div className="guest-stay-container">
       <div
         className="filter-item"
         style={{ borderLeft: '1px solid #E5E7Eb', paddingBottom: -5 }}
         onClick={() => setShowBox(!showBox)}
       >
-        <span className="span-spacing">Guest Stay</span>
+        <span className="span-spacing">Guest Stay</span> <br/>
         <input
           type="number"
           placeholder="Add Person"
@@ -540,25 +561,7 @@ const Crousel = ({ CallBackFun }) => {
       )}
     </div>
 
-              <div className="check-in">
-                <div className="filter-item2" >
-                  <span className="span-spacing" style={{ marginLeft: '8px' }}>Check In</span><br/>
-                  <input
-                      className="input"
-                      type="date"
-                      placeholder="dd/mm/yyyy"
-                      style={{ background: 'white', marginLeft: '8px', }}
-                  />
-                </div>
-                <div className="filter-item2" >
-                  <span className="span-spacing" style={{ marginLeft: '8px' }}>Check Out</span><br/>
-                  <input
-                      className="input"
-                      type="date"
-                      style={{ background: 'white', marginLeft: '8px' }}
-                  />
-                </div>
-              </div>
+              
 
               <div className="filter-itemss d-flex justify-content-center">
                 <a onClick={handleButtonClick} className="search-button">

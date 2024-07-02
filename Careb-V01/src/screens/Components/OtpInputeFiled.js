@@ -14,42 +14,51 @@ class PhoneAuth extends Component {
             otp: '',
             verificationCodeSent: false,
             confirmationResult: null,
-            message: ''
+            message: '',
+            timer: 30,
+            canResend: false,
         };
+        this.timerInterval = null;
     }
 
     handlePhoneChange = (value) => {
-        // Check if the value starts with '+' already
         if (!value.startsWith('+')) {
-            // If not, prepend '+' to the phone number
             value = '+' + value;
         }
         this.setState({ phone: value });
         console.log('Phone number changed:', value);
     };
 
+    startTimer = () => {
+        this.setState({ timer: 30, canResend: false });
+        this.timerInterval = setInterval(() => {
+            this.setState(prevState => {
+                if (prevState.timer > 1) {
+                    return { timer: prevState.timer - 1 };
+                } else {
+                    clearInterval(this.timerInterval);
+                    return { canResend: true };
+                }
+            });
+        }, 1000);
+    };
+
     sendOtp = () => {
         try {
-            const rechaptcha = new RecaptchaVerifier(auth, "recaptcha", {})
+            const rechaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
             signInWithPhoneNumber(auth, this.state.phone, rechaptcha)
                 .then((confirmationResult) => {
-                    // Handle successful confirmation result
-                    this.setState({ verificationCodeSent: true, confirmationResult });
+                    this.setState({ verificationCodeSent: true, confirmationResult, message: 'OTP sent successfully.' });
+                    this.startTimer();
                 })
                 .catch((error) => {
                     console.error('Error sending OTP:', error);
                     this.setState({ message: 'Error sending OTP. Please try again.' });
-
-                    // Log Firebase's error response if available
-                    if (error.code && error.message) {
-                        console.error('Firebase Error:', error.code, error.message);
-                    }
                 });
-
         } catch (err) {
-            console.error(err)
+            console.error(err);
         }
-    }
+    };
 
     verifyOTP = (e) => {
         e.preventDefault();
@@ -57,21 +66,25 @@ class PhoneAuth extends Component {
 
         confirmationResult.confirm(otp)
             .then((result) => {
-                // OTP verification successful
                 const user = result.user;
                 console.log('User signed in successfully:', user);
                 this.setState({ message: 'Phone number verified successfully!' });
-               this.props.NextCallBack({ navigationTo: 'Pasport_veri', id: 4, bt_type: 'Next'})
+                this.props.NextCallBack({ navigationTo: 'Pasport_veri', id: 4, bt_type: 'Next' });
             })
             .catch((error) => {
-                // Invalid OTP entered
                 console.error('Invalid OTP:', error);
                 this.setState({ message: 'Invalid OTP. Please try again.' });
             });
     };
 
+    componentWillUnmount() {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+        }
+    }
+
     render() {
-        const { phone, otp, verificationCodeSent, message } = this.state;
+        const { phone, otp, verificationCodeSent, message, timer, canResend } = this.state;
 
         return (
             <div className='v-phone-number' style={{ width: '70%', padding: 30 }}>
@@ -115,8 +128,9 @@ class PhoneAuth extends Component {
                                 className="me-2 btn btn-outline-dark"
                                 type="button"
                                 onClick={this.sendOtp}
+                                disabled={verificationCodeSent && !canResend}
                             >
-                                Verify
+                                {verificationCodeSent ? `Resend OTP (${timer}s)` : 'Verify'}
                             </button>
                         )}
                     </div>
@@ -171,7 +185,6 @@ class PhoneAuth extends Component {
                                 border: 'none'
                             }}
                             onClick={() => this.props.NextCallBack({ navigationTo: 'Pasport_veri', id: 4, bt_type: 'Next' })}
-                            // onClick={() => this.verifyOTP()}
                     >
                         Next
                     </button>

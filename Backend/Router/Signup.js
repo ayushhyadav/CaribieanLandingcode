@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const Users = require('../SignupModule/Signupmodules');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
 // const router = express.Router();
 // const bcrypt = require('bcrypt');
 
@@ -37,6 +39,62 @@ router.post("/auth/signup", async (req, res) => {
         };
 
         const newUser = await Users.create(userDetail);
+
+        // Send thank you email
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER, // Using environment variable
+                pass: process.env.EMAIL_PASS // Using environment variable
+            }
+        });
+
+        const mailOptions = {
+            from: 'joinus@caribbeaneaze.com', 
+            to: email,
+             subject: 'Welcome to Caribbeaneaze!',
+            text:` Dear ${first_name}, Congratulations on completing your registration and welcome to the Caribbeaneaze
+community! We are delighted to have you with us.
+
+As a part of our community, you can:
+
+-   Hosts  : Showcase your beautiful properties, connect with guests, and create
+memorable experiences.
+-   Guests  : Discover unique accommodations, explore amazing destinations, and
+enjoy seamless booking experiences.
+
+Here are a few tips to get started:
+
+1.   For Hosts  :
+- Make your listing stand out with high-quality photos and detailed descriptions.
+- Keep your calendar up-to-date to attract more bookings.
+- Engage with your guests to provide exceptional experiences.
+
+2.   For Guests  :
+- Use our search feature to find warm places that match your preferences.
+- Read reviews to choose the best accommodations.
+- Communicate with hosts to ensure a smooth stay.
+
+We’re here to support you every step of the way. If you have any questions or need
+assistance, please don’t hesitate to contact our support team at [Support Email].
+
+Thank you for joining Caribbeaneaze. We look forward to helping you make the most of
+your experience with us!
+
+Warm regards,
+The Caribbeaneaze Team
+Caribbeaneaze.com
+Support@Caribbeaneaze.com
+Info@caribbeaneaze.com
+        `};
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+            } else {
+                console.log('Email sent:', info.response);
+            }
+        });
 
         res.status(201).json({ message: 'User created successfully', user: newUser });
     } catch (error) {

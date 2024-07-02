@@ -79,10 +79,10 @@ const ForgotPasswordModal = ({ isOpen, onRequestClose, onPasswordChange }) => {
             ),
           }}
         />
-        <button onClick={handlePasswordChange} className="button">
+        <button style={{ margin: "0.5rem 0"}}onClick={handlePasswordChange} >
           Change Password
         </button>
-        <button onClick={onRequestClose} className="button button-close">
+        <button onClick={onRequestClose} >
           Close
         </button>
       </div>

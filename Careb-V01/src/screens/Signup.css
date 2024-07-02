@@ -1,3 +1,32 @@
+/* Main Container */
+.Main-Container {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Signup Image Container */
+.signup-img {
+    position: relative;
+}
+
+/* Signup Image */
+.signup-img img:first-child {
+    height: 100vh;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .signup-img img:first-child {
+        height: auto;
+    }
+    .fieldtext{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+/* Signup Description */
 .signup-descap p {
     color: #F8FAFC;
     font-size: 13px;
@@ -6,10 +35,43 @@
     padding: 0 4px;
 }
 
-img {
-    width: 100%;
+@media screen and (max-width: 576px) {
+    .signup-descap p {
+        font-size: 12px;
+        margin-top: 7px;
+    }
 }
 
+/* Detail Section */
+.detail {
+    position: absolute;
+    width: 100%;
+    background-image: linear-gradient(195.42deg, #56BBFF -63.22%, rgba(85, 187, 255, 0.21) -63.2%, #061BEB 87.54%);
+    background-size: cover;
+    bottom: 0;
+    padding: 20px;
+}
+
+@media screen and (max-width: 576px) {
+    .detail {
+        padding: 10px 15px !important;
+    }
+}
+
+/* Registration Heading */
+.regis-heading p {
+    font-size: 30px;
+    font-weight: 700;
+    color: #000;
+}
+
+@media screen and (max-width: 576px) {
+    .regis-heading p {
+        font-size: 26px;
+    }
+}
+
+/* Registration Button */
 .regis-heading button {
     width: auto;
     background: transparent;
@@ -17,148 +79,97 @@ img {
     font-weight: 700;
     padding: 0px 10px;
     font-size: 14px;
-
+    border: none;
 }
 
+@media screen and (max-width: 576px) {
+    .regis-heading button {
+        padding: 0px 12px;
+        font-size: 11px;
+        border: 1.7px solid black;
+        height: 41px;
+    }
+}
+
+/* Social Buttons */
+.social-btn {
+    display: flex;
+    flex-direction: row;
+    border-color: #C4C4C4;
+    background-color: #F8FAFC;
+    height: 45px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 10px;
+}
+
+.social-btn img {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+.social-btn label {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #474554;
+}
+
+@media screen and (max-width: 576px) {
+    .social-btn {
+        width: 40% !important;
+        margin: 0px 13px !important;
+        padding: 10px;
+        justify-content: center !important;
+    }
+
+    .social-btn img {
+        margin-left: 0 !important;
+    }
+
+    .social-btn label {
+        font-size: 16px !important;
+    }
+}
+
+/* Social Media */
+.social-media {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 576px) {
+    .social-media {
+        margin-top: 18px !important;
+    }
+}
+
+/* Scrollbar */
 .team\& {
     height: 300px !important;
     scrollbar-color: rgba(241, 90, 41, 1) rgba(226, 232, 240, 1);
     scrollbar-width: thin;
 }
 
-
-.regis-heading p {
-    font-size: 30px;
-    font-weight: 700;
-    color: #000;
+@media screen and (max-width: 576px) {
+    .team\& {
+        height: 55vh !important;
+    }
 }
 
-.detail {
-    position: absolute;
-    width: 100%;
-    background-image: linear-gradient(195.42deg, #56BBFF -63.22%, rgba(85, 187, 255, 0.21) -63.2%, #061BEB 87.54%);
-    background-size: cover;
-    bottom: 0;
+/* Lists */
+ol, ul {
+    padding-left: 0rem !important;
 }
 
-.signup-img img:first-child {
-    height: 100vh;
-}
-
-
-.SignuPdetail {
-    height: "100%";
-    width: '100%';
-    background-image: linear-gradient(195.42deg, #56BBFF -63.22%, rgba(85, 187, 255, 0.21) -63.2%, #061BEB 87.54%);
-}
-
-.Main-Container {
-    width: 100%;
-    overflow: hidden;
-}
-
-.signup-img {
-    position: relative;
-}
+/* Miscellaneous */
 .or > div {
     width: 100%;
     margin-bottom: 8px;
 }
+
 .or h6 {
     margin: 0 15px;
     color: #a4a4a4;
-}
-
-@media screen and  (max-width: 576px) {
-    .signup-img img:first-child {
-        height: auto;
-    }
-    .signup-descap p {
-        font-size: 12px;
-    }
-    .signup-descap p {
-        margin-top: 7px;
-    }
-    .detail {
-        padding: 10px 15px !important;
-    }
-    .regis-heading p {
-        font-size: 26px;
-        font-weight: 700;
-        color: #000;
-    }
-    .regis-heading button {
-        width: auto;
-        background: transparent;
-        color: #000;
-        font-weight: 700;
-        padding: 0px 12px;
-        font-size: 11px;
-        border: 1.7px solid black;
-        height: 41px;
-    }
-
-    .social-btn img {
-        margin-left: 0 !important;
-    }
-    .social-btn {
-        width: 40% !important;
-        margin: 0px  10px 0 0!important;
-        padding: 10px;
-        justify-content:center !important;
-        margin: 0px 13px !important;
-    }
-    .social-media {
-        margin-top: 18px !important;
-    }
-    .robot {
-        width: auto !important;
-    }
-    .accounr-reg {
-        margin-bottom: 30px;
-    }
-    .top-log {
-        margin-top: 15px !important;
-    }
-    .top-log p {
-        font-size: 26px;
-    }
-    .top-log button {
-        height: 36px !important;
-    }
-    .social-media label {
-        font-size: 14px !important;
-    }
-    .socical-mo label {
-        font-size: 15px !important;
-        font-weight: 700;
-        margin-left: 11px !important;
-    }
-    .socical-mo img {
-        width: 20px;
-        height: 20px;
-    }
-    .socical-mo {
-        justify-content: center !important;
-        margin-left: 0 !important;
-    }
-    .social-btn label {
-        font-size: 16px !important;
-    }
-    .btn-accpt {
-        margin-top: 14px !important;
-    }
-    .btn-accpt button {
-        width: auto !important;
-    }
-    .btn-accpt a {
-        width: auto !important;
-    }
-    .team\& {
-        height: 55vh !important;
-
-    }
-    ol, ul {
-        padding-left: 0rem !important;
-    }
 }

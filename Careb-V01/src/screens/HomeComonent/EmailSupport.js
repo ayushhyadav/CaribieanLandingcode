@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RegistrationHeader from './HomeHeader';
-
+import BaseUrl from '../Server/BaseUrl';
 export default class EmailSupport extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +15,7 @@ export default class EmailSupport extends Component {
   handleSubmit = () => {
     const { service_provider, name, email, message } = this.state;
 
-    fetch('http://localhost:4000/help/support', { // Updated fetch URL
+    fetch(`${BaseUrl.BaseUrl}/help/support`, { // Updated fetch URL
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
