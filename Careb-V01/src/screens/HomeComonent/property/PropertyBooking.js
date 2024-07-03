@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PropertyBooking.css';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+  List,
+  ListItem,
+  ListItemText
+} from '@mui/material';
 import BaseUrl from '../../Server/BaseUrl';
 
 const Order = [
@@ -90,12 +107,12 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
       return;
     }
   
-    // Check if user is logged in or user ID is available (replace with your actual check)
-    const isLoggedIn = localStorage.getItem('userId'); // Example: Check if userId exists in localStorage or your auth context
+    // Check if user is logged in or user ID is available
+    const isLoggedIn = localStorage.user_id;
   
     if (!isLoggedIn) {
       // Redirect user to login page if not logged in
-      navigate('/login');
+      navigate('/userlogin');
       return;
     }
   
@@ -113,7 +130,7 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
     localStorage.setItem('bookingData', JSON.stringify(bookingData));
   
     // Navigate to VerifyBooking component
-    navigate('/VerifyBooking');
+    navigate('/VarifyBooking');
   };
   
 
@@ -134,7 +151,7 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
             </div>
           </div>
 
-          <div className="input-group">
+          {/* <div className="input-group">
             <label htmlFor="checkIn">Check In</label>
             <input
               className="date-input"
@@ -156,7 +173,28 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
               onChange={handleDateChange}
               min={new Date().toISOString().split('T')[0]}
             />
-          </div>
+          </div> */}
+
+<Box display="flex" flexDirection="column" style={{marginTop:10}} gap={2}>
+            <TextField
+              label="Check In"
+              type="date"
+              id="checkIn"
+              value={checkInDate}
+              onChange={handleDateChange}
+              InputLabelProps={{ shrink: true }}
+              inputProps={{ min: new Date().toISOString().split('T')[0] }}
+            />
+            <TextField
+              label="Check Out"
+              type="date"
+              id="checkOut"
+              value={checkOutDate}
+              onChange={handleDateChange}
+              InputLabelProps={{ shrink: true }}
+              inputProps={{ min: new Date().toISOString().split('T')[0] }}
+            />
+          </Box>
 
           <div className="service-options">
             <label>Choose Extra Service</label>

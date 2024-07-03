@@ -11,11 +11,20 @@ class ProfileUpload extends Component {
     };
   }
 
-  handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    console.log('file image  ', file);
-    this.setState({ selectedImage: file });
-  };
+handleFileUpload = (e) => {
+  const file = e.target.files[0];
+  console.log('file image  ', file);
+
+  // Check file size
+  const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+  if (file.size > maxSize) {
+    alert("Please select an image file smaller than 5MB.");
+    return;
+  }
+
+  this.setState({ selectedImage: file });
+};
+
 
   sendImageToServer = () => {
     const { selectedImage, user_id } = this.state;

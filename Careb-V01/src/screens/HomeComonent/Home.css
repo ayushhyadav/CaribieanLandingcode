@@ -5,6 +5,21 @@
   color: #000;
   margin: 35px 20px;
 }
+.feedback-button {
+  position: fixed;
+  background: black;
+  border: 1px solid ;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: -22px;
+  /* background: none; */
+  right: 0;
+  bottom: 50px;
+  z-index: 1000;
+  transform: rotate(-90deg); /* Rotate button 90 degrees clockwise */
+}
+
 
 
 .carousel-list {
@@ -53,6 +68,15 @@
     /* Example: Adjust font size for the HomeHeader */
     .home-header {
       font-size: 24px;
+    }
+    .feedback-button {
+      position: fixed;
+      width: 120;
+      /* background: none; */
+      right: 0;
+      bottom: 50px;
+      z-index: 1000;
+      transform: rotate(-90deg); /* Rotate button 90 degrees clockwise */
     }
   
     /* Add other responsive styles for larger screens here */

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './HomeHeader.css';
-
-import BaseUrl from '../Server/BaseUrl'
+import BaseUrl from '../Server/BaseUrl';
 
 const HomeHeader = () => {
     const navigate = useNavigate();
     const [hasProperty, setHasProperty] = useState(false);
     const [isNavOpen, setIsNavOpen] = useState(false);
-    const userId = localStorage.getItem("user_id");
+    const userId = localStorage.user_id;
 
     useEffect(() => {
         const checkUserProperties = async () => {
@@ -30,6 +29,7 @@ const HomeHeader = () => {
     const handleLogout = () => {
         localStorage.removeItem("user_id");
         navigate("/");
+        window.location.reload();
     };
 
     const handleBecomeHostClick = () => {
@@ -51,12 +51,14 @@ const HomeHeader = () => {
     const toggleNav = () => {
         setIsNavOpen(!isNavOpen);
     };
+
     const handleBookingClick = (event) => {
         if (!userId) {
             event.preventDefault(); // Prevent the default link behavior
             navigate('/login'); // Redirect to login if userId is not present
         }
     };
+
     return (
         <nav style={{ borderBottom: '1px solid #E5E7EB', padding: 20 }} className="navbar navbar-expand-lg navbar-white">
             <div style={{ width: '90%', justifyContent: 'space-between' }} className="container-fluid main-hd">
@@ -86,7 +88,7 @@ const HomeHeader = () => {
                                     <Link to={`/dashboard/${userId}`} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link active" aria-current="page">Dashboard</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link  to={userId ? `/booking/${userId}` : '/login'} onClick={handleBookingClick} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Booking History</Link>
+                                    <Link to={userId ? `/booking/${userId}` : '/login'} onClick={handleBookingClick} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Booking History</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Earnings</Link>
@@ -98,7 +100,7 @@ const HomeHeader = () => {
                         ) : (
                             <>
                                 <li className="nav-item">
-                                    <Link  to={userId ? `/booking/${userId}` : '/login'} onClick={handleBookingClick} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link active" aria-current="page">My Booking</Link>
+                                    <Link to={userId ? `/booking/${userId}` : '/login'} onClick={handleBookingClick} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link active" aria-current="page">My Booking</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to='/EmailSupport' style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Support</Link>
@@ -113,25 +115,24 @@ const HomeHeader = () => {
                     <img className='hind-bs' style={{ marginLeft: 15 }} src={require('../../assets/notification.png')} alt='' />
                     {hasProperty ? (
                         <div className='Become'>
-                            <button onClick={handleBecomeuserClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '2px solid #000', padding: 0, fontWeight: 700, borderRadius: 11 }} className="me-2 btn host" type="submit">Become a User</button>
+                            <button onClick={handleBecomeuserClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '2px solid #000', padding: 0, fontWeight: 700, borderRadius: 11 }} className="me-2 btn host" type="button">Become a User</button>
                         </div>
                     ) : (
                         <div className='Become'>
-                            <button onClick={handleBecomeHostClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '1px solid #000', padding: 0, borderRadius: 11 }} className="me-2 btn host" type="submit">Become a Host</button>
+                            <button onClick={handleBecomeHostClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '1px solid #000', padding: 5, borderRadius: 11 }} className="me-2 btn host" type="button">Become a Host</button>
                         </div>
                     )}
                     {userId ? (
-                        <Link onClick={handleLogout} style={{ marginLeft: 20 }} >
-                            <button style={{
-                                height: 48,
-                                width: '10rem',
-                                border: 'none',
-                                borderRadius: 11,
-                                color: 'white',
-                                background: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%)'
-                            }} className="me-2 btn btn-outline-dark" type="submit">Logout
-                            </button>
-                        </Link>
+                        <button onClick={handleLogout} style={{
+                            marginLeft: 20,
+                            height: 48,
+                            width: '10rem',
+                            border: 'none',
+                            borderRadius: 11,
+                            color: 'white',
+                            background: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%)'
+                        }} className="me-2 btn btn-outline-dark" type="button">Logout
+                        </button>
                     ) : (
                         <div className='Signup'>
                             <Link style={{ marginLeft: 20 }} to='/usersignup'>

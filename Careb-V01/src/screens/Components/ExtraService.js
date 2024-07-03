@@ -6,7 +6,7 @@ import 'reactjs-popup/dist/index.css';
 import { Link } from 'react-router-dom';
 import BaseUrl from '../Server/BaseUrl';
 import Storage from '../Server/Storage';
-import {  Box, Typography, Button,} from '@mui/material';
+import {  Box, Typography, Button,TextField, Grid } from '@mui/material';
 
 const Amenities = [
   {
@@ -183,70 +183,60 @@ export default class ExtraService extends Component {
         this.setState({ selectedFile });
     };
 
-  renderExtraServiceFields() {
-    return this.state.selectedExtra.map((extra) => {
-      return (
-        <div  key={extra.id} style={{ marginTop: 20 }}>
-          <label style={{ fontSize: 20, fontWeight: '550' }}>{extra.item}</label>
-          <div style={{ display: 'flex', width: '60%', marginTop: 10 }}>
-            <div style={{ width: '45%', marginTop: 15 }}>
-              <label style={{ color: '#474554', fontSize: 15 }}>Select Service for Number of Guests</label><br />
-              <input
-                style={{
-                  width: '100%',
-                  height: 45,
-                  borderWidth: 0.1,
-                  marginTop: 5,
-                  borderColor: '#E2E8F0',
-                  borderRadius: 7,
-                  padding: 10,
-                }}
-                type='number'
-                name="number_of_guest"
-                value={extra.number_of_guest}
-                onChange={(e) => this.handleExtraServiceChange(e, extra.id)}
-              />
-            </div>
-            <div style={{ width: '45%', marginTop: 15 }}>
-              <label style={{ color: '#474554', fontSize: 15 }}>Price</label><br />
-              <input
-                style={{
-                  width: '100%',
-                  height: 45,
-                  borderWidth: 0.1,
-                  marginTop: 5,
-                  borderColor: '#E2E8F0',
-                  borderRadius: 7,
-                  padding: 10,
-                }}
-                type='number'
-                name="price"
-                value={extra.price}
-                onChange={(e) => this.handleExtraServiceChange(e, extra.id)}
-              />
-            </div>
-          </div>
-          <label style={{ marginTop: 15, color: '#474554', width: '60%' }}>Description</label><br />
-          <textarea
-            placeholder={`Enter ${extra.item} Description`}
-            style={{
-              width: '60%',
-              padding: 5,
-              color: 'black',
-              height: 90,
-              borderRadius: 10,
-              borderColor: '#E2E8F0',
-            }}
-            id="freeform"
-            name="description"
-            rows="4"
-            cols="50"
-            value={extra.description}
-            onChange={(e) => this.handleExtraServiceChange(e, extra.id)}
-          ></textarea>
-        </div>
-      );
-    });
+    renderExtraServiceFields() {
+      return this.state.selectedExtra.map((extra) => {
+          return (
+              <Box key={extra.id} sx={{ mt: 3 }}>
+                  <Typography variant="h6" fontWeight="bold">
+                      {extra.item}
+                  </Typography>
+                  <Grid container spacing={2} sx={{ mt: 1 }}>
+                      <Grid item xs={6}>
+                          <Typography variant="body2" color="textSecondary">
+                              Select Service for Number of Guests
+                          </Typography>
+                          <TextField
+                              fullWidth
+                              variant="outlined"
+                              margin="normal"
+                              type="number"
+                              name="number_of_guest"
+                              value={extra.number_of_guest}
+                              onChange={(e) => this.handleExtraServiceChange(e, extra.id)}
+                          />
+                      </Grid>
+                      <Grid item xs={6}>
+                          <Typography variant="body2" color="textSecondary">
+                              Price
+                          </Typography>
+                          <TextField
+                              fullWidth
+                              variant="outlined"
+                              margin="normal"
+                              type="number"
+                              name="price"
+                              value={extra.price}
+                              onChange={(e) => this.handleExtraServiceChange(e, extra.id)}
+                          />
+                      </Grid>
+                  </Grid>
+                  <Typography variant="body2" color="textSecondary" sx={{ mt: 2 }}>
+                      Description
+                  </Typography>
+                  <TextField
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      multiline
+                      rows={4}
+                      placeholder={`Enter ${extra.item} Description`}
+                      name="description"
+                      value={extra.description}
+                      onChange={(e) => this.handleExtraServiceChange(e, extra.id)}
+                  />
+              </Box>
+          );
+      });
   }
     handleExtraServiceChange = (e, id) => {
         const { name, value } = e.target;

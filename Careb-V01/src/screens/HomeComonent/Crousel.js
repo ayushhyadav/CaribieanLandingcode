@@ -244,7 +244,16 @@ import ReactCountryFlag from 'react-country-flag';
 import { getCountries, getCities } from 'countries-cities';
 import Flag from 'react-world-flags';
 // import 'react-select/dist/react-select.css';
-
+import {
+  Box,
+  
+  TextField,
+  Typography,
+  List,
+  ListItem,
+  ListItemText
+} from '@mui/material';
+// import CloseIcon from '@mui
 const Crousel = ({ CallBackFun }) => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCity, setSelectedCity] = useState('');
@@ -319,7 +328,7 @@ const Crousel = ({ CallBackFun }) => {
           throw new Error('Failed to fetch data');
         }
         const data = await response.json();
-        console.log("country",data)
+        // console.log("country",data)
 
         // Filter tropical countries based on criteria (e.g., countries in tropical regions)
         const filteredCountries = data.filter(country => {
@@ -508,7 +517,7 @@ const Crousel = ({ CallBackFun }) => {
                       className="input"
                       type="date"
                       placeholder="dd/mm/yyyy"
-                      style={{ background: 'white', marginLeft: '8px', }}
+                      style={{marginLeft: '8px', }}
                   />
                 </div>
                 <div className="filter-item2" >
@@ -534,7 +543,7 @@ const Crousel = ({ CallBackFun }) => {
           className="input-field2"
           value={persons}
           readOnly
-          style={{ height: 30, width: 120, padding: 10 }}
+          // style={{ height: 30, width: 120, padding: 10 }}
         />
       </div>
       {showBox && (

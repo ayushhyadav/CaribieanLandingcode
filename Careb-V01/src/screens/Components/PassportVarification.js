@@ -17,8 +17,17 @@ function PassportVerification(props) {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setSelectedFile(file);
+    
+    // Check if file size exceeds 5MB (5242880 bytes)
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    if (file.size > maxSize) {
+      alert('File size exceeds 5MB. Please choose a smaller file.');
+      setSelectedFile(null); // Clear selected file
+    } else {
+      setSelectedFile(file);
+    }
   };
+  
 
   const idTypeChangeHandler = (e) => {
     setIdentityType(e.target.value);

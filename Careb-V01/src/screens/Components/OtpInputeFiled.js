@@ -152,13 +152,14 @@ class PhoneAuth extends Component {
                                     border: '1px solid #ccc',
                                     borderRadius: '4px',
                                     textAlign: 'center',
+                                    marginBottom:50
                                 }}
                             />
                         </div>
                     )}
                 </div>
 
-                <div id="recaptcha"></div>
+                <div style={{marginTop:"60px"}} id="recaptcha"></div>
                 <div className="main-btn"
                      style={{ display: 'flex', marginTop: '1%', alignItems: 'center', justifyContent: 'flex-end' }}>
                     <button className='back-btn'
@@ -184,7 +185,7 @@ class PhoneAuth extends Component {
                                 marginLeft: 10,
                                 border: 'none'
                             }}
-                            onClick={() => this.props.NextCallBack({ navigationTo: 'Pasport_veri', id: 4, bt_type: 'Next' })}
+                            // onClick={() => this.props.NextCallBack({ navigationTo: 'Pasport_veri', id: 4, bt_type: 'Next' })}
                     >
                         Next
                     </button>

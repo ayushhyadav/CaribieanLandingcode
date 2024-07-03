@@ -88,7 +88,9 @@
   padding: 0 10px;
   width: 200px;
 }
-
+.filter-item input{
+  width: 120px;
+}
 
 .check-in, .check-out {
   border-left: 1px solid #b8b8b8;
@@ -227,7 +229,18 @@
   margin-left: 13px;
   width: 100%;
  }
- 
+ .filter-item input{
+  width: 210px;
+}
+
+ .filter-item2 {
+  width: 93%;
+  /* border: 3px solid black; */
+ }
+ .filter-item2 input{
+width: 215px;
+  /* border: 2px solid red; */
+ }
   .arrow-icon img {
     display: none;
   }

@@ -52,7 +52,7 @@ export default class PropertyList extends Component {
     } = this.state;
 
     // Check if all required fields are filled
-    const isValid = property_name && view && propertyType && pricePerNight && guestCapacity && bedroomCount && bathroomCount && description && rules;
+    const isValid = property_name && view && propertyType && pricePerNight && guestCapacity && bedroomCount && bathroomCount && description;
     
     this.setState({ formValid: isValid });
     return isValid;
@@ -92,9 +92,9 @@ export default class PropertyList extends Component {
           <Typography sx={{ fontSize: 17, fontWeight: 500, ml: 1 }}>Step 5/8</Typography>
           <Button 
           // href='/divercify' 
-           variant="outlined" sx={{ width: '15%' ,background:'none'}}>Diversify Property
+           variant="outlined" sx={{ width: '200px' ,background:'none'}}>Diversify Property
             {/* <InfoIcon /> */}
-            <Tooltip title="Diversify property for long-stay bookings offers varied accommodations like serviced apartments, extended-stay hotels, and rental homes for 1-2 month or 6+ month stays, featuring amenities such as kitchens, laundry facilities, wifi, workspaces etc.,">
+            <Tooltip title="Diversify property for long-stay bookings offers varied accommodations like serviced apartments, extended-stay hotels, and rental homes for 1-2 month or 6+ month stays, featuring amenities such as kitchens, laundry facilities, wifi, workspaces etc.,  Coming Soon!!">
               <Box sx={{ display: 'inline-block' }}>
                 <InfoIcon />
               </Box>
@@ -175,6 +175,7 @@ export default class PropertyList extends Component {
               <TextField
                 id="guest-capacity"
                 fullWidth
+                type="number"
                 variant="outlined"
                 placeholder=''
                 value={this.state.guestCapacity}
@@ -186,6 +187,7 @@ export default class PropertyList extends Component {
               <InputLabel htmlFor="bedroom-count" sx={{ color: '#474554', fontSize: 17 }}>How many bedrooms guests can use</InputLabel>
               <TextField
                 id="bedroom-count"
+                type="number"
                 fullWidth
                 variant="outlined"
                 placeholder=''
@@ -198,6 +200,7 @@ export default class PropertyList extends Component {
               <InputLabel htmlFor="bathroom-count" sx={{ color: '#474554', fontSize: 17 }}>How many bathrooms guests can use</InputLabel>
               <TextField
                 id="bathroom-count"
+                type="number"
                 fullWidth
                 variant="outlined"
                 placeholder=''
