@@ -76,7 +76,7 @@ Here are a few tips to get started:
 - Communicate with hosts to ensure a smooth stay.
 
 We’re here to support you every step of the way. If you have any questions or need
-assistance, please don’t hesitate to contact our support team at [Support Email].
+assistance, please don’t hesitate to contact our support team at support@Caribbeaneaze.com.
 
 Thank you for joining Caribbeaneaze. We look forward to helping you make the most of
 your experience with us!
@@ -84,8 +84,8 @@ your experience with us!
 Warm regards,
 The Caribbeaneaze Team
 Caribbeaneaze.com
-Support@Caribbeaneaze.com
-Info@caribbeaneaze.com
+support@Caribbeaneaze.com
+info@caribbeaneaze.com
         `};
 
         transporter.sendMail(mailOptions, (error, info) => {
