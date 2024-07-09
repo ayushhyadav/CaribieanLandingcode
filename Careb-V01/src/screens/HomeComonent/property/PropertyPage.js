@@ -7,6 +7,7 @@ import PropertyBooking from './PropertyBooking';
 import BaseUrl from '../../Server/BaseUrl';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import Footer from '../Footer/Footer';
 
 export default function PropertyPage() {
   const location = useLocation();
@@ -56,7 +57,7 @@ export default function PropertyPage() {
         )}
       </div>
 
-    
+    <Footer/>
     </div>
   );
 }

@@ -27,14 +27,24 @@ import PandingApprovalProperty from '../src/screens/Components/Deshbord/PendingA
 import UserSignup from './screens/UserSignup'
 import UserLogin from  './screens/UserLogin'
 import TermConditionUser from './TermConditionUser'
+import Footer from './screens/HomeComonent/Footer/Footer.js';
 
-
-
-                                                                                                      
+import TermConditions from './screens/HomeComonent/Footer/Termconditions.js'
+import PrivacyPolicy from './screens/HomeComonent/Footer/Privacypolicy.js';
+import RefundPolicy from './screens/HomeComonent/Footer/Refundpolicy.js';
+import CookiePolicy from './screens/HomeComonent/Footer/Cookiepolicy.js';
+import CancellationPolicy from './screens/HomeComonent/Footer/Cancellationpolicy.js';
+   import Aboutus from './screens/HomeComonent/Footer/Aboutus.js';                                                                                                   
 const App = () => {
   return (
+   <>
      <Routes>
-     
+     <Route path='/Login' element={<Login/>} style={{width: '100vw'}}/>
+     <Route path='/Signup' element={<Signup />} style={{width: '100vw'}}/>
+         <Route path='/userlogin' element={<UserLogin/>}/>
+         <Route path='/usersignup' element={<UserSignup/>}/>
+
+
       {/* <Route path='/' element={<RegistrationHeader/> }/> */}
      <Route path='/earning/' element={<EarningScreen />} style={{width: '100vw'}}/>
      {/* <Route path="/booking/:userid" component={BookingHistory} /> */}
@@ -43,8 +53,7 @@ const App = () => {
      <Route path='/mylisting/:userid' element={<MyListing />} style={{width: '100vw'}}/>
      <Route path="/Dashboard/:userid" element={<Deshbord />} style={{width: '100vw'}}/>
      <Route path='/Registration' element={<RegistrationProcess/>} style={{width: '100vw'}}/>
-     <Route path='/Login' element={<Login/>} style={{width: '100vw'}}/>
-     <Route path='/Signup' element={<Signup />} style={{width: '100vw'}}/>
+
      <Route path='/TermsCondition' element={<TermsCondition />} style={{width: '100vw'}}/>
      <Route path='/' element={<Home />} style={{width: '100vw'}}/>
         <Route path='/TermsConditionuser' element={<TermConditionUser />} style={{width: '100vw'}}/>
@@ -63,10 +72,15 @@ const App = () => {
         {/*<Route path='/PandingApproval/:userid' element={<TermsCondition />} style={{width: '100vw'}}/>*/}
      {/* <Route path='/Propertylist' element={<Propertylist />} style={{width: '100vw'}}/> */}
      {/* <Route path='/earning/:userId ' element={<EarningScreen/>}/> */}
-         <Route path='/userlogin' element={<UserLogin/>}/>
-         <Route path='/usersignup' element={<UserSignup/>}/>
+     <Route path='/aboutus' element={<Aboutus />} style={{width: '100vw'}}/>
+     <Route path='/TermConditions' element={<TermConditions />} style={{width: '100vw'}}/>
+     <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} style={{width: '100vw'}}/>
+     <Route path='/CancelaionPolicy' element={<CancellationPolicy />} style={{width: '100vw'}}/>
+     <Route path='/Refundpolicy' element={<RefundPolicy />} style={{width: '100vw'}}/>
+     <Route path='/cookiespolicy' element={<CookiePolicy/>} style={{width: '100vw'}}/>
      </Routes>
- 
+     {/* <Footer/> */}
+     </>
   )
 }
 

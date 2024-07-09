@@ -60,7 +60,7 @@ const PolicyModal = ({ isOpen, onClose }) => {
                 </Typography>
 
                 <Typography variant="body1" gutterBottom>
-                    <strong>Effective date:</strong> 1st November 2023
+                    <strong>Effective date:</strong>26 june 2024
                 </Typography>
                 <Typography variant="body1" gutterBottom>
                     <strong style={{ color: '#1976D2' }}>1. Introduction</strong>
@@ -110,7 +110,7 @@ const PolicyModal = ({ isOpen, onClose }) => {
                 <Typography variant="body1" gutterBottom>
                     <strong style={{ color: '#1976D2' }}>9. Contact Us</strong>
                     <br />
-                    If you have any questions about our use of cookies or other technologies, please email us at [Contact Information].
+                    If you have any questions about our use of cookies or other technologies, please email us at support@caribbeaneaze.com.
                 </Typography>
 
                 <Button variant="contained" color="primary" onClick={onClose} style={{ marginTop: '20px',width:'100px' }}>

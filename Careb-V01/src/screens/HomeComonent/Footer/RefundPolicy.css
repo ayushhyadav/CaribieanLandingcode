@@ -1,0 +1,116 @@
+/* General styles for the Refund-policy-container */
+
+/* .Refund-policy-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  } */
+  .intro {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #333;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  
+  .Refund-policy-container h1,
+  .Refund-policy-container h2,
+  .Refund-policy-container h3 {
+    color: #0073e6;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .Refund-policy-container h1 {
+    font-size: 28px;
+  }
+  
+  .Refund-policy-container h2 {
+    font-size: 24px;
+    text-align: left;
+  }
+  
+  .Refund-policy-container h3 {
+    font-size: 20px;
+  }
+  
+  .Refund-policy-container p,
+  .Refund-policy-container ul {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: justify;
+    width: 100%;
+  }
+  
+  .Refund-policy-container ul {
+    padding-left: 20px;
+  }
+  
+  .Refund-policy-container ul li {
+    list-style-type: disc;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .intro {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    .Refund-policy-container {
+      padding: 15px;
+    }
+  
+    .Refund-policy-container h1 {
+      font-size: 26px;
+    }
+  
+    .Refund-policy-container h2 {
+      font-size: 22px;
+      text-align: left;
+    }
+  
+    .Refund-policy-container h3 {
+      font-size: 18px;
+    }
+  
+    .Refund-policy-container p,
+    .Refund-policy-container ul {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .Refund-policy-container {
+      padding: 10px;
+    }
+  
+    .Refund-policy-container h1 {
+      font-size: 24px;
+    }
+  
+    .Refund-policy-container h2 {
+      font-size: 20px;
+    }
+  
+    .Refund-policy-container h3 {
+      font-size: 16px;
+    }
+  
+    .Refund-policy-container p,
+    .Refund-policy-container ul {
+      font-size: 12px;
+    }
+  }
+  

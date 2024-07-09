@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import Cookies from 'js-cookie';
 import CookiePolicy from './Cookiepolicy';
 import GuestPhotoSubmissionForm from './GuestPhotoSubmissionForm';
+import Footer from './Footer/Footer';
 
 export default class Home extends Component {
     constructor(props) {
@@ -252,6 +253,8 @@ export default class Home extends Component {
 
                 {/* Guest Photo Submission Form */}
                 {/* {showFeedbackForm && <GuestPhotoSubmissionForm />} */}
+
+                <Footer/>
             </div>
         );
     }

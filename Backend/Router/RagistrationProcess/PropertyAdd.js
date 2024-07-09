@@ -45,7 +45,7 @@ router.post('/property_add', PropertyImages.fields([
       property_images: req?.files?.property_images, amenties, extra_service, rafting_number_of_guest, rafting_price,
       rafting_description, rafting_certifcate: req?.files?.rafting_certifcate, exotic_food_number_of_guest,
       exotic_food_price, exotic_food_description, exotic_food_certifcate: req?.files?.exotic_food_certifcate,
-      status: 'pending' // Set initial status to pending
+      status: 'pending' 
     };
 
     property_list.push(newProperty);
