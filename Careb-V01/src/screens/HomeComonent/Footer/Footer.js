@@ -18,7 +18,7 @@ function Footer() {
         </div>
         <div className="part1">
           <h3>Policy</h3>
-          <a href="/TermsConditions"
+          <a href="/TermConditions"
             >Terms & Condition</a>
           <a  href="/PrivacyPolicy"
            >Privacy Policy</a>
@@ -45,8 +45,8 @@ function Footer() {
       </div>
       <div className="bottomfooter">
         <p id="bottom-txt1">© 2024 Caribbeaneaze, Inc.</p>
-     <p id="bottom-txt">Proudly created by<br/>
-    <a href="https://4tunerstech.com/">4TUNERS TECHNOLOGIES</a> </p> 
+     {/* <p id="bottom-txt">Proudly created by<br/>
+    <a href="https://4tunerstech.com/">4TUNERS TECHNOLOGIES</a> </p>  */}
       </div>
     </div>
   );

@@ -8,8 +8,9 @@ import BaseUrl from '../Server/BaseUrl';
 import Modal from 'react-modal';
 import Cookies from 'js-cookie';
 import CookiePolicy from './Cookiepolicy';
-import GuestPhotoSubmissionForm from './GuestPhotoSubmissionForm';
+
 import Footer from './Footer/Footer';
+import Feedback from './Feedback';
 
 export default class Home extends Component {
     constructor(props) {
@@ -21,11 +22,15 @@ export default class Home extends Component {
             showPolicyModal: false, // State for cookies policy modal
             showCookieModal: !Cookies.get('cookieConsent'), // Check if cookie consent is already given
             hasClosedMainModal: false, // Flag to check if main modal is closed
-            showFeedbackForm: false,
+            showFeedbackModal: false, // State to control feedback modal visibility
         };
     }
 
     componentDidMount() {
+        this.fetchData();
+    }
+
+    fetchData = () => {
         fetch(BaseUrl.BaseUrl + '/get_all_propertys')
             .then((response) => response.json())
             .then((data) => {
@@ -39,7 +44,7 @@ export default class Home extends Component {
                 console.error('Error fetching property data:', error);
                 alert('Please check your Internet');
             });
-    }
+    };
 
     NewProperty = (value) => {
         fetch(BaseUrl.BaseUrl + '/most_dest_property/' + value)
@@ -51,7 +56,7 @@ export default class Home extends Component {
                 });
             })
             .catch((error) => {
-                console.error('Errorproperty:', error);
+                console.error('Error fetching property:', error);
             });
     };
 
@@ -96,22 +101,29 @@ export default class Home extends Component {
     };
 
     handleCloseMainModal = () => {
-        this.setState({
-            showMainModal: false,
-            hasClosedMainModal: true, // Set flag to true when main modal is closed
-        }, () => {
-            if (!Cookies.get('cookieConsent')) {
-                this.setState({ showCookieModal: true });
+        this.setState(
+            {
+                showMainModal: false,
+                hasClosedMainModal: true, // Set flag to true when main modal is closed
+            },
+            () => {
+                if (!Cookies.get('cookieConsent')) {
+                    this.setState({ showCookieModal: true });
+                }
             }
-        });
+        );
     };
+
     openFeedbackModal = () => {
-        alert('Coming soon! ');
-        // this.setState({ showFeedbackForm: true });
+        this.setState({ showFeedbackModal: true });
     };
-    
+
+    closeFeedbackModal = () => {
+        this.setState({ showFeedbackModal: false });
+    };
+
     render() {
-        const { showMainModal, showCookieModal, showPolicyModal, hasClosedMainModal, showFeedbackForm  } = this.state;
+        const { showMainModal, showCookieModal, showPolicyModal, hasClosedMainModal, showFeedbackModal } = this.state;
 
         return (
             <div style={{ width: '100%', height: 'auto' }}>
@@ -190,18 +202,11 @@ export default class Home extends Component {
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 width: '100%',
-                                // background: 'transparent',
                             },
                         }}
                     >
                         <div style={{ width: '90%', textAlign: 'center' }}>
-                            <p>We use cookies to enhance your experience. By continuing, you agree to our use of
-                             <a
-                                    onClick={this.openPolicyModal}
-                                    style={{ color: 'blue', textDecoration: 'underline', marginLeft:5}}
-                                >
-                                     cookies
-                                </a> </p>
+                            <p>We use cookies to enhance your experience. By continuing, you agree to our use of cookies.</p>
                             <div>
                                 <button
                                     style={{
@@ -231,14 +236,6 @@ export default class Home extends Component {
                                     Decline
                                 </button>
                             </div>
-                            {/* <p style={{ marginTop: 20, fontSize: 12 }}>
-                                <a
-                                    onClick={this.openPolicyModal}
-                                    style={{ color: 'blue', textDecoration: 'underline' }}
-                                >
-                                    View our cookies policy
-                                </a>
-                            </p> */}
                         </div>
                     </Modal>
                 )}
@@ -246,15 +243,45 @@ export default class Home extends Component {
                 {/* Cookies Policy Modal */}
                 <CookiePolicy isOpen={showPolicyModal} onClose={this.closePolicyModal} />
 
+                {/* Feedback Modal */}
+                <Modal
+                    isOpen={showFeedbackModal}
+                    onRequestClose={this.closeFeedbackModal}
+                    contentLabel="Feedback Modal"
+                    style={{
+                        overlay: {
+                            zIndex: 1000, // Set a high z-index to ensure it appears above other modals
+                        },
+                        content: {
+                            top: '50%',
+                            left: '50%',
+                            right: 'auto',
+                            bottom: 'auto',
+                            marginRight: '-50%',
+                            transform: 'translate(-50%, -45%)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            // alignItems: 'center',
+                            width: '100%',
+                            overflow:'scroll',
+                            height:'100vh',
+                            maxWidth:'600px'
+                            // background: 'transparent'
+                        },
+                    }}
+                >
+                  <div style={{display:'flex',justifyContent:'flex-end'}}>
+                  <button onClick={this.closeFeedbackModal}  style={{width:35,height:35,borderRadius:'50%',background:'none',color:'black',}}>x</button>
+                  </div>
+                    <Feedback onClose={this.closeFeedbackModal} />
+                </Modal>
+
                 {/* Feedback Button */}
                 <div onClick={this.openFeedbackModal} className="feedback-button">
-                    <a >Feedback</a>
+                    <a>Feedback</a>
                 </div>
 
-                {/* Guest Photo Submission Form */}
-                {/* {showFeedbackForm && <GuestPhotoSubmissionForm />} */}
-
-                <Footer/>
+                <Footer />
             </div>
         );
     }

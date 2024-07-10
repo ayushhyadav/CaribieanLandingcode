@@ -3,7 +3,7 @@ import './TermConditions.css';
 function TermConditions() {
   return (
     <div className="term-condition-container">
-      <h1>Terms & Conditions</h1>
+      <h1 style={{textAlign:'center'}}>Terms & Conditions</h1>
       <p id="center">
         Welcome to Caribbeaneaze. These terms and conditions outline the rules
         and regulations for the use of our website.
