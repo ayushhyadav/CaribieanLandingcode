@@ -1,5 +1,7 @@
 import './ExtraService.css';
 import React, { Component } from 'react';
+// import React, { useState } from 'react';
+
 import Popup from 'reactjs-popup';
 import Modal from 'react-modal';
 import 'reactjs-popup/dist/index.css';
@@ -114,6 +116,29 @@ export default class ExtraService extends Component {
         acceptTerms: false,
         showTerms: false,
         showModal: false,
+        cancellationPolicies: [
+          {
+            name: "Flexible",
+            hostServiceFee: 3,
+            guestServiceFee: 13
+          },
+          {
+            name: "Moderate",
+            hostServiceFee: 5,
+            guestServiceFee: 10
+          },
+          {
+            name: "Firm",
+            hostServiceFee: 7,
+            guestServiceFee: 8
+          },
+          {
+            name: "Strict",
+            hostServiceFee: 10,
+            guestServiceFee: 6
+          }
+        ],
+        selectedPolicyIndex: 0
     };
   }
 
@@ -139,25 +164,7 @@ export default class ExtraService extends Component {
     }));
   };
 
-  // handleExtraClick = (item) => {
-  //   let selectedExtra = [...this.state.selectedExtra]
-  //
-  //   console.log('itemsss ',selectedExtra)
-  //
-  //   if(selectedExtra.includes(item)){
-  //      selectedExtra = selectedExtra.filter((data)=> data?.item !== item?.item)
-  //   }
-  //   else{
-  //     selectedExtra.push(item)
-  //   }
-  //   this.setState({selectedExtra:selectedExtra})
-  //   // this.setState((prevState) => ({
-  //   //   selectedExtra: prevState.selectedExtra.includes(data)
-  //   //     ? prevState.selectedExtra.filter((i) => i.item !== item)
-  //   //     : [...prevState.selectedExtra, data],
-  //   // }));
-  //   // console.log('valueee ',this.state.selectedExtra)
-  // };
+
     handleExtraClick = (item) => {
         this.setState((prevState) => {
             const selectedExtra = prevState.selectedExtra.some(extra => extra.item === item.item)
@@ -168,15 +175,6 @@ export default class ExtraService extends Component {
         });
     };
 
-    // handleFileChange = (event, name) => {
-    //     const selectedFile = event.target.files[0];
-    //     this.setState((prevState) => ({
-    //         selectedFiles: {
-    //             ...prevState.selectedFiles,
-    //             [name]: selectedFile,
-    //         }
-    //     }));
-    // };
 
     handleFileChange = (event, name) => {
         const selectedFile = event.target.files[0];
@@ -288,16 +286,7 @@ export default class ExtraService extends Component {
     formData.append('extra_service', this.state.selectedExtra);
       formData.append('amenties', JSON.stringify(selectedAmenities));
       formData.append('extra_service', JSON.stringify(selectedExtra));
-    // formData.append('rafting_number_of_guest',this.state.rafting_number_of_guest);
-    // formData.append('rafting_price', this.state.rafting_price);
-    // formData.append('rafting_description', this.state.rafting_description);
-    // formData.append('exotic_food_number_of_guest', this.state.exotic_food_number_of_guest);
-    // formData.append('exotic_food_price', this.state.exotic_food_price);
-    // formData.append('exotic_food_description', this.state.exotic_food_description);
-    // formData.append('exotic_food_certifcate', this.state.selectedFile);
-    // formData.append('rafting_certifcate', this.state.selectedFile);
 
-    // Make the POST request to your server
       fetch(BaseUrl.BaseUrl + '/property_add', {
           method: 'POST',
           body: formData,
@@ -354,9 +343,16 @@ export default class ExtraService extends Component {
     this.toggleModal();
   };
 
- 
+  handlePolicySelect = (index) => {
+    this.setState({
+      selectedPolicyIndex: index
+    });
+    this.props.onSelectPolicy(this.state.cancellationPolicies[index]);
+  };
 
     render() {
+      const { cancellationPolicies, selectedPolicyIndex } = this.state;
+      
 
       const modalStyle = {
         position: 'absolute',
@@ -570,6 +566,21 @@ export default class ExtraService extends Component {
 
           </div>
         </div>
+        <div>
+        <h3>Select Cancellation Policy:</h3>
+        <ul>
+          {cancellationPolicies?.map((policy, index) => (
+            <li key={index}>
+              <button
+                onClick={() => this.handlePolicySelect(index)}
+                className={selectedPolicyIndex === index ? 'selected' : ''}
+              >
+                {policy?.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
         {this.renderExtraServiceFields()}
         <Modal
           isOpen={showModal}
@@ -725,23 +736,3 @@ export default class ExtraService extends Component {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

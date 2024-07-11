@@ -1,9 +1,12 @@
 import React from "react";
 import { Typography, Container, List, ListItem, ListItemText } from "@material-ui/core";
-
+import HomeHeader from "../HomeHeader";
+import Footer from "./Footer";
 function CancellationPolicy() {
   return (
-    <Container  className="cancellation-policy-container">
+  <div>
+    <HomeHeader/>
+      <Container  className="privacy-policy-container">
       <Typography variant="h4" style={{ color: "#0073e6" ,textAlign:'center'}} gutterBottom>
         Cancellation Policy
       </Typography>
@@ -68,6 +71,8 @@ function CancellationPolicy() {
         our support team at <a href="mailto:support@Caribbeaneaze.com">support@Caribbeaneaze.com</a>.
       </Typography>
     </Container>
+    <Footer/>
+  </div>
   );
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import { NavLink } from "react-router-dom";
 
 function handlePolicyClick(policy) {
   console.log(`${policy} clicked`);
@@ -18,16 +19,16 @@ function Footer() {
         </div>
         <div className="part1">
           <h3>Policy</h3>
-          <a href="/TermConditions"
-            >Terms & Condition</a>
-          <a  href="/PrivacyPolicy"
-           >Privacy Policy</a>
-          <a href="/CancelaionPolicy"
-           >Cancellation Policy</a>
-          <a href="/Refundpolicy"
-           >Refund Policy</a>
-          <a  href="/cookiespolicy"
-          >Cookies Policy</a>
+          <NavLink to="/TermConditions"
+            >Terms & Condition</NavLink>
+          <NavLink  to="/PrivacyPolicy"
+           >Privacy Policy</NavLink>
+          <NavLink to="/CancelaionPolicy"
+           >Cancellation Policy</NavLink>
+          <NavLink to="/Refundpolicy"
+           >Refund Policy</NavLink>
+          <NavLink  to="/cookiespolicy"
+          >Cookies Policy</NavLink>
         </div>
         <div className="part1">
           <h3>Follow Us</h3>

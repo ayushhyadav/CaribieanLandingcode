@@ -37,7 +37,7 @@ router.get('/owner/accepted-properties', async (req, res) => {
         let acceptedProperties = [];
         allUsers.forEach(user => {
             if (user.property_list && user.property_list.length > 0) {
-                const accepted = user.property_list.filter(property => property.status === 'accepted');
+                const accepted = user.property_list.filter(property => property.status === 'accept');
                 acceptedProperties = [...acceptedProperties, ...accepted];
             }
         });

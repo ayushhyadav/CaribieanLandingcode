@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
 import { styled } from '@mui/system';
+import Footer from './Footer';
+import HomeHeader from '../HomeHeader';
 
 const StyledContainer = styled(Container)({
   textAlign:'center',
@@ -17,7 +19,9 @@ const StyledHeading = styled(Typography)({
 
 const RefundPolicy = () => {
   return (
-    <StyledContainer>
+ <div>
+  <HomeHeader/>
+     <StyledContainer className="privacy-policy-container">
       <StyledHeading variant="h4" gutterBottom>
         REFUND POLICY
       </StyledHeading>
@@ -157,6 +161,8 @@ const RefundPolicy = () => {
         </ListItem>
       </List>
     </StyledContainer>
+    <Footer/>
+ </div>
   );
 };
 

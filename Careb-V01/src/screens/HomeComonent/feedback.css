@@ -95,11 +95,11 @@
         font-weight: bold;
       }
       
-      input[type="text"],
-      input[type="email"],
-      input[type="tel"],
-      input[type="file"],
-      textarea {
+      .form-container input[type="text"],
+      .form-container input[type="email"],
+      .form-container input[type="tel"],
+      .form-containerinput[type="file"],
+      .form-container textarea {
         width: 100%;
         padding: 10px;
         margin: 5px 0 15px 0;
@@ -109,12 +109,12 @@
         box-sizing: border-box;
       }
       
-      input:hover{
+      .form-container input:hover{
         border: 1px solid gray;
       
       }
       
-      input[type="submit"] {
+     .form-container input[type="submit"] {
         width: 100%;
         background: linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%);  color: white;
         padding: 14px 20px;
@@ -125,7 +125,7 @@
         font-size: 16px;
       }
       
-      input[type="submit"]:hover {
+      .form-container input[type="submit"]:hover {
         background-color: #2980b9;
       }
       
@@ -145,15 +145,15 @@
             font-size: 1.5em;
         }
       
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="file"],
-        textarea {
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="tel"],
+        .form-container input[type="file"],
+        .form-container textarea {
             padding: 8px;
         }
       
-        input[type="submit"] {
+        .form-container input[type="submit"] {
             padding: 12px 18px;
             font-size: 14px;
         }
@@ -171,15 +171,15 @@
             font-size: 1.2em;
         }
       
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="file"],
-        textarea {
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="tel"],
+        .form-container input[type="file"],
+        .form-container textarea {
             padding: 6px;
         }
       
-        input[type="submit"] {
+        .form-container input[type="submit"] {
             padding: 10px 16px;
             font-size: 12px;
         }

@@ -130,6 +130,9 @@ function Feedback() {
               <label htmlFor="description">Photo Description:</label>
               <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows="4" cols="50"></textarea>
 
+              <label htmlFor="description">Host Feedback</label>
+              <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows="4" cols="50"></textarea>
+
               <h3 style={{ color: 'black' }}>Consent and Permissions:</h3>
               <input type="checkbox" id="consent" name="consent" checked={formData.consent} onChange={handleInputChange} required />
               <label htmlFor="consent"> I agree to the terms and conditions and grant Caribbeaneaze permission to use my photos for marketing and promotional purposes.</label>
@@ -139,7 +142,7 @@ function Feedback() {
               <input type="text" id="signature" name="signature" value={formData.signature} onChange={handleInputChange} required />
               {formErrors.signature && <span className="error">Signature is required</span>}
 
-              <h3 style={{ color: 'black' }}>Additional Information (Optional):</h3>
+              <h3 style={{ color: 'black' }}>Additional Information</h3>
               <label htmlFor="location">Location of Photo:</label>
               <input type="text" id="location" name="location" value={formData.location} onChange={handleInputChange} />
 
@@ -173,6 +176,9 @@ function Feedback() {
               <input type="file" id="photos" name="photos" accept="image/*" multiple required />
 
               <label htmlFor="description">Photo Description:</label>
+              <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows="4" cols="50"></textarea>
+
+              <label htmlFor="description">Guest Feedback</label>
               <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows="4" cols="50"></textarea>
 
               <h3 style={{ color: 'black' }}>Consent and Permissions:</h3>

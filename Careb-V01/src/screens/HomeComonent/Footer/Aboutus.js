@@ -1,9 +1,12 @@
 import React from 'react';
 import './aboutus.css'; // Make sure to create and add your CSS here
-
+import Homeheader from '../HomeHeader'
+import Footer from './Footer';
 const Aboutus = () => {
   return (
-    <div style={{width:'90%',margin:'0 auto'}}>
+  <div>
+    <Homeheader/>
+      <div style={{width:'90%',margin:'0 auto'}}>
       <section className="about" id="about">
         <div className="about-img">
           <img src={require('./image/aboutus.png')} alt="About Us" />
@@ -49,6 +52,8 @@ As someone who was born in the islands and later moved abroad to a colder climat
         </div>
       </section>
     </div>
+    <Footer/>
+  </div>
   );
 };
 

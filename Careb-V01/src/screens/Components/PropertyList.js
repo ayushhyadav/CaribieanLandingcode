@@ -32,6 +32,8 @@ export default class PropertyList extends Component {
       bedroomCount: '',
       bathroomCount: '',
       description: '',
+      petprice:'',
+      Extrapersonprice:'',
       rules: '',
       formValid: false  // State to track form validity
     };
@@ -48,6 +50,8 @@ export default class PropertyList extends Component {
       bedroomCount,
       bathroomCount,
       description,
+      Extrapersonprice,
+      petprice,
       rules
     } = this.state;
 
@@ -76,6 +80,8 @@ export default class PropertyList extends Component {
       bathroomCount: this.state.bathroomCount,
       description: this.state.description,
       rules: this.state.rules,
+      petprice:this.state.petprice,
+      Extrapersonprice:this.state.petprice,
     };
 
     localStorage.setItem('propertyList', JSON.stringify(dataToSave));
@@ -113,11 +119,12 @@ export default class PropertyList extends Component {
                 label="Property Name"
                 id="property-name"
                 fullWidth
-                variant="outlined"
+                // variant="standard"
                 placeholder='Enter property Name'
                 value={this.state.property_name}
                 onChange={(e) => this.setState({ property_name: e.target.value })}
                 sx={{ mt: 1 }}
+                style={{border:'none'}}
               />
             </Box>
             <Box className="listing-box" sx={{ width: '50%', m: 1 }}>
@@ -164,6 +171,34 @@ export default class PropertyList extends Component {
                 placeholder='$0'
                 value={this.state.pricePerNight}
                 onChange={(e) => this.setState({ pricePerNight: e.target.value })}
+                sx={{ mt: 1 }}
+              />
+            </Box>
+            <Box className='type-p' sx={{ width: '50%', m: 1 }}>
+              {/* <InputLabel htmlFor="price-per-night" sx={{ color: '#474554' }}>Price Per Night</InputLabel> */}
+              <TextField
+              label="Pet Price (if applicable)"
+                id="Pet Price"
+                fullWidth
+                variant="outlined"
+                type="number"
+                placeholder='$0'
+                value={this.state.petprice}
+                onChange={(e) => this.setState({ petprice: e.target.value })}
+                sx={{ mt: 1 }}
+              />
+            </Box>
+            <Box className='type-p' sx={{ width: '50%', m: 1 }}>
+              {/* <InputLabel htmlFor="price-per-night" sx={{ color: '#474554' }}>Price Per Night</InputLabel> */}
+              <TextField
+              label="Extra Person Price"
+                id="Extra-person-price"
+                fullWidth
+                variant="outlined"
+                type="number"
+                placeholder='$0'
+                value={this.state.Extrapersonprice}
+                onChange={(e) => this.setState({ Extrapersonprice: e.target.value })}
                 sx={{ mt: 1 }}
               />
             </Box>

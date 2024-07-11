@@ -1,7 +1,11 @@
+import HomeHeader from '../HomeHeader';
+import Footer from './Footer';
 import './privacyPolicy.css';
 function PrivacyPolicy() {
   return (
-    <div className="privacy-policy-container">
+  <div>
+    <HomeHeader/>
+      <div className="privacy-policy-container">
       <h1>Privacy Policy</h1>
       <p id="date">Effective date: 26th June 2024</p>
       <div className="intro">
@@ -297,6 +301,8 @@ function PrivacyPolicy() {
       </p>
       </div>
     </div>
+    <Footer/>
+  </div>
   );
 }
 

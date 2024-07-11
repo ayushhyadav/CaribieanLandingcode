@@ -1,9 +1,12 @@
 import React from "react";
 import './cookiePolicy.css';
-
+import HomeHeader from "../HomeHeader";
+import Footer from "./Footer";
 function cookiePolicy() {
   return (
-    <div style={{ padding: "20px", textAlign: "left" }}>
+ <div>
+  <HomeHeader/>
+     <div className="privacy-policy-container" style={{ padding: "20px", textAlign: "left" }}>
       <h1 className="cookieshedding">Cookies Policy</h1>
       <div className="intro">
 
@@ -111,6 +114,8 @@ function cookiePolicy() {
       </p>
       </div>
     </div>
+    <Footer/>
+ </div>
   );
 }
 
