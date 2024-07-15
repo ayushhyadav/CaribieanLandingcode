@@ -48,6 +48,7 @@
     "reactjs-popup": "^2.0.5",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.7.2",
+    "twilio": "^5.2.2",
     "us-state-codes": "^1.1.2",
     "web-vitals": "^2.1.4"
   },

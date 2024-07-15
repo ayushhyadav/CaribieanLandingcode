@@ -55,7 +55,7 @@ router.get('/owner/rejected-properties', async (req, res) => {
         let rejectedProperties = [];
         allUsers.forEach(user => {
             if (user.property_list && user.property_list.length > 0) {
-                const rejected = user.property_list.filter(property => property.status === 'rejected');
+                const rejected = user.property_list.filter(property => property.status === 'cancel');
                 rejectedProperties = [...rejectedProperties, ...rejected];
             }
         });
@@ -101,7 +101,7 @@ router.post('/owner/accept_property', async (req, res) => {
             return res.status(404).send({ error: 'Property not found' });
         }
 
-        property.status = 'accepted';
+        property.status = 'accept';
         await owner.save();
 
         res.send({ message: 'Property accepted' });
@@ -128,7 +128,7 @@ router.post('/owner/reject_property', async (req, res) => {
             return res.status(404).send({ error: 'Property not found' });
         }
 
-        property.status = 'rejected';
+        property.status = 'cancel';
         await owner.save();
 
         res.send({ message: 'Property rejected' });
@@ -137,5 +137,25 @@ router.post('/owner/reject_property', async (req, res) => {
         res.status(500).send({ error: 'Internal Server Error' });
     }
 });
+
+// API to get all booking history for all users
+router.get('/owner/all-booking-history', async (req, res) => {
+    try {
+        const allUsers = await Users.find();
+
+        let allBookingHistory = [];
+        allUsers.forEach(user => {
+            if (user.booking_history && user.booking_history.length > 0) {
+                allBookingHistory = [...allBookingHistory, ...user.booking_history];
+            }
+        });
+
+        res.json(allBookingHistory);
+    } catch (error) {
+        console.error('Error fetching booking history:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 module.exports = router;

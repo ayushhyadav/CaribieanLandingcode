@@ -1,41 +1,37 @@
-const express =require('express');
-const router =express.Router()
-const Users = require('../../SignupModule/Signupmodules')
-const LocalStorage = require('../LocalStorage')
-const accountSid = LocalStorage.TWILIO_ACCOUNT_SID;
-const authToken = LocalStorage.TWILIO_AUTH_TOKEN;
-const PhoneNO = LocalStorage.TWILIO_PHONE_NO;
-const client = require('twilio')(accountSid, authToken);
+const express = require('express');
+const router = express.Router();
+const twilio = require('twilio');
+require('dotenv').config();  // Load environment variables from .env file
 
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const serviceSid = process.env.TWILIO_SERVICE_SID;
+const client = twilio(accountSid, authToken);
 
-router.post('/auth/send_otp',async (req,res)=>{
-  const {user_id,mobile_no} = req.body
-  if(mobile_no == ""){
-    res.send({error:"mobile no required"})
-  }
-  
-  else{
-   console.log('mobile number show me ',mobile_no)
-    await Users.findOneAndUpdate({user_id:req.body.user_id }, 
-        { $set: { mobile_no:mobile_no } }, { //options
-          returnNewDocument: true,
-          new: true,
-          strict: false
-        }
-      )
-    .then((value) => {
-      if(value == null){
-        res.send({error:'User Not Found'})
-      }
-      else{
-        client.verify.v2.services('VA0c2776aa47238b4c47da34ec23637cb6')
+router.post('/api/send-otp', (req, res) => {
+    const { phone } = req.body;
+
+    client.verify.v2.services(serviceSid)
         .verifications
-        .create({to: "+"+mobile_no, channel: 'sms'})
-        .then(verification =>  res.send({ message:value}));
-      }
-    })
-    .catch((err) => console.log(err))
-  }
-}
-  )
-module.exports = router
+        .create({ to: phone, channel: 'sms' })
+        .then(verification => res.send({ success: true, verification }))
+        .catch(err => res.send({ success: false, error: err.message }));
+});
+
+router.post('/api/verify-otp', (req, res) => {
+    const { phone, otp } = req.body;
+
+    client.verify.v2.services(serviceSid)
+        .verificationChecks
+        .create({ to: phone, code: otp })
+        .then(verification_check => {
+            if (verification_check.status === 'approved') {
+                res.send({ success: true });
+            } else {
+                res.send({ success: false });
+            }
+        })
+        .catch(err => res.send({ success: false, error: err.message }));
+});
+
+module.exports = router;

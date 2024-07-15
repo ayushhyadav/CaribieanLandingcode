@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 
 function handlePolicyClick(policy) {
   console.log(`${policy} clicked`);
@@ -12,10 +12,10 @@ function Footer() {
     <div>
       <div className="footer">
         <div className="part1">
-          <div className="footer-image">
+          <Link to="/" className="footer-image">
             <img src={require('./image/ca.png')} alt="Logo" />
             <img src={require('./image/ca1.png')} id="im1" alt="Logo" />
-          </div>
+          </Link>
         </div>
         <div className="part1">
           <h3>Policy</h3>

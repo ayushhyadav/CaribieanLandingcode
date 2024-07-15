@@ -102,10 +102,11 @@ export default class ScrollDestination extends Component {
           </div>
           {list.slice(currentIndex, currentIndex + visibleImages).map((item, index) => (
 
-            <div className='slider-box'
+            <div  className='slider-box'
               onClick={() => this.props.CallBackFun(item.title)}
               key={index}
               style={{
+                cursor:'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -119,7 +120,7 @@ export default class ScrollDestination extends Component {
                 position: 'relative',
               }}
             >
-              <label style={{ position: 'absolute', color: 'white', fontSize: 28, fontWeight: '600' }}>{item.title}</label>
+              <label style={{ position: 'absolute', color: 'white', fontSize: 28, fontWeight: '600' , cursor:'pointer',}}>{item.title}</label>
             </div>
             // </button>
           ))}

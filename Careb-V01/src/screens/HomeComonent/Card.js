@@ -22,7 +22,7 @@ export default class Card extends Component {
 
                 <div className="card-container">
                     {this.props.props_data
-                        .filter(property => property.status !== 'canceled') // Filter out canceled properties
+                        .filter(property => property.status !== 'cancel') // Filter out canceled properties
                         .map((property, index) => (
                             <div key={index} className={`card ${property.status === 'pending' ? 'card-disabled' : ''}`}>
                                 {property.status !== 'pending' ? (
