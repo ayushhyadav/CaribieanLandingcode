@@ -3,10 +3,10 @@ const router = express.Router();
 const twilio = require('twilio');
 require('dotenv').config();  // Load environment variables from .env file
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
+const apiKey = process.env.TWILIO_API_KEY;
+const apiSecret = process.env.TWILIO_API_SECRET;
 const serviceSid = process.env.TWILIO_SERVICE_SID;
-const client = twilio(accountSid, authToken);
+const client = twilio(apiKey, apiSecret, { accountSid: process.env.TWILIO_ACCOUNT_SID });
 
 router.post('/api/send-otp', (req, res) => {
     const { phone } = req.body;
