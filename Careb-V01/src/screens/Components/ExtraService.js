@@ -1,12 +1,12 @@
 import './ExtraService.css';
 import React, { Component } from 'react';
-import Popup from 'reactjs-popup';
 import Modal from 'react-modal';
 import 'reactjs-popup/dist/index.css';
 import { Link } from 'react-router-dom';
 import BaseUrl from '../Server/BaseUrl';
 import Storage from '../Server/Storage';
 import {  Box, Typography, Button,TextField, Grid } from '@mui/material';
+import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 
 const Amenities = [
   {
@@ -101,13 +101,7 @@ export default class ExtraService extends Component {
       selectedUser: [],
       selectedExtra: [],
       selectedFile: null,
-      // extra_service: '',
-      rafting_number_of_guest: '',
-      rafting_price: '',
-      rafting_description: '',
-      exotic_food_number_of_guest: '',
-      exotic_food_price:'',
-      exotic_food_description: '',
+      cancellationPolicy: '',
       custome_extra_service:"Enter....",
         isPropertyAccepted: false,
         pollingInterval: null,
@@ -158,15 +152,16 @@ export default class ExtraService extends Component {
   //   // }));
   //   // console.log('valueee ',this.state.selectedExtra)
   // };
-    handleExtraClick = (item) => {
-        this.setState((prevState) => {
-            const selectedExtra = prevState.selectedExtra.some(extra => extra.item === item.item)
-                ? prevState.selectedExtra.filter(extra => extra.item !== item.item)
-                : [...prevState.selectedExtra, item];
+  
+  handleExtraClick = (item) => {
+    this.setState((prevState) => {
+      const selectedExtra = prevState.selectedExtra.some(extra => extra.item === item.item)
+        ? prevState.selectedExtra.filter(extra => extra.item !== item.item)
+        : [...prevState.selectedExtra, { ...item, description: '', number_of_guest: '', price: '' }];
 
-            return { selectedExtra };
-        });
-    };
+      return { selectedExtra };
+    });
+  };
 
     // handleFileChange = (event, name) => {
     //     const selectedFile = event.target.files[0];
@@ -238,6 +233,82 @@ export default class ExtraService extends Component {
           );
       });
   }
+
+  renderCancellationPolicy = () => {
+    return (
+      <FormControl component="fieldset" sx={{ mt: 4 }}>
+        <FormLabel style={{color:'#000',fontWeight:'700'}} component="legend">Choose Cancellation Policy</FormLabel>
+        <RadioGroup
+          aria-label="cancellation policy"
+          name="cancellationPolicy"
+          value={this.state.cancellationPolicy}
+          onChange={this.handleCancellationPolicyChange}
+        >
+          <FormControlLabel
+            value="Flexible"
+            control={<Radio />}
+            label="Flexible:-  Allows guests to receive a full refund if they cancel at least 24 hours before check-in (local time). Hosts will also forfeit the cleaning fee. If a guest cancels less than 24 hours before check-in, they will still be charged for the first night but are entitled to a refund for the remaining nights. If a guest cancels their reservation after checking in, they may be eligible for a partial refund for the remaining nights of the reservation. "
+          /><br/>
+          <FormControlLabel
+            value="Moderate"
+            control={<Radio />}
+            label="Moderate: This policy allows fewer cancellations. Guests must cancel the reservation at least 5 days before the reservation date to receive a full refund of the accommodation fees. If the guest cancels within 5 days of the reservation start date, the first night and the service fee is non-refundable. They also only get 50% of the booking fees back. If the customer decides to cancel the reservation after check-in, 50% of the remaining nightly accommodation fees will be refunded. However, they still pay for nights spent."
+          /><br/>
+          <FormControlLabel
+            value="Firm"
+            control={<Radio />}
+            label="Firm: Guests must cancel at least 30 days prior to check-in to receive a full refund. This policy allows for a 50% refund if your guests cancel between 7 and 30 days prior to check-in.If a guest cancels less than seven days prior to check-in, the host will still receive 100% of everything (nights booked). This is a good middle ground between strict and flexible cancellation policies.In addition, guests can receive a full refund if they cancel within 48 hours of the booking date, as long as they cancel at least 14 days before check-in."
+          /><br/>
+          <FormControlLabel
+            value="Strict"
+            control={<Radio />}
+            label="Strict: Guests receive a full refund if they cancel within 48 hours of booking and at least 14 days before the property's local check-in time. After 48 hours, guests are only entitled to a 50% refund, regardless of how far in advance the check-in date is.Guests will also receive a 50% refund of accommodation fees if they cancel 7-14 days before the check-in date. They also get the cleaning fee back, but not the service fee. If the customer cancels the reservation less than 7 days in advance, he is not entitled to a refund."
+          />
+        </RadioGroup>
+      </FormControl>
+    );
+  };
+
+
+  renderServiceFees = () => {
+    const { cancellationPolicy } = this.state;
+    let hostFee = 0;
+    let guestFee = 0;
+
+    switch (cancellationPolicy) {
+      case 'Flexible':
+        hostFee = 0.03; // 3% for host
+        guestFee = 0.13; // 13% for guest
+        break;
+      case 'Moderate':
+        hostFee = 0.05; // 5% for host
+        guestFee = 0.10; // 10% for guest
+        break;
+      case 'Firm':
+        hostFee = 0.07; // 7% for host
+        guestFee = 0.08; // 8% for guest
+        break;
+        case 'Strict':
+          hostFee = 0.10; // 10% for host
+          guestFee = 0.06; // 6% for guest
+          break;
+      default:
+        // Default to flexible fees if no policy selected
+        hostFee = 0.03;
+        guestFee = 0.13;
+        break;
+    }
+
+    return (
+      <Box sx={{ mt: 4 }}>
+        <FormLabel component="legend">Service Fees</FormLabel>
+        <ul>
+          <li>Host: {hostFee * 100}%</li>
+          <li>Guest: {guestFee * 100}%</li>
+        </ul>
+      </Box>
+    );
+  };
     handleExtraServiceChange = (e, id) => {
         const { name, value } = e.target;
         this.setState((prevState) => ({
@@ -248,7 +319,7 @@ export default class ExtraService extends Component {
     };
 
   handleSaveData = () => {
-      const { selectedExtra, selectedAmenities, selectedUser,acceptTerms } = this.state;
+      const { selectedExtra, selectedAmenities, selectedUser,acceptTerms , cancellationPolicy } = this.state;
       if (!acceptTerms) {
         alert("Please accept the terms and conditions.");
         return; // Stop further execution
@@ -277,6 +348,7 @@ export default class ExtraService extends Component {
     formData.append('state', PropertysData.state);
     formData.append('city', PropertysData.city);
     formData.append('street_address', PropertysData.streetAddress);
+    formData.append('cancellationPolicy', cancellationPolicy);
     Storage.propety_images.forEach((val,index)=> formData.append('property_images',Storage.propety_images[index]))
 
       // Storage.propety_images.forEach((image, index) => {
@@ -284,8 +356,8 @@ export default class ExtraService extends Component {
       // });
 
 
-      formData.append('amenties', this.state.selectedAmenities);
-    formData.append('extra_service', this.state.selectedExtra);
+    //   formData.append('amenties', this.state.selectedAmenities);
+    // formData.append('extra_service', this.state.selectedExtra);
       formData.append('amenties', JSON.stringify(selectedAmenities));
       formData.append('extra_service', JSON.stringify(selectedExtra));
 
@@ -305,16 +377,15 @@ export default class ExtraService extends Component {
                   alert('Welcome aboard! 🚀 Your registration is complete. Explore our platform and make the most of your journey with us!');
                   const storedUserId = localStorage.getItem('user_id');
                   if (storedUserId) {
-                      window.location.href = `/PandingApproval/${storedUserId}`;
+                      // window.location.href = `/PandingApproval/${storedUserId}`;
                   } else {
                       console.error('User ID not found in local storage');
                   }
               } else {
-                  // this.setState({ isPropertyAccepted: false });
                   alert('Your property has been submitted and is pending For approval. You will be notified once it is approved.');
                   const storedUserId = localStorage.getItem('user_id');
                   if (storedUserId) {
-                      window.location.href = `/PandingApproval/${storedUserId}`;
+                      // window.location.href = `/PandingApproval/${storedUserId}`;
                   } else {
                       console.error('User ID not found in local storage');
                   }
@@ -346,7 +417,10 @@ export default class ExtraService extends Component {
     this.toggleModal();
   };
 
- 
+  handleCancellationPolicyChange = (event) => {
+    this.setState({ cancellationPolicy: event.target.value });
+  };
+
 
     render() {
 
@@ -361,7 +435,6 @@ export default class ExtraService extends Component {
         boxShadow: 24,
         p: 4,
         borderRadius: '10px',
-        // maxHeight: '80vh',
         overflowY: 'auto',
       };
       const { selectedAmenities, selectedUser, acceptTerms, showTerms, showModal } = this.state;
@@ -387,9 +460,7 @@ export default class ExtraService extends Component {
           bottom: 'auto',
           marginRight: '-50%',
           gap:'10px',
-          // height:'100%',
           transform: 'translate(-50%, -50%)',
-          // width: '100%',
           padding: '20px',
           borderRadius: '10px',
           display:'flex',
@@ -524,45 +595,17 @@ export default class ExtraService extends Component {
             >
               +
             </div>
-{/* <Popup
-            shouldCloseOnOverlayClick={false}
-            closeOnDocumentClick={false}
-            trigger={
-            <img style={{ width: 40, height: 40, marginLeft: 50, marginTop: 10 }} src={require('../../assets/plus.png')} alt="plus" />
-          }
-          modal
-          contentStyle={{ height: '100px', overflow: 'auto' }}
-        >
-          {close => (
-              <div>
-                <input closeModule={() => close()} />
-
-     <input onChange={(e)=>this.setState({custome_extra_service:e?.target?.value})} type='text' />
-     <button onClick={()=>{
-      if(this.state.custome_extra_service ==''){
-
-      }
-      else{
-        Extra.push({
-          id: Extra.length+1,
-          item: this.state.custome_extra_service,
-          description:"",
-          number_of_guest:"",
-          price:""
-        })
-        this.setState({custome_extra_service:""},()=>close())
-      }
-     }}  >submit</button>
-
-
-              </div>
-            )}
-          </Popup> */}
 
 
           </div>
         </div>
+ 
+
+        <Box>
         {this.renderExtraServiceFields()}
+        {this.renderCancellationPolicy()}
+        {this.renderServiceFees()}
+      </Box>
         <Modal
           isOpen={showModal}
           onRequestClose={this.toggleModal}
@@ -631,8 +674,8 @@ export default class ExtraService extends Component {
     </ul>
     <p><strong>Host Cancellation Policies</strong></p>
     <ul>
-      <li>Cancellation Notice Period: More than 36 hours notice: No penalty. Less than 36 hours notice: Penalties apply.</li>
-      <li>Penalties for Late Cancellations</li>
+        <li>Cancellation Notice Period: More than 36 hours notice: No penalty. Less than 36 hours notice: Penalties apply.</li>
+        <li>Penalties for Late Cancellations</li>
       <ul>
         <li>Penalty Fee: $25 for cancellations made with less than 36 hours notice.</li>
         <li>Service Fee Forfeiture: The service fee for the canceled booking is non-refundable.</li>
@@ -668,20 +711,15 @@ export default class ExtraService extends Component {
     <p>
       Caribbeaneaze may update these terms and conditions from time to time. Hosts will be notified of any changes, and continued use of the platform constitutes acceptance of the updated terms.
     </p>
+
   </Typography>
   <Button style={{ width: 200, marginTop: 20 }} variant="contained" color="primary" onClick={() => this.setState({ acceptTerms: true, showTerms: false })}>Accept</Button>
 </Box>
 
-
-      
         </Modal>
         <div style={{marginTop:30,marginLeft:10}} className="terms-checkbox">
-        <input
-  style={{ transform: 'scale(1.4)' }} // Adjust the scale factor as needed
-  type="checkbox"
-  checked={acceptTerms}
-  onChange={this.handleCheckboxChange}
-/>
+        <input style={{ transform: 'scale(1.4)' }} type="checkbox" 
+        checked={acceptTerms} onChange={this.handleCheckboxChange} />
 
       <Link style={{marginLeft:10}} to="#" onClick={this.toggleTermsModal}>
             <span>Terms and Conditions</span>
@@ -694,18 +732,15 @@ export default class ExtraService extends Component {
               style={{ width: '10%', borderRadius: 10, height: '45px', borderWidth: 0, background: 'white' ,color:'black'}}
               onClick={() => this.props.NextCallBack({ navigationTo: 'Extra_Service', id: 7, currentid: 8, bt_type: 'Back' })}
             >Back</button>
-           <button
-  className='termaccept'
-  disabled={!acceptTerms}
-  onClick={this.handleSaveData}
-  style={{
+           <button className='termaccept' disabled={!acceptTerms} onClick={this.handleSaveData} 
+    style={{
     color: 'white',
-    background: acceptTerms ? '#F15A29' : '#CCCCCC', // Change background color based on acceptTerms
+    background: acceptTerms ? '#F15A29' : '#CCCCCC', 
     borderRadius: 10,
     height: '45px',
     marginLeft: 10,
     width: '150px',
-    cursor: acceptTerms ? 'pointer' : 'not-allowed' // Change cursor style based on acceptTerms
+    cursor: acceptTerms ? 'pointer' : 'not-allowed' 
   }}
 >
   Finish

@@ -9,15 +9,10 @@
     font-family: Arial, sans-serif;
   }
    */
-/* .booking-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2vh;
-    background: none;
-    min-height: 10vh;
-    background-color: #f4f4f4;
-  } */
+.booking-container {
+ width: 100%;
+ max-width: 430px;
+  }
 
 .booking-content {
   background-color: white;
@@ -215,8 +210,17 @@ button {
 -ms-overflow-style: none;  
 scrollbar-width: none;  
 } */
-
+@media (max-width: 766px) {
+  .booking-container {
+    width: 100%;
+     }
+   
+    }
 @media (max-width: 576px) {
+  .booking-container {
+    width: 100%;
+     }
+   
   button.bookingoder {
     display: block;
 }

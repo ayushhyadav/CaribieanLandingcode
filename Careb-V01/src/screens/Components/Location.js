@@ -145,7 +145,7 @@
                               }}
                               value={countryRegion}
                               onChange={this.handleCountryChange}
-                              disabled={useCurrentLocation} // Disable if using current location
+                              // Disable if using current location
                             >
                               <option value="">Select Country</option>
                               {Country.getAllCountries().map((country) => (
@@ -166,7 +166,7 @@
                               }}
                               value={state}
                               onChange={this.handleStateChange}
-                              disabled={!countryRegion || useCurrentLocation} // Disable if no country selected or using current location
+                              disabled={!countryRegion} // Disable if no country selected or using current location
                             >
                               <option value="">Select State</option>
                               {states.map((state) => (
@@ -187,7 +187,7 @@
                               }}
                               value={city}
                               onChange={(e) => this.setState({ city: e.target.value })}
-                              disabled={!state || useCurrentLocation} // Disable if no state selected or using current location
+                              disabled={!state } // Disable if no state selected or using current location
                             >
                               <option value="">Select City</option>
                               {cities.map((city) => (

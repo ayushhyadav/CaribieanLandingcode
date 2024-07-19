@@ -22,74 +22,84 @@ function uniqid() {
 // Endpoint to add a property
 router.post('/property_add', PropertyImages.fields([
   { name: 'property_images', maxCount: 10 },
-  { name: 'rafting_certifcate', maxCount: 5 },
-  { name: 'exotic_food_certifcate', maxCount: 5 }
 ]), async (req, res) => {
   try {
     const {
-      user_id, email, property_name, select_view, property_type, price_per_night, guest_count, bedroom_count,
-      bathroom_count, property_description, property_rules, country, state, city, street_address,
-      amenties, extra_service, rafting_number_of_guest, rafting_price, rafting_description,
-      exotic_food_number_of_guest, exotic_food_price, exotic_food_description
+      user_id,
+      property_name,
+      select_view,
+      property_type,
+      price_per_night,
+      guest_count,
+      bedroom_count,
+      bathroom_count,
+      property_description,
+      property_rules,
+      country,
+      state,
+      city,
+      street_address,
+      amenties,
+      extra_service,
+      cancellationPolicy
     } = req.body;
 
     let user = await Users.findOne({ user_id: user_id });
     if (!user) {
-      return res.status(404).send({ error: 'User not found' });
+      return res.status(404).json({ error: 'User not found' });
     }
 
     let property_list = user.property_list || [];
+
     let newProperty = {
-      user_id, email, property_id: uniqid(), property_name, select_view, property_type, price_per_night, guest_count,
-      bedroom_count, bathroom_count, property_description, property_rules, country, state, city, street_address,
-      property_images: req?.files?.property_images, amenties, extra_service, rafting_number_of_guest, rafting_price,
-      rafting_description, rafting_certifcate: req?.files?.rafting_certifcate, exotic_food_number_of_guest,
-      exotic_food_price, exotic_food_description, exotic_food_certifcate: req?.files?.exotic_food_certifcate,
-      status: 'pending' 
+      user_id,
+      property_id: uniqid(),
+      property_name,
+      select_view,
+      property_type,
+      price_per_night,
+      guest_count,
+      bedroom_count,
+      bathroom_count,
+      property_description,
+      property_rules,
+      country,
+      state,
+      city,
+      street_address,
+      property_images: req?.files?.property_images,
+      // property_images: req.files?.property_images?.map(file => file.filename) || [],
+      amenties: JSON.parse(amenties),
+      extra_service: JSON.parse(extra_service),
+      cancellationPolicy,
+      status: 'pending'
     };
 
     property_list.push(newProperty);
     user.property_list = property_list;
     await user.save();
 
-    res.send({ message: 'Property added successfully. Awaiting owner approval.', property: newProperty });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ error: 'Internal Server Error' });
-  }
-});
+    // Simulate the approval process
+    const isAccepted = Math.random() < 0.5; // 50% chance of being accepted for this example
 
-
-// Function to generate unique IDs
-function uniqid() {
-  return (new Date()).getTime() + Math.random().toString(16).slice(2);
-}
-
-// Endpoint to update availability dates for a property
-router.post('/property_update_availability', async (req, res) => {
-  try {
-    const { user_id, property_id, availabilityDates } = req.body;
-
-    let user = await Users.findOne({ user_id: user_id });
-    if (!user) {
-      return res.status(404).send({ error: 'User not found' });
+    if (isAccepted) {
+      res.status(200).json({ 
+        message: 'Property added successfully',
+        accepted: true,
+        property: newProperty
+      });
+    } else {
+      res.status(200).json({ 
+        message: 'Property submitted for approval',
+        accepted: false,
+        property: newProperty
+      });
     }
 
-    let property = user.property_list.find(p => p.property_id === property_id);
-    if (!property) {
-      return res.status(404).send({ error: 'Property not found' });
-    }
-
-    property.availabilityDates = availabilityDates;
-
-    await user.save();
-
-    res.send({ message: 'Availability dates updated successfully.', property: property });
   } catch (err) {
     console.error(err);
-    res.status(500).send({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 module.exports = router;

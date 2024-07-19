@@ -185,7 +185,8 @@ class PhoneAuth extends Component {
                                 marginLeft: 10,
                                 border: 'none'
                             }}
-                            onClick={() => this.props.NextCallBack({ navigationTo: 'Pasport_veri', id: 4, bt_type: 'Next' })}
+                            onClick={this.verifyOTP}
+                            // onClick={() => this.props.NextCallBack({ navigationTo: 'Pasport_veri', id: 4, bt_type: 'Next' })}
                     >
                         Next
                     </button>

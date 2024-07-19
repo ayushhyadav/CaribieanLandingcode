@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PropertyBooking.css';
+import InfoIcon from '@mui/icons-material/Info';
+import { Tooltip, IconButton } from '@mui/material';
 import {
   Box,
   Button,
@@ -365,12 +367,20 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
   const [checkOutDate, setCheckOutDate] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
   const [basePrice, setBasePrice] = useState(0);
+  const [cancellationprice,setcancellationprice]=useState(0)
   const [numNights, setNumNights] = useState(0);
   const [selectedServices, setSelectedServices] = useState([]);
   const [ratePerNight, setRatePerNight] = useState(0);
+  const [ serviceTaxprice,setserviceTax]=useState(0);
 
   const navigate = useNavigate();
-
+  console.log('properdasa',propertyData)
+  const serviceFeeRates = {
+    Flexible: { host: 0.03, guest: 0.13 },
+    Moderate: { host: 0.05, guest: 0.10 },
+    Firm: { host: 0.07, guest: 0.08 },
+    Strict: { host: 0.07, guest: 0.08 } // Same as Firm
+  };
   useEffect(() => {
     if (propertyData) {
       setRatePerNight(propertyData.price_per_night);
@@ -386,62 +396,67 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
       calculateTotalPrice(value);
     }
   };
-
   const handleServiceClick = (item, price) => {
     setSelectedServices((prevSelectedServices) => {
       const updatedServices = [...prevSelectedServices];
       const index = updatedServices.findIndex((service) => service.item === item);
-
+  
       if (index !== -1) {
         updatedServices.splice(index, 1);
       } else {
         updatedServices.push({ item, price });
       }
-
-      calculateTotalPrice(null, updatedServices);
+  
+      // Call calculateTotalPrice with the updated services
+      calculateTotalPrice(checkOutDate, updatedServices);
+  
       return updatedServices;
     });
   };
+const cancellationPolicy=propertyData?.cancellationPolicy
+;
+// console.log('pros',cancellationPolicy)
+const calculateTotalPrice = (newCheckOutDate = checkOutDate, newSelectedServices = selectedServices) => {
+  const amount = newSelectedServices.reduce((sum, service) => sum + service.price, 0);
+  console.log('amount',amount)
 
-  const calculateTotalPrice = (newCheckOutDate = checkOutDate, newSelectedServices = selectedServices) => {
-    if (checkInDate && newCheckOutDate) {
-      const startDate = new Date(checkInDate);
-      const endDate = new Date(newCheckOutDate);
-      const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+  if (checkInDate && newCheckOutDate) {
+    const startDate = new Date(checkInDate);
+    const endDate = new Date(newCheckOutDate);
+    const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
 
-      const base = nights * ratePerNight;
-      let amount = 0;
-      newSelectedServices.forEach((value) => (amount += value.price));
+    const base = nights * ratePerNight;
 
-      // Get the service tax rate based on the country of the property
-      const serviceTaxRate = countryTaxRates[propertyData.country] || 0;
-      const serviceTax = base * serviceTaxRate;
+    const serviceTaxRate = countryTaxRates[propertyData.country] || 0;
+    const serviceTax = (base + amount) * serviceTaxRate;
 
-      // Get the region-specific base service fee
-      const region = countryRegions[propertyData.country] || "Other";
-      const regionServiceFee = regionBaseServiceFees[region] || 0;
-      const regionServiceTax = base * regionServiceFee;
+    const region = countryRegions[propertyData.country] || "Other";
+    const regionServiceFee = regionBaseServiceFees[region] || 0;
+    const cancellationServiceFee = serviceFeeRates[cancellationPolicy]?.guest || 0;
+    
+    const regionServiceTax = (amount + base) * (regionServiceFee + cancellationServiceFee);
+    console.log('base',base)
+    console.log('tax',regionServiceFee)
+    console.log('cancellation',cancellationServiceFee)
+    console.log('total',amount)
+    console.log('region service tax',regionServiceTax)
 
-      const total = base + amount + serviceTax + regionServiceTax;
-      setTotalPrice(total);
-      setNumNights(nights);
-      setBasePrice(base);
-    } else {
-      let amount = 0;
-      newSelectedServices.forEach((value) => (amount += value.price));
+    const total = base + amount + serviceTax + regionServiceTax;
+    setTotalPrice(total);
+    setNumNights(nights);
+    setBasePrice(base);
+    setcancellationprice(regionServiceTax);
+    setserviceTax(serviceTax);
 
-      const totalAmount = numNights * ratePerNight;
-      const serviceTaxRate = countryTaxRates[propertyData.country] || 0;
-      const serviceTax = totalAmount * serviceTaxRate;
+  } else {
+    // When dates are not selected, we'll just update the amount
+    setTotalPrice(amount);
+  }
 
-      const region = countryRegions[propertyData.country] || "Other";
-      const regionServiceFee = regionBaseServiceFees[region] || 0;
-      const regionServiceTax = totalAmount * regionServiceFee;
-
-      setTotalPrice(totalAmount + amount + serviceTax + regionServiceTax);
-    }
-  };
-
+  // Always update these values
+  setSelectedServices(newSelectedServices);
+  console.log('useramount', amount);
+};
   const handleBooking = () => {
     if (!checkInDate || !checkOutDate) {
       alert('Please select both Check In and Check Out dates.');
@@ -473,13 +488,23 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
 
     navigate('/VarifyBooking');
   };
+  const [showDetails, setShowDetails] = useState(false);
+
+  const toggleDetails = () => {
+    setShowDetails(!showDetails);
+  };
+
 
   return (
     <div className="booking-container mobile-res">
       <form className="booking-form">
         <div className="booking-content">
+      
           <div className='top-section'>
+      
+
             <div className='heding-opo'>
+
               <label className="night-label">From</label>
               <label className="price-label">${ratePerNight}</label>
               <label className="night-label">/night</label>
@@ -523,7 +548,7 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
                 flexWrap: 'wrap'
               }}
             >
-              {Order.map((service, index) => (
+              {propertyData?.extra_service?.map((service, index) => (
                 <ul
                   style={{
                     listStyleType: 'none',
@@ -553,7 +578,7 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
               ))}
             </div>
 
-            <div style={{ display: 'flex' }}>
+            {/* <div style={{ display: 'flex' }}>
               {Order2.map((service, index) => (
                 <ul
                   style={{
@@ -582,7 +607,7 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
                   </li>
                 </ul>
               ))}
-            </div>
+            </div> */}
           </div>
 
           <div className="billing">
@@ -601,13 +626,13 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
               <h6>Taxes 
                 {/* ({(countryTaxRates[propertyData?.country] || 0) * 100}%) */}
                 </h6>
-              <h6>${(basePrice * (countryTaxRates[propertyData?.country] || 0)).toFixed(2)}</h6>
+              <h6>${(serviceTaxprice).toFixed(2)}</h6>
             </div>
             <div className="billing-row">
-              <h6>Service Tax 
+              <h6>Service Fee 
                 {/* ({(regionBaseServiceFees[countryRegions[propertyData?.country]] || 0) * 100}%) */}
                 </h6>
-              <h6>${(basePrice * (regionBaseServiceFees[countryRegions[propertyData?.country]] || 0)).toFixed(2)}</h6>
+              <h6>${cancellationprice}</h6>
             </div>
             <div style={{ borderTop: '1px solid #E5E7EB', padding: 5 }} className="billing-row">
               <h6>Subtotal</h6>
@@ -615,13 +640,45 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
             </div>
           </div>
 
-          <button type="button" onClick={handleBooking} className="confirm-booking-btn">
+          <button style={{border:'none'}} type="button" onClick={handleBooking} className="confirm-booking-btn">
             Confirm Booking
           </button>
+
+          {propertyData?.cancellationPolicy && (
+        <div style={{ display: 'flex', alignItems: 'center', fontSize: 15.5 ,padding:2,paddingLeft:5}}>
+          <div>Host follows {propertyData?.cancellationPolicy} cancellation policy</div>
+          <Tooltip title="View Details">
+            <IconButton onClick={toggleDetails} style={{ width:10,background:'none',marginLeft:10,  }}>
+            <InfoIcon style={{color:'#2E6DF5' }} color='#F15A29' />
+            </IconButton>
+          </Tooltip>
         </div>
+      )}
+      {showDetails && (
+        <div style={{ marginTop: 10, fontSize: 14, color: '#555' }}>
+          {getDetailedCancellationPolicy(propertyData?.cancellationPolicy)}
+        </div>
+      )}
+        </div>
+   
       </form>
     </div>
   );
 };
 
+
+const getDetailedCancellationPolicy = (policy) => {
+  switch (policy) {
+    case 'Flexible':
+      return 'Flexible:-  Allows guests to receive a full refund if they cancel at least 24 hours before check-in (local time). Hosts will also forfeit the cleaning fee. If a guest cancels less than 24 hours before check-in, they will still be charged for the first night but are entitled to a refund for the remaining nights. If a guest cancels their reservation after checking in, they may be eligible for a partial refund for the remaining nights of the reservation.';
+    case 'Moderate':
+      return 'Moderate: This policy allows fewer cancellations. Guests must cancel the reservation at least 5 days before the reservation date to receive a full refund of the accommodation fees. If the guest cancels within 5 days of the reservation start date, the first night and the service fee is non-refundable. They also only get 50% of the booking fees back. If the customer decides to cancel the reservation after check-in, 50% of the remaining nightly accommodation fees will be refunded. However, they still pay for nights spent.';
+    case 'Firm':
+      return 'Firm: Guests must cancel at least 30 days prior to check-in to receive a full refund. This policy allows for a 50% refund if your guests cancel between 7 and 30 days prior to check-in.If a guest cancels less than seven days prior to check-in, the host will still receive 100% of everything (nights booked). This is a good middle ground between strict and flexible cancellation policies.In addition, guests can receive a full refund if they cancel within 48 hours of the booking date, as long as they cancel at least 14 days before check-in.';
+    case 'Strict':
+      return 'Strict: Guests receive a full refund if they cancel within 48 hours of booking and at least 14 days before the property`s local check-in time. After 48 hours, guests are only entitled to a 50% refund, regardless of how far in advance the check-in date is.Guests will also receive a 50% refund of accommodation fees if they cancel 7-14 days before the check-in date. They also get the cleaning fee back, but not the service fee. If the customer cancels the reservation less than 7 days in advance, he is not entitled to a refund.';
+    default:
+      return 'No detailed policy available.';
+  }
+};
 export default PropertyBooking;

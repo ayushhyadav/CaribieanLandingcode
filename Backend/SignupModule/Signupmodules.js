@@ -39,18 +39,17 @@ const PropertySchema = new mongoose.Schema({
   city: String,
   street_address: String,
   property_images: [PropertyImageSchema],
-  amenties: String,
-  extra_service: [ExtraServiceSchema],
-  rafting_number_of_guest: String,
-  rafting_price: String,
-  rafting_description: String,
-  rafting_certifcate: String,
-  exotic_food_number_of_guest: String,
-  exotic_food_price: String,
-  exotic_food_description: String,
-  exotic_food_certifcate: String,
+  amenties: [],
+  extra_service: [{
+    item: String,
+    description: String,
+    number_of_guest: Number,
+    price: Number
+  }],
+  cancellationPolicy: { type: String},
+  status: { type: String, default: 'pending' },
   Booking_History: { type: Array, default: [] },
-  status:'',
+  // status:'',
 });
 
 const UserSchema = new mongoose.Schema({

@@ -332,30 +332,6 @@ import BaseUrl from '../../Server/BaseUrl'
 import './userDetails.css'
 i18nIsoCountries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
-const Amenities = [
-    { Item: 'Wifi' },
-    { Item: 'Washer' },
-    { Item: 'Kitchen' },
-    { Item: 'dryer' },
-    { Item: 'Air Conditioning' },
-    { Item: 'Heating' },
-    { Item: 'Dedicated Workspace' },
-];
-
-const user = [
-    { Item2: 'Hair Dryer' },
-    { Item2: 'Iron' },
-    { Item2: 'TV' },
-];
-
-const Extra = [
-    { item: 'Rafting' },
-    { item: 'Exotic Food' },
-    { item: 'Pick and Drop' },
-    { item: 'BBQ' },
-    { item: 'Breakfast' },
-];
-
 const Feature = [
     { item: 'Pool' },
     { item: 'Smoking allowed' },
@@ -398,6 +374,7 @@ class UserDetails extends Component {
 
     render() {
         const { propertyData } = this.props;
+        console.log('userdta',propertyData)
         const code = i18nIsoCountries.getAlpha2Code(propertyData?.country, 'en');
 
         return (
@@ -443,6 +420,8 @@ class UserDetails extends Component {
                         <label style={{ marginLeft: 10 }}>{propertyData?.property?.bathroom_count} Bathroom </label>
                     </div>
                 </div>
+            
+
                 <div style={{ borderBottom: '1px solid #E5E7EB', display: 'flex', flexDirection: 'row', textAlign: 'center', alignSelf: 'center', justifyContent: 'space-between', width: '90%', margin: '0 auto', padding: 10, marginTop: 30 }}>
                     <div>
                         <img style={{ width: 40,borderRadius:100,height:40 }}
@@ -472,8 +451,8 @@ class UserDetails extends Component {
                 <div style={{ width: '90%', margin: '0 auto' }}>
                     {/* <label style={{ fontSize: 20, fontSize: 18, fontWeight: 600, marginTop: 30 }}>Extra Services</ */}
                     <label style={{ marginTop: 20, fontSize: 18, fontWeight: 600, marginTop: 30 }}>Extra Services</label>
-                    {/* <div style={{ display: 'flex', width: '80%', marginTop: 10 }}>
-  {propertyData?.extra_service && propertyData?.extra_service.split(',').map((Extra, index) => (
+                    <div style={{ display: 'flex', width: '80%', marginTop: 10 }}>
+  {propertyData?.property?.extra_service.map((Extra, index) => (
     <ul
       key={index}
       style={{
@@ -487,7 +466,7 @@ class UserDetails extends Component {
         justifyContent: 'center',
         cursor: 'pointer',
       }}
-      onClick={() => this.setState({ Active_extra_service: Extra }, () => this.handleShowAdditionalMessage(index))}
+    //   onClick={() => this.setState({ Active_extra_service: Extra }, () => this.handleShowAdditionalMessage(index))}
     >
       <li
         style={{
@@ -503,20 +482,20 @@ class UserDetails extends Component {
           justifyContent: 'center',
         }}
       >
-        {Extra}
+        {Extra.item}
       </li>
     </ul>
   ))}
-</div> */}
+</div>
 
-                    {this.state.Active_extra_service && (
+                    {/* {this.state.Active_extra_service && (
                         <div>
                             {this.state.Active_extra_service === 'Rafting' ? propertyData?.rafting_description : this.state.Active_extra_service === 'Exotic Food' ? propertyData?.exotic_food_description : null}
                         </div>
-                    )}
+                    )} */}
                     <label style={{ marginTop: 20, fontSize: 18, fontWeight: 600 }}>Amenities</label>
                     <div style={{ display: 'flex', width: '100%', marginTop: 10, flexWrap: 'wrap' }}>
-                        {propertyData?.amenties && propertyData?.amenties.split(',').map((Amenities, index) => (
+                        {propertyData?.property?.amenties.map((Amenities, index) => (
                             <ul key={index} style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                                 <li style={{ background: '#F3F4F6', borderRadius: 5, textAlign: 'center', color: '#6B7280', fontSize: 13, padding: '10px 15px', marginBottom: 13, marginRight: 10 }}>{Amenities}</li>
                             </ul>
