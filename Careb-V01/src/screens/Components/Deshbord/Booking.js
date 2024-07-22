@@ -119,15 +119,17 @@ export default class Booking extends Component {
 
             <div className='topMain' style={{width: '100%'}}>
                 <div className="epmt" style={{height: 77}}>
-                    <img src={require('../../../assets/mobile-bargar.png')} alt=""/>
+                <div style={{width: '100%',padding:10,fontSize:20,fontWeight:600}}>  Booking</div> 
+                    {/* <img src={require('../../../assets/mobile-bargar.png')} alt=""/> */}
                 </div>
                 {userData?.data?.length === 0 ? (
                     <p style={{width: '100%', textAlign: 'center', fontSize: 30, fontWeight: 'bold'}}>No bookings
                         available</p>
                 ) : (
                     <div className="table-Page">
-                        <table className="table-full" style={{width: '100%'}}>
-                            <thead>
+                        <table className="table-full" >
+                       
+                            {/* <thead>
                             <tr>
                                 <th><label style={{
                                     fontSize: 13,
@@ -151,15 +153,15 @@ export default class Booking extends Component {
                                     color: '#64748B',
                                     textAlign: 'center'
                                 }}>Status</label></th>
-                                {/*<th><label style={{*/}
-                                {/*    fontSize: 13,*/}
-                                {/*    fontWeight: '600',*/}
-                                {/*    color: '#64748B',*/}
-                                {/*    textAlign: 'center',*/}
-                                {/*    paddingLeft: 7*/}
-                                {/*}}>Action</label></th>*/}
+                                <th><label style={{
+                                   fontSize: 13,
+                                   fontWeight: '600',
+                                   color: '#64748B',
+                                   textAlign: 'center',
+                                   paddingLeft: 7
+                                }}>Action</label></th>
                             </tr>
-                            </thead>
+                            </thead> */}
                             <tbody>
                             {userData?.data?.map((item, index) => (
                                 <tr key={index}>

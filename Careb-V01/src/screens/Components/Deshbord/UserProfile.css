@@ -1,5 +1,23 @@
 .btn-white button {
     background: transparent;
+    margin-left: 20px;
+}
+.pro-icon{
+}
+.user-pro{
+    width: 70%;
+}
+.box-profile{    width: 100%;
+}
+@media (max-width:480px) {
+    
+    .btn-white button {
+        background: transparent;
+        margin-left:0;
+    }
+}
+.btn-white button:hover{
+    background-color: transparent;
 }
 .table-Page {
     font-family: Arial, sans-serif;

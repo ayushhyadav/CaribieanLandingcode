@@ -3,7 +3,7 @@ import "./EarningScreen.css";
 import { useState } from "react";
 
 function EarningScreen() {
-  const [isOpen, setIsOpen] = useState(true); // Initially open
+  const [isOpen, setIsOpen] = useState(true); 
 
   const toggleButton = () => {
     setIsOpen(!isOpen);

@@ -37,7 +37,7 @@ console.log(userid,'userid')
 
     return (
       <div className='booking-box' style={{ width: '100%', display: 'flex', justifyContent: 'center',marginTop:'20px',height:"180px" ,}}>
-        <div className='box-profile' style={{ width: '80%',display:'flex',justifyContent:'space-between', alignItems: 'center'}}>
+        <div className='box-profile' style={{ width: '90%',display:'flex',justifyContent:'space-between', alignItems: 'center'}}>
           <div className='user-pro' style={{ display: 'flex',width:'50%', alignItems: 'center', marginBottom: 20 ,}}>
             {/* <img className='img-pro' style={{ width: 120, height: 120,}} src={require('../../../assets/Ellipse 11 (1).png')} alt='' /> */}
 
@@ -49,7 +49,7 @@ console.log(userid,'userid')
           alt='Profile'
         />
       )}
-            <div className='pro-icon' style={{ marginLeft: 20, display: 'flex', flexDirection: 'column' }}>
+            <div className='pro-icon' style={{ marginLeft: 10, display: 'flex', flexDirection: 'column' }}>
               <label style={{ fontSize: 14, fontWeight: '700', color: '#0F172A' }}>{userData?.first_name}</label>
               {/*<label style={{ color: '#0f172a', fontSize: 23, fontWeight: '700' }}>{userData?.property_list[3]?.city} {userData?.property_list[3]?.country}John Doe</label>*/}
               <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -63,7 +63,7 @@ console.log(userid,'userid')
               </div>
             </div>
             <div className='btn-white' style={{ display: 'flex', justifyContent:'end',width:'28%' , marginBottom: 20 }}>
-            <button style={{ height: 44,width:'75%', fontSize: 15, fontWeight: '600', color: '#0F172A', border: '1px solid', borderColor: '#0F172A', alignItems: 'center', justifyContent: 'center', borderRadius: 12}} className="me-2 btn btn-outline-dark" type="submit">View Location</button>
+            <button style={{ height: 50,width:'100%', fontSize: 15, fontWeight: '600', color: '#0F172A', border: '1px solid', borderColor: '#0F172A', alignItems: 'center', justifyContent: 'center', borderRadius: 12,}} className="me-2 btn btn-outline-dark" type="submit">View Location</button>
           </div>
           </div>
          

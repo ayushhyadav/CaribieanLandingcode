@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Calendar } from 'react-multi-date-picker';
 import "react-multi-date-picker/styles/colors/red.css"; // Optional for theming
-
+import './JobsDetailes.css'
 export default class JobsDetailes extends Component {
     constructor(props) {
         super(props);
@@ -27,8 +27,8 @@ export default class JobsDetailes extends Component {
             <div style={{ marginTop: 20 }}>
                 <div>
                     <label style={{ fontSize: 21, fontWeight: '600', marginLeft: 25 }}>Stats</label>
-                    <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'space-between', marginTop: 20 }}>
-                        <div>
+                    <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'space-between', marginTop: 20}}>
+                        <div className='balance_1'>
                             <li style={{ fontSize: 20, fontWeight: '500', color: '#0F172A', marginTop: 10 }}>
                                 Balance
                             </li>
@@ -42,7 +42,7 @@ export default class JobsDetailes extends Component {
                         </div>
                     </ul>
                     <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'space-between', marginTop: 20 }}>
-                        <div>
+                        <div className='balance_1'> 
                             <li style={{ fontSize: 20, fontWeight: '500', color: '#0F172A', marginTop: 10 }}>
                                 Active Jobs
                             </li>
@@ -58,7 +58,7 @@ export default class JobsDetailes extends Component {
                         </div>
                     </ul>
                     <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'space-between', marginTop: 20 }}>
-                        <div>
+                        <div className='balance_1'>
                             <li style={{ fontSize: 20, fontWeight: '500', color: '#0F172A', marginTop: 10 }}>
                                 Earned this Month
                             </li>
@@ -73,7 +73,7 @@ export default class JobsDetailes extends Component {
                         </div>
                     </ul>
                     <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'space-between', marginTop: 20 }}>
-                        <div>
+                        <div className='balance_1'>
                             <li style={{ fontSize: 20, fontWeight: '500', color: '#0F172A', marginTop: 10 }}>
                                 Expected Earning
                             </li>

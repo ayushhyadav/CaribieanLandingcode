@@ -51,7 +51,7 @@ const App = () => {
 
      <Route path='/booking/:userid' element={<BookingHistry />} style={{width: '100vw'}}/>
      <Route path='/mylisting/:userid' element={<MyListing />} style={{width: '100vw'}}/>
-     <Route path="/Dashboard/:userid" element={<Deshbord />} style={{width: '100vw'}}/>
+     <Route path="/Dashboard" element={<Deshbord />} style={{width: '100vw'}}/>
      <Route path='/Registration' element={<RegistrationProcess/>} style={{width: '100vw'}}/>
 
      <Route path='/TermsCondition' element={<TermsCondition />} style={{width: '100vw'}}/>

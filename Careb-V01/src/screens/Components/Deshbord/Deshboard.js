@@ -6,7 +6,7 @@ import Booking from './Booking';
 import UserProfile from './UserProfile';
 import BaseUrl from '../../Server/BaseUrl';
 import HomeHeader from '../../HomeComonent/HomeHeader'
-
+import './Deshbord.css'
 const Deshbord = () => {
   // const { userId } = useParams();
   const { userid } = useParams();
@@ -43,11 +43,11 @@ console.log('userid',userid)
       <UserProfile />
 
       <div style={{ margin: '0 auto', width: '100%', display: 'flex', justifyContent: 'center' }}>
-        <div style={{ display: 'flex', width: '85%', borderTop: '1px solid #E2E8F0', justifyContent: 'center', margin: '0 auto' }}>
-          <div style={{ width: '25%' }}>
+      <div className="details">
+      <div className="jobdetails">
             <JobsDetailes userData={userData} />
           </div>
-          <div style={{ borderLeft: '1px solid #E2E8F0', width: '75%' }}>
+          <div className="userdata">
             <Booking userData={userData} />
           </div>
         </div>
