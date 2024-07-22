@@ -216,6 +216,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import OTPInput from 'react-otp-input';
 import './OtpInputeFiled.css';
+import BaseUrl from '../Server/BaseUrl';
 
 class PhoneAuth extends Component {
     constructor(props) {
@@ -254,7 +255,7 @@ class PhoneAuth extends Component {
     };
 
     sendOtp = () => {
-        fetch('http://localhost:4000/api/send-otp', {
+        fetch(BaseUrl.BaseUrl +`/api/send-otp`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -281,7 +282,7 @@ class PhoneAuth extends Component {
         e.preventDefault();
         const { phone, otp } = this.state;
 
-        fetch('http://localhost:4000/api/verify-otp', {
+        fetch(BaseUrl.BaseUrl +`/api/verify-otp`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
