@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const twilio = require('twilio');
+const OtpModel = require('../../OtpModel'); // Ensure you have a proper path to your OtpModel
 require('dotenv').config();  // Load environment variables from .env file
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -8,30 +9,34 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const serviceSid = process.env.TWILIO_SERVICE_SID;
 const client = twilio(accountSid, authToken);
 
-router.post('/api/send-otp', (req, res) => {
+// Function to generate OTP
+const generateOTP = () => {
+    return Math.floor(100000 + Math.random() * 900000).toString(); // 6 digit OTP
+};
+
+router.post('/api/send-otp', async (req, res) => {
     const { phone } = req.body;
 
-    client.verify.v2.services(serviceSid)
-        .verifications
-        .create({ to: phone, channel: 'sms' })
-        .then(verification => res.send({ success: true, verification }))
-        .catch(err => res.send({ success: false, error: err.message }));
-});
+    if (!phone) {
+        return res.status(400).send({ success: false, error: "Phone number is required" });
+    }
 
-router.post('/api/verify-otp', (req, res) => {
-    const { phone, otp } = req.body;
+    try {
+        const otp = generateOTP();
+        const otpDocument = new OtpModel({ phone, otp });
+        await otpDocument.save();
 
-    client.verify.v2.services(serviceSid)
-        .verificationChecks
-        .create({ to: phone, code: otp })
-        .then(verification_check => {
-            if (verification_check.status === 'approved') {
-                res.send({ success: true });
-            } else {
-                res.send({ success: false });
-            }
-        })
-        .catch(err => res.send({ success: false, error: err.message }));
+        await client.messages.create({
+            body: `Your OTP is ${otp}`,
+            from: '+16479557342',  // Your Twilio phone number
+            to: phone
+        });
+
+        res.send({ success: true, otp });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ success: false, error: "Failed to send OTP" });
+    }
 });
 
 module.exports = router;

@@ -6,7 +6,7 @@ const txtFieldState = {
   value: "",
   valid: true,
   typeMismatch: false,
-  errMsg: "" // this is where our error message gets across
+  errMsg: "" 
 };
 
 export default class Information extends Component {

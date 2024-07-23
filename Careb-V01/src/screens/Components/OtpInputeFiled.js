@@ -255,7 +255,7 @@ class PhoneAuth extends Component {
     };
 
     sendOtp = () => {
-        fetch(BaseUrl.BaseUrl +`/api/send-otp`, {
+        fetch(BaseUrl.BaseUrl + `/api/send-otp`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -282,7 +282,7 @@ class PhoneAuth extends Component {
         e.preventDefault();
         const { phone, otp } = this.state;
 
-        fetch(BaseUrl.BaseUrl +`/api/verify-otp`, {
+        fetch(BaseUrl.BaseUrl + `/api/verify-otp`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
