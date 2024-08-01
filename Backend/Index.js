@@ -12,7 +12,6 @@ const app = express()
 const path = require('path')
 app.get('/', (req, res) => {
   res.send('Hello World!')
-
 })
 const signup =require("./Router/Signup");
 const OwnerDashboard =require("./Router/OwenerDeshword")
@@ -57,6 +56,7 @@ const ownerDeshborad=require('./Router/User/OwnerDeshborad')
 //     console.log('A user disconnected');
 //   });
 // });
+
 require('dotenv').config()
 app.use(express.json());
 app.use(cors())
@@ -121,7 +121,7 @@ mongoose.connect(url)
 
 const fileUpload = multer({
    storage : multer.diskStorage({
-  destination: (req, file, cb) => cb(null,"uploads"), // cb -> callback
+  destination: (req, file, cb) => cb(null,"uploads"), 
   filename: (req, file, cb) => {
     const uniqueName = `${Date.now()}-${Math.round(
       Math.random() * 1e9
@@ -135,7 +135,6 @@ const fileUpload = multer({
 //   res.send("file upload")
 // })
 
-// Define a Mongoose schema for the image details
 const imageSchema = new mongoose.Schema({
   imageUrl: String,
 });

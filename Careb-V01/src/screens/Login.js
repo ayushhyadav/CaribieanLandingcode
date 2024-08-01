@@ -42,7 +42,15 @@ function Login() {
           alert(JSON.stringify(responseJson?.error));
         } else {
           localStorage.setItem('user_id', responseJson.user_id);
-          navigate("/TermsCondition");
+          
+          // Check if the user has already seen the Terms and Conditions
+          const hasSeenTerms = localStorage.getItem('hasSeenTerms');
+          if (!hasSeenTerms) {
+            localStorage.setItem('hasSeenTerms', 'true'); // Set the flag
+            navigate("/TermsCondition");
+          } else {
+            navigate("/");
+          }
         }
       })
       .catch((error) => {

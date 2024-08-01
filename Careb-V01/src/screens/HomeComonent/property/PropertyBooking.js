@@ -350,7 +350,6 @@ const countryRegions = {
   "Yemen": "Middle East",
 };
 
-
 const Order = [
   { item: 'Rafting', price: 200 },
   { item: 'Exotic Food', price: 300 },
@@ -470,7 +469,7 @@ const calculateTotalPrice = (newCheckOutDate = checkOutDate, newSelectedServices
     const isLoggedIn = localStorage.user_id;
 
     if (!isLoggedIn) {
-      navigate('/userlogin');
+      navigate('');
       return;
     }
 
@@ -578,36 +577,6 @@ const calculateTotalPrice = (newCheckOutDate = checkOutDate, newSelectedServices
               ))}
             </div>
 
-            {/* <div style={{ display: 'flex' }}>
-              {Order2.map((service, index) => (
-                <ul
-                  style={{
-                    listStyleType: 'none',
-                    padding: 0,
-                    margin: 6,
-                  }}
-                  key={index}
-                >
-                  <li
-                    onClick={() => handleServiceClick(service.item2,service.price)}
-                    style={{
-                      background: selectedServices.some((s) => s.item === service.item2)
-                        ? '#F15A29'
-                        : '#F3F4F6',
-                      borderRadius: 5,
-                      color: selectedServices.some((s) => s.item === service.item2)
-                        ? 'white'
-                        : '#6B7280',
-                      fontSize: 15,
-                      padding: '7px 15px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {service.item2}
-                  </li>
-                </ul>
-              ))}
-            </div> */}
           </div>
 
           <div className="billing">

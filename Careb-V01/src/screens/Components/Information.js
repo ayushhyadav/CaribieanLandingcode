@@ -107,7 +107,7 @@ export default class Information extends Component {
       const data = await response.json();
 
       if (response.ok) {
-        alert('User updated successfully');
+        // alert('User updated successfully');
         console.log('data', data);
         this.props.NextCallBack({
           navigationTo: 'Upload_Profile',

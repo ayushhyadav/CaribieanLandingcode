@@ -108,6 +108,7 @@ export default class ExtraService extends Component {
         acceptTerms: false,
         showTerms: false,
         showModal: false,
+        showTax:false,
     };
   }
 
@@ -399,6 +400,9 @@ export default class ExtraService extends Component {
   toggleTermsModal = () => {
     this.setState((prevState) => ({ showTerms: !prevState.showTerms }));
   };
+  toggleTaxModal = () => {
+    this.setState((prevState) => ({ showTax: !prevState.showTax }));
+  };
 
   toggleModal = () => {
     this.setState((prevState) => ({ showModal: !prevState.showModal }));
@@ -437,7 +441,7 @@ export default class ExtraService extends Component {
         borderRadius: '10px',
         overflowY: 'auto',
       };
-      const { selectedAmenities, selectedUser, acceptTerms, showTerms, showModal } = this.state;
+      const { selectedAmenities, selectedUser, acceptTerms, showTerms, showModal,showTax } = this.state;
       const customStyles = {
         content: {
           top: '50%',
@@ -643,7 +647,7 @@ export default class ExtraService extends Component {
       Caribbeaneaze charges a service fee for each booking made through the platform. This fee helps cover the cost of secure transactions, customer support, and marketing efforts. The service fee is calculated based on the host's chosen cancellation policy and is deducted from the host's payout. The current service fee structure is as follows:
     </p>
     <ul>
-      <li>Host pays either 2% or 2.5% service fee to the platform, depends on location:</li>
+      <li>Host pays either 2%, 2.25%, or 2.5% service fee to the platform, depending on location:</li>
       <li>Guest pays when choosing one of these policy options:</li>
       <ul>
         <li>Flexible: 13%</li>
@@ -674,25 +678,22 @@ export default class ExtraService extends Component {
     </ul>
     <p><strong>Host Cancellation Policies</strong></p>
     <ul>
-        <li>Cancellation Notice Period: More than 36 hours notice: No penalty. Less than 36 hours notice: Penalties apply.</li>
-        <li>Penalties for Late Cancellations</li>
+      <li>Cancellation Notice Period:</li>
       <ul>
-        <li>Penalty Fee: $25 for cancellations made with less than 36 hours notice.</li>
+        <li>More than 36 hours notice: No penalty.</li>
+        <li>Less than 36 hours notice: Penalties apply.</li>
+      </ul>
+      <li>Penalties for Late Cancellations:</li>
+      <ul>
+        <li>Penalty Fee: $30 for cancellations made with less than 36 hours notice.</li>
         <li>Service Fee Forfeiture: The service fee for the canceled booking is non-refundable.</li>
-        <li>Guest Compensation and Support</li>
+        <li>Guest Compensation and Support:</li>
         <ul>
           <li>Guest Compensation: The $30 penalty fee will compensate the guest and Caribbeaneaze for the inconvenience.</li>
           <li>Rebooking Assistance: Guests will receive help finding alternative accommodations on our platform.</li>
         </ul>
-        <li>Additional Policies</li>
-        <ul>
-          <li>Review Impact: Guests can leave a review about the cancellation on the host’s profile.</li>
-          <li>Account Suspension: Multiple late cancellations may lead to temporary suspension or removal of the host’s account.</li>
-        </ul>
-      </ul>
-      <li>Example Policy Statement</li>
-      <ul>
-        <li>Late Cancellation by Host Policy: Penalty Fee: $25 for cancellations made with less than 36 hours notice. Service Fee Forfeiture: The service fee for the canceled booking is non-refundable. Guest Compensation: The $25 penalty fee will compensate the guest. Review Impact: Guests can leave a review about the cancellation on the host’s profile. Account Suspension: Multiple late cancellations may lead to temporary suspension or removal of the host’s account. Rebooking Assistance: Guests will receive help finding alternative accommodations on our platform.</li>
+        <li>Review Impact: Guests can leave a review about the cancellation on the host’s profile.</li>
+        <li>Account Suspension: Multiple late cancellations may lead to temporary suspension or removal of the host’s account.</li>
       </ul>
     </ul>
     <h3 style={{ color: '#1976D2' }}>5. Host Responsibilities</h3>
@@ -711,10 +712,97 @@ export default class ExtraService extends Component {
     <p>
       Caribbeaneaze may update these terms and conditions from time to time. Hosts will be notified of any changes, and continued use of the platform constitutes acceptance of the updated terms.
     </p>
-
   </Typography>
   <Button style={{ width: 200, marginTop: 20 }} variant="contained" color="primary" onClick={() => this.setState({ acceptTerms: true, showTerms: false })}>Accept</Button>
 </Box>
+
+
+        </Modal>
+
+        <Modal
+          isOpen={showTax}
+          onRequestClose={this.toggleTaxModal}
+          style={customStyles}
+          contentLabel="Terms and Conditions"
+        >
+<Box sx={modalStyle}>
+  {/* <Typography id="terms-and-conditions-title" variant="h4" component="h2" sx={{ color: '#1976D2', marginBottom: '10px' }}>
+      Taxes and Tax Obligations
+  </Typography> */}
+  <Typography id="terms-and-conditions-description" sx={{ color: 'black' }}>
+    {/* <h3 style={{ color: '#1976D2' }}>1. Introduction</h3>
+    <p>
+      Welcome to Caribbeaneaze! These terms and conditions outline the rules and regulations for hosts listing their properties on our platform. By listing your property, you agree to comply with these terms.
+    </p> */}
+
+    <h3 style={{ color: '#1976D2' }}> Host Compliance for Taxes: Responsibilities and Accountability</h3>
+    <p>
+      As a valued host on our platform, it is essential to understand and adhere to the tax obligations that come with renting out your property. Compliance with tax regulations is crucial for maintaining the integrity of our platform and ensuring a seamless experience for all users. Below are the key responsibilities and accountability measures for hosts concerning taxes.
+    </p>
+
+    <h4>Responsibilities</h4>
+    <ul>
+      <li>
+        <strong>Understanding Tax Obligations:</strong> It is the host’s responsibility to understand the tax obligations relevant to their rental activities. This includes but is not limited to local, state, and federal taxes such as income tax, staying tax, GST (Australia), VAT (European Union), and tourism fees for the Caribbean only if required.
+      </li>
+      <li>
+        <strong>Accurate Reporting:</strong> Hosts must accurately report all income earned through the platform. This includes maintaining comprehensive records of all transactions, bookings, and related income.
+      </li>
+      <li>
+        <strong>Timely Filing:</strong> Hosts are required to file their tax returns on time, as stipulated by the relevant tax authorities. Late filings can result in penalties and interest charges by the government.
+      </li>
+      <li>
+        <strong>Compliance with Local Laws:</strong> Hosts must ensure that they comply with all local laws and regulations concerning short-term rentals. This includes obtaining any necessary licenses or permits required by local jurisdictions.
+      </li>
+      <li>
+        <strong>Collection and Remittance of Taxes:</strong> Where applicable, hosts must collect and remit any taxes required by local authorities. This may include transient occupancy taxes, sales taxes in the country located, or other local taxes.
+      </li>
+    </ul>
+
+    <h4>Accountability</h4>
+    <ul>
+      <li>
+        <strong>Transparency:</strong> Hosts are expected to be transparent in their financial reporting. This includes providing accurate information to tax authorities and the platform when requested.
+      </li>
+      <li>
+        <strong>Documentation:</strong> Hosts must keep detailed records of their rental income and expenses. This includes invoices, receipts, and any other documentation that supports their tax filings.
+      </li>
+      <li>
+        <strong>Platform Policies:</strong> Hosts are required to comply with the platform’s policies on tax compliance. Failure to adhere to these policies may result in penalties, suspension, or termination of their hosting privileges.
+      </li>
+      <li>
+        <strong>Professional Advice:</strong> Hosts are encouraged to seek professional tax advice to ensure full compliance with tax laws. This can help in understanding complex tax regulations and optimizing tax liabilities.
+      </li>
+      <li>
+        <strong>Updates and Changes:</strong> Hosts must stay informed about changes in tax laws and regulations that may affect their rental activities. The platform may provide updates and resources to assist hosts, but the ultimate responsibility lies with the host.
+      </li>
+    </ul>
+
+    <h4>Tax Handling by the Platform</h4>
+    <ul>
+      <li>
+        <strong>Collection of Taxes:</strong> The platform will collect applicable taxes on behalf of the host at the time of booking.
+      </li>
+      <li>
+        <strong>Returning Taxes to Hosts:</strong> Collected taxes will be returned to the host. Hosts are responsible for remitting these taxes to the appropriate tax authorities.
+      </li>
+      <li>
+        <strong>Record Keeping:</strong> The platform will maintain detailed records of all tax collections and returns. This documentation serves as proof that taxes were returned to the host and can be provided to government authorities if required.
+      </li>
+      <li>
+        <strong>Government Reporting:</strong> In the event of an audit or inquiry from tax authorities, the platform will cooperate fully by providing records demonstrating that the host received the collected taxes and is responsible for their remittance.
+      </li>
+    </ul>
+
+    <h4>Support and Resources</h4>
+    <p>
+      Our platform is committed to supporting hosts in their tax compliance efforts. We provide resources and tools to help you understand your tax obligations and ensure compliance. If you have any questions or need assistance, please do not hesitate to contact our support team.
+    </p>
+  </Typography>
+  <Button style={{ width: 200, marginTop: 20 }} variant="contained" color="primary" onClick={() => this.setState({  showTax: false })}>close</Button>
+</Box>
+
+
 
         </Modal>
         <div style={{marginTop:30,marginLeft:10}} className="terms-checkbox">
@@ -723,6 +811,10 @@ export default class ExtraService extends Component {
 
       <Link style={{marginLeft:10}} to="#" onClick={this.toggleTermsModal}>
             <span>Terms and Conditions</span>
+          </Link>
+          <span> &</span>
+          <Link style={{marginLeft:3}} to="#" onClick={this.toggleTaxModal}>
+            <span>Tax info</span>
           </Link>
     </div>
        

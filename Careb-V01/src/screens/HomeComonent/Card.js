@@ -7,8 +7,41 @@ export default class Card extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
+            weatherData: {}
         };
+    }
+
+    componentDidMount() {
+        // Fetch weather data for all properties
+        this.props.props_data.forEach(property => {
+            console.log('Property:', property);
+            if (property.city) {
+                console.log('Fetching weather data for city:', property.city);
+                this.fetchWeatherData(property.city);
+            }
+        });
+    }
+
+    fetchWeatherData(city) {
+        const apiKey = '6e9aa4900f91d94baaad123dd7bc4fc2'; // Replace with your valid API key
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.cod === 200) {
+                    this.setState(prevState => ({
+                        weatherData: {
+                            ...prevState.weatherData,
+                            [city]: data
+                        }
+                    }));
+                    console.log('Weather data for', city, ':', data);
+                } else {
+                    console.error('Error fetching weather data:', data.message);
+                }
+            })
+            .catch(error => console.error('Error fetching weather data:', error));
     }
 
     render() {
@@ -30,7 +63,7 @@ export default class Card extends Component {
                                         <img
                                             style={{ height: 260, objectFit: 'cover' }}
                                             src={
-                                                property?.property_images &&
+                                                Array.isArray(property?.property_images) &&
                                                 property?.property_images[0]?.filename &&
                                                 `${BaseUrl.BaseUrl}/Images/${property?.property_images[0]?.filename}`
                                             }
@@ -41,14 +74,14 @@ export default class Card extends Component {
                                     <img
                                         style={{ height: 260, objectFit: 'cover', filter: 'grayscale(100%)' }}
                                         src={
-                                            property?.property_images &&
+                                            Array.isArray(property?.property_images) &&
                                             property?.property_images[0]?.filename &&
                                             `${BaseUrl.BaseUrl}/Images/${property?.property_images[0]?.filename}`
                                         }
                                         alt="Background"
                                     />
                                 )}
-                                {property?.property_images &&
+                                {Array.isArray(property?.property_images) &&
                                     property?.property_images[0]?.filename &&
                                     console.log('Image URL:', `${BaseUrl.BaseUrl}/Images/${property?.property_images[0]?.filename}`)}
 
@@ -71,7 +104,22 @@ export default class Card extends Component {
                                             <label className="price-value"> $ {property?.price_per_night}</label>
                                             <label className="price-unit"> /Night</label>
                                         </div>
-                                        <label className="distance">{property?.distance}</label>
+                                        <div className="weather-info">
+                                            {this.state.weatherData[property.city] ? (
+                                                <div>
+                                                    <img
+                                                        style={{ width: 50, height: 50 }}
+                                                        src={`http://openweathermap.org/img/wn/${this.state.weatherData[property.city].weather[0].icon}.png`}
+                                                        alt="Weather Icon"
+                                                    />
+                                                    <label style={{ fontSize: 13 }} className="temperature">
+                                                        {Math.round(this.state.weatherData[property.city].main.temp)}°C
+                                                    </label>
+                                                </div>
+                                            ) : (
+                                                <label className="temperature">Loading...</label>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

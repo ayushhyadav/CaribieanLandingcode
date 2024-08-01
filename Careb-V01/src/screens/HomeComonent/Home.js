@@ -206,7 +206,7 @@ export default class Home extends Component {
                         }}
                     >
                         <div style={{ width: '90%', textAlign: 'center' }}>
-                            <p>We use cookies to enhance your experience. By continuing, you agree to our use of cookies.</p>
+                            <p style={{ textAlign: 'center' }}>We use cookies to enhance your experience. By continuing, you agree to our use of cookies.</p>
                             <div>
                                 <button
                                     style={{

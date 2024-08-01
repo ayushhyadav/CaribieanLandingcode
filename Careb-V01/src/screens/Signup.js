@@ -97,13 +97,14 @@ export default function Signup() {
           } else if (responseJson.message) {
             // If there's any other message from the backend, alert it
             alert(responseJson.message);
-          } else {
+          } else  {
             // If no specific message, alert a generic error
-            alert('An unknown error occurred.');
+            alert(responseJson.message);
           }
         }
       })
       .catch((error) => {
+        alert(JSON.stringify(error));
         setErrorMessage('An error occurred: ' + error.message);
       });
   };

@@ -400,11 +400,11 @@ class UserDetails extends Component {
                     ) : (
                         <div></div>
                     )}
-                    <label style={{ marginLeft: 10 }}>{propertyData?.property?.country}</label>
+                    {/* <label style={{ marginLeft: 10 }}>{propertyData?.property?.country}</label> */}
                 </div>
                 <div className='loction-icon' style={{ textAlign: 'center', marginTop: 10, display: 'flex', padding: 10 }}>
                     <img src={require('../../../assets/location-point.png')} />
-                    <label style={{ marginLeft: 10 }}>{propertyData?.property?.street_address}</label>
+                    <label style={{ marginLeft: 10 }}>{propertyData?.property?.city} ({propertyData?.property?.country})</label>
                 </div>
                 <div style={{ textAlign: 'center', marginTop: 10, display: 'flex', padding: 10 }}>
                     <div className='item-icon'>

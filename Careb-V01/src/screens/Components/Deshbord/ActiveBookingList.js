@@ -10,16 +10,17 @@ const ActiveBookingList = () => {
   const { userid } = useParams();
   const [state, setState] = useState({
     activeBt: '',
-    apiData: [], // Initialize as an empty array
+    apiData: [], 
     loading: true,
     error: null,
   });
-
+  
   useEffect(() => {
     fetchData();
   }, [userid, state.activeBt]);
 
   const fetchData = async () => {
+    
     const API_URL = `${BaseUrl.BaseUrl}/active_booking/${userid}`;
 
     try {
@@ -111,9 +112,9 @@ const ActiveBookingList = () => {
                           style={{borderRadius:200,height:50,width:50}}
                           src={
                             item.user_type === 'User'
-                                ? `${BaseUrl.Baseurl}/${item.user_image}`
+                                ? `${BaseUrl.BaseUrl}/${item.user_image}`
                                 : (item.property_image && item.property_image.length > 0
-                                    ? `${BaseUrl.Baseurl}/Images/${item.property_image[0].filename
+                                    ? `${BaseUrl.BaseUrl}/Images/${item.property_image[0].filename
                                     }`
                                     : '')
                           }
@@ -324,5 +325,5 @@ const ActiveBookingList = () => {
     </div>
   );
 };
-
 export default ActiveBookingList;
+

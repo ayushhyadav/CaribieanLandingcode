@@ -25,10 +25,25 @@ export default function UserSignup() {
     const [dob, setDob] = useState("");
     const [confirm_password, setConfirm_password] = useState("");
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleClickShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
 
+    const validatePassword = (password) => {
+        const uppercaseRegex = /[A-Z]/;
+        const lowercaseRegex = /[a-z]/;
+        const numericRegex = /[0-9]/;
+        const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+        return (
+          uppercaseRegex.test(password) &&
+          lowercaseRegex.test(password) &&
+          numericRegex.test(password) &&
+          specialCharRegex.test(password) &&
+          password.length >= 6
+        );
+      };
+    
     const SignupFun = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -36,14 +51,24 @@ export default function UserSignup() {
             alert('Please enter a valid email address.');
             return;
         }
+         // Validate password
+    if (!validatePassword(password)) {
+        setErrorMessage('Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one numeric character, and one special character.');
+        return;
+      }
+  
+      if (password !== confirm_password) {
+        setErrorMessage('Passwords do not match.');
+        return;
+      }
 
         let data = {
-            first_name,
-            last_name,
-            email,
-            password,
-            dob,
-            confirm_password,
+            first_name: first_name,
+      last_name: last_name,
+      email: email,
+      password: password,
+      dob: dob,
+      confirm_password: confirm_password,
         };
 
         fetch(BaseUrl.BaseUrl + '/auth/signup', {
@@ -65,12 +90,14 @@ export default function UserSignup() {
                     if (responseJson.message === 'User created successfully') {
                         navigate('/userlogin');
                     } else {
-                        alert('Unexpected response from server.');
+                        alert(responseJson.message);
+                        // alert('Unexpected response from server.');
                     }
                 }
             })
             .catch((error) => {
                 alert(JSON.stringify(error));
+                setErrorMessage('An error occurred: ' + error.message);
                 console.error(error);
             });
     };
@@ -179,53 +206,53 @@ export default function UserSignup() {
                                 />
                              
                             </div>
-                            <div className='fieldtext'  style={{ display: 'flex', marginTop: 20, justifyContent: 'space-between',gap:10  }}>
-                                <TextField
-                                    label="Confirm Password"
-                                    variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    type={showConfirmPassword ? 'text' : 'password'}
-                                    value={confirm_password}
-                                    onChange={e => setConfirm_password(e.target.value)}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton style={{width:30,height:30,background:"none"}}
-                                                    aria-label="toggle confirm password visibility"
-                                                    onClick={handleClickShowConfirmPassword}
-                                                    edge="end"
-                                                >
-                                                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
-        
-                          <TextField
-                             label="Password"
-                               variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    type={showPassword ? 'text' : 'password'}
-                                    value={password}
-                                    onChange={e => setPassword(e.target.value)}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton style={{width:30,height:30,background:"none"}}
-                                                    aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
-                                                    edge="end"
-                                                >
-                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
-                            </div>
+                            <div className='fieldtext' style={{ display: 'flex', marginTop: 20, justifyContent: 'space-between', gap: 10 }}>
+                <TextField
+                  label="Password"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton style={{ width: 30, height: 30, background: "none" }}
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <TextField
+                  label="Confirm Password"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  value={confirm_password}
+                  onChange={e => setConfirm_password(e.target.value)}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton style={{ width: 30, height: 30, background: "none" }}
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowConfirmPassword}
+                          edge="end"
+                        >
+                          {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <p style={{ color: 'red' }}>{errorMessage}</p>
                             <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
                                 <button onClick={SignupFun}  style={{ background: '#F15A29', width: '100%', height: 55, marginTop: 45, marginRight: 20 , borderWidth: 0, borderRadius: 8, fontSize: 20, color: 'white', fontWeight: '500' }} className=''>
                                     Sign Up

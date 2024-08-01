@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Calendar } from 'react-multi-date-picker';
 import "react-multi-date-picker/styles/colors/red.css"; // Optional for theming
-import './JobsDetailes.css'
+import './JobsDetailes.css';
+
 export default class JobsDetailes extends Component {
     constructor(props) {
         super(props);
@@ -11,6 +12,7 @@ export default class JobsDetailes extends Component {
         };
         this.onChange = this.onChange.bind(this);
         this.handleAvailabilityChange = this.handleAvailabilityChange.bind(this);
+        this.updateAvailabilityDates = this.updateAvailabilityDates.bind(this);
     }
 
     onChange(value) {
@@ -19,6 +21,34 @@ export default class JobsDetailes extends Component {
 
     handleAvailabilityChange(dates) {
         this.setState({ availabilityDates: dates });
+    }
+
+    async updateAvailabilityDates() {
+        const { availabilityDates } = this.state;
+        const { user_id, property_id } = this.props.userData; // Assuming user_id and property_id are available in userData
+
+        try {
+            const response = await fetch(`http://localhost:4000/api/property/${property_id}/availability`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: user_id,
+                    availabilityDates: availabilityDates.map(date => date.toISOString().split('T')[0]) // Convert dates to string
+                })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert('Availability dates updated successfully');
+            } else {
+                alert(`Error: ${data.error}`);
+            }
+        } catch (error) {
+            console.error('Error updating availability dates:', error);
+            alert('An error occurred while updating availability dates');
+        }
     }
 
     render() {
@@ -101,6 +131,7 @@ export default class JobsDetailes extends Component {
                             className="red" // Customizing color (optional)
                         />
                     </div>
+                    <button onClick={this.updateAvailabilityDates} style={{ marginTop: 20 }}>Update Availability</button>
                 </div>
             </div>
         );

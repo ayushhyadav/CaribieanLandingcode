@@ -24,6 +24,33 @@ function Login() {
 
   const navigate = useNavigate();
 
+  // const loginMethod = () => {
+  //   const data = {
+  //     email,
+  //     password,
+  //   };
+  //   fetch(BaseUrl.BaseUrl + '/auth/login', {
+  //     method: 'POST',
+  //     body: JSON.stringify(data),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       if (responseJson?.error) {
+  //         alert(JSON.stringify(responseJson?.error));
+  //       }
+  //        else {
+  //         localStorage.setItem('user_id', responseJson.user_id);
+  //         navigate("/TermsConditionuser");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       alert(JSON.stringify(error));
+  //     });
+  // };
+
   const loginMethod = () => {
     const data = {
       email,
@@ -42,7 +69,15 @@ function Login() {
           alert(JSON.stringify(responseJson?.error));
         } else {
           localStorage.setItem('user_id', responseJson.user_id);
-          navigate("/TermsConditionuser");
+          
+          // Check if the user has already seen the Terms and Conditions
+          const hasSeenTerms = localStorage.getItem('hasSeenTerms');
+          if (!hasSeenTerms) {
+            localStorage.setItem('hasSeenTerms', 'true'); // Set the flag
+            navigate("/TermsConditionuser");
+          } else {
+            navigate("/");
+          }
         }
       })
       .catch((error) => {

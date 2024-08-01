@@ -24,7 +24,7 @@ export default class Checkout extends Component {
   componentDidMount() {
 
     const userId = useParams.userId;
-    fetch(`${BaseUrl.Baseurl}/booking/${userId}`)
+    fetch(`${BaseUrl.BaseUrl}/booking/${userId}`)
       .then(response => {
         this.setState({ apiData: response.data });
       })

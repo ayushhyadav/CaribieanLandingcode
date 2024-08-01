@@ -39,4 +39,29 @@ router.post('/api/send-otp', async (req, res) => {
     }
 });
 
+
+router.post('/api/verify-otp', async (req, res) => {
+    const { phone, otp } = req.body;
+
+    if (!phone || !otp) {
+        return res.status(400).send({ success: false, error: "Phone number and OTP are required" });
+    }
+
+    try {
+        // Find OTP document by phone number and OTP
+        const otpDocument = await OtpModel.findOne({ phone, otp });
+
+        if (!otpDocument) {
+            return res.status(400).send({ success: false, error: "Invalid OTP" });
+        }
+
+        // Optionally, you might want to delete the OTP after successful verification
+        await OtpModel.deleteOne({ phone, otp });
+
+        res.send({ success: true, message: "OTP verified successfully" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ success: false, error: "Failed to verify OTP" });
+    }
+});
 module.exports = router;

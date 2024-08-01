@@ -87,10 +87,10 @@ router.get('/owner/pending-properties', async (req, res) => {
 // Accept property endpoint
 router.post('/owner/accept_property', async (req, res) => {
     try {
-        const { owner_id, property_id } = req.body;
+        const { user_id, property_id } = req.body;
 
         // Find the owner
-        let owner = await Users.findOne({ user_id: owner_id });
+        let owner = await Users.findOne({ user_id });
         if (!owner) {
             return res.status(404).send({ error: 'Owner not found' });
         }
@@ -114,10 +114,10 @@ router.post('/owner/accept_property', async (req, res) => {
 // Reject property endpoint
 router.post('/owner/reject_property', async (req, res) => {
     try {
-        const { owner_id, property_id } = req.body;
+        const { user_id, property_id } = req.body;
 
         // Find the owner
-        let owner = await Users.findOne({ user_id: owner_id });
+        let owner = await Users.findOne({ user_id });
         if (!owner) {
             return res.status(404).send({ error: 'Owner not found' });
         }
@@ -138,7 +138,7 @@ router.post('/owner/reject_property', async (req, res) => {
     }
 });
 
-// API to get all booking history for all users
+// API to get all booking history
 router.get('/owner/all-booking-history', async (req, res) => {
     try {
         const allUsers = await Users.find();
@@ -157,5 +157,147 @@ router.get('/owner/all-booking-history', async (req, res) => {
     }
 });
 
+// API to get total booking count
+router.get('/owner/total-bookings', async (req, res) => {
+    try {
+        const allUsers = await Users.find();
+
+        let totalBookings = 0;
+        allUsers.forEach(user => {
+            if (user.booking_history && user.booking_history.length > 0) {
+                totalBookings += user.booking_history.length;
+            }
+        });
+
+        res.json({ totalBookings });
+    } catch (error) {
+        console.error('Error fetching total bookings:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// API to get total earnings
+router.get('/owner/total-earnings', async (req, res) => {
+    try {
+        const allUsers = await Users.find();
+
+        let totalEarnings = 0;
+        allUsers.forEach(user => {
+            if (user.booking_history && user.booking_history.length > 0) {
+                user.booking_history.forEach(booking => {
+                    totalEarnings += booking.amount; // Adjust the field name as per your schema
+                });
+            }
+        });
+
+        res.json({ totalEarnings });
+    } catch (error) {
+        console.error('Error fetching total earnings:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// API to get available properties
+router.get('/owner/available-properties', async (req, res) => {
+    try {
+        const allUsers = await Users.find();
+
+        let allBookedPropertyIds = new Set();
+        allUsers.forEach(user => {
+            if (user.booking_history && user.booking_history.length > 0) {
+                user.booking_history.forEach(booking => {
+                    allBookedPropertyIds.add(booking.property_id); // Adjust the field name as per your schema
+                });
+            }
+        });
+
+        let availableProperties = [];
+        allUsers.forEach(user => {
+            if (user.property_list && user.property_list.length > 0) {
+                user.property_list.forEach(property => {
+                    if (property.status === 'accept' && !allBookedPropertyIds.has(property.property_id)) { // Adjust the field name as per your schema
+                        availableProperties.push(property);
+                    }
+                });
+            }
+        });
+
+        res.json({
+            availableProperties,
+            count: availableProperties.length
+        });
+    } catch (error) {
+        console.error('Error fetching available properties:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/owner/summary', async (req, res) => {
+    try {
+        const allUsers = await Users.find();
+
+        let totalBookings = 0;
+        let totalEarnings = 0;
+        let allBookedPropertyIds = new Set();
+        let availablePropertiesCount = 0;
+
+        allUsers.forEach(user => {
+            // Calculate total bookings and total earnings
+            if (user.booking_history && user.booking_history.length > 0) {
+                totalBookings += user.booking_history.length;
+                user.booking_history.forEach(booking => {
+                    totalEarnings += booking.amount; // Adjust the field name as per your schema
+                    allBookedPropertyIds.add(booking.property_id); // Adjust the field name as per your schema
+                });
+            }
+
+            // Calculate available properties count
+            if (user.property_list && user.property_list.length > 0) {
+                user.property_list.forEach(property => {
+                    if (property.status === 'accept' && !allBookedPropertyIds.has(property.property_id)) { // Adjust the field name as per your schema
+                        availablePropertiesCount++;
+                    }
+                });
+            }
+        });
+
+        res.json({
+            totalBookings,
+            totalEarnings,
+            availablePropertiesCount
+        });
+    } catch (error) {
+        console.error('Error fetching summary:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+router.get('/owner/property/:property_id', async (req, res) => {
+    try {
+        const { property_id } = req.params;
+        const allUsers = await Users.find();
+
+        let property = null;
+
+        allUsers.forEach(user => {
+            if (user.property_list && user.property_list.length > 0) {
+                const foundProperty = user.property_list.find(prop => prop.property_id === property_id);
+                if (foundProperty) {
+                    property = foundProperty;
+                }
+            }
+        });
+
+        if (property) {
+            res.json(property);
+        } else {
+            res.status(404).json({ error: 'Property not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching property:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 module.exports = router;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './feedback.css';
+import { Link } from 'react-router-dom';
 
 function Feedback() {
   const [activeForm, setActiveForm] = useState('signUp');
@@ -19,6 +20,7 @@ function Feedback() {
     consent: false,
     signature: false
   });
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleFormToggle = (form) => {
     setActiveForm(form);
@@ -37,36 +39,22 @@ function Feedback() {
     let errors = { ...formErrors };
 
     // Basic validation for required fields
-    if (formData.name.trim() === '') {
-      errors.name = true;
-    } else {
-      errors.name = false;
-    }
-    if (formData.email.trim() === '') {
-      errors.email = true;
-    } else {
-      errors.email = false;
-    }
-    if (!formData.consent) {
-      errors.consent = true;
-    } else {
-      errors.consent = false;
-    }
-    if (formData.signature.trim() === '') {
-      errors.signature = true;
-    } else {
-      errors.signature = false;
-    }
+    errors.name = formData.name.trim() === '';
+    errors.email = formData.email.trim() === '';
+    errors.consent = !formData.consent;
+    errors.signature = formData.signature.trim() === '';
 
     // Update the state with errors
     setFormErrors(errors);
 
     // If there are no errors, proceed with form submission
     if (!Object.values(errors).some(err => err)) {
-      // Handle form submission logic here
       console.log('Form submitted:', formData);
-      // Example: submitFormData(formData);
     }
+  };
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
   };
 
   return (
@@ -130,9 +118,6 @@ function Feedback() {
               <label htmlFor="description">Photo Description:</label>
               <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows="4" cols="50"></textarea>
 
-              <label htmlFor="description">Host Feedback</label>
-              <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows="4" cols="50"></textarea>
-
               <h3 style={{ color: 'black' }}>Consent and Permissions:</h3>
               <input type="checkbox" id="consent" name="consent" checked={formData.consent} onChange={handleInputChange} required />
               <label htmlFor="consent"> I agree to the terms and conditions and grant Caribbeaneaze permission to use my photos for marketing and promotional purposes.</label>
@@ -150,7 +135,12 @@ function Feedback() {
               <input type="text" id="social" name="social" value={formData.social} onChange={handleInputChange} />
 
               <h3 style={{ color: 'black' }}>Incentives:</h3>
-              <p>Submit your photos and receive [describe incentive].</p>
+              <p>
+                Share your property photos and get a 10% incentive! 
+                <Link onClick={toggleModal} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}>
+                  T&C Apply
+                </Link>
+              </p>
 
               <h3 style={{ color: 'black' }}>Acknowledgement:</h3>
               <p>Thank you for contributing to Caribbeaneaze! Your photos help us showcase the beauty and unique experiences of our properties.</p>
@@ -178,17 +168,31 @@ function Feedback() {
               <label htmlFor="description">Photo Description:</label>
               <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows="4" cols="50"></textarea>
 
-              <label htmlFor="description">Guest Feedback</label>
-              <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows="4" cols="50"></textarea>
-
-              <h3 style={{ color: 'black' }}>Consent and Permissions:</h3>
-              <input type="checkbox" id="consent" name="consent" checked={formData.consent} onChange={handleInputChange} required />
-              <label htmlFor="consent"> I agree to the terms and conditions and grant Caribbeaneaze permission to use my photos for marketing and promotional purposes.</label>
+              <h3 style={{ color: 'black' }}>Acknowledgement:</h3>
+              <p>Thank you for contributing to Caribbeaneaze! Your feedback helps us improve our services.</p>
 
               <input type="submit" value="Submit" />
             </form>
           )}
         </div>
+
+        {/* Modal for Terms and Conditions */}
+        {modalOpen && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={toggleModal}>&times;</span>
+              <h4>Terms and Conditions for 10% Incentive</h4>
+              <ul>
+                <li><strong>Eligibility:</strong> Offer valid for first-time hosts only.</li>
+                <li><strong>Photo Submission:</strong> Hosts must upload a minimum of 5 high-quality photos of their property.</li>
+                <li><strong>Incentive Details:</strong> The 10% incentive will be applied to the first booking made through the platform.</li>
+                <li><strong>Verification:</strong> All photos must be verified by our team to ensure they meet quality standards.</li>
+                <li><strong>Promotional Use:</strong> Photos submitted may be used by the platform for promotional purposes.</li>
+                <li><strong>Changes:</strong> Terms and conditions are subject to change without prior notice.</li>
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
