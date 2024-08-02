@@ -70,17 +70,25 @@ table.table-full tbody th {
   background: #f15a29;
   border-radius: 10px;
   border-width: 0;
-  font-size: 13px;
+  font-size: 12px;
+  padding: 10;
   font-weight: 600;
   color: #ffffff;
 }
 
-.grid-container {
+.grid-containers {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   width: 90%;
   margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  padding: 10px 0;
 }
 
 .listing-card {
@@ -90,11 +98,22 @@ table.table-full tbody th {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 100%;
+   height: auto;
+  max-width: 380px;
+  /* max-height: 300px; */
+
+  
 }
 
 .card-image {
   width: 100%;
+  
   height: auto;
+  /* max-height: 300px; */
+  /* max-width: 380px; */
+  object-fit: cover;
+  
+ 
  
 }
 .image-container {
@@ -244,3 +263,10 @@ table.table-full tbody th label {
   padding-left: 24px !important;
 }
 }
+@media screen and (max-width: 768px){
+.grid-containers {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 5px;
+    /* margin-top: 80%; */
+}}

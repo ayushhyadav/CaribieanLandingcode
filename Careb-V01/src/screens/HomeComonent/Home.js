@@ -185,6 +185,7 @@ export default class Home extends Component {
                 {/* Cookie Consent Modal */}
                 {hasClosedMainModal && showCookieModal && (
                     <Modal
+                
                         isOpen={showCookieModal}
                         onRequestClose={this.acceptCookies}
                         contentLabel="Cookie Consent Modal"
@@ -201,7 +202,7 @@ export default class Home extends Component {
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
-                                width: '100%',
+                                width: '100%',  
                             },
                         }}
                     >

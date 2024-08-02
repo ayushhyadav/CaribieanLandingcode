@@ -115,11 +115,11 @@ const HomeHeader = () => {
                     <img className='hind-bs' style={{ marginLeft: 15 }} src={require('../../assets/notification.png')} alt='' />
                     {hasProperty ? (
                         <div className='Become'>
-                            <button onClick={handleBecomeuserClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '2px solid #000', padding: 0, fontWeight: 700, borderRadius: 11 }} className="me-2 btn host" type="button">Become a User</button>
+                            <button onClick={handleBecomeuserClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '2px solid #000', padding: 0, fontWeight: 500, borderRadius: 11,whiteSpace:'nowrap' }} className="me-2 btn host" type="button">Become a User</button>
                         </div>
                     ) : (
                         <div className='Become'>
-                            <button onClick={handleBecomeHostClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '1px solid #000', padding: 5, borderRadius: 11 }} className="me-2 btn host" type="button">Become a Host</button>
+                            <button onClick={handleBecomeHostClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '1px solid #000', padding: 5, borderRadius: 11 ,fontWeight: 500,whiteSpace:'nowrap'}} className="me-2 btn host" type="button">Become a Host</button>
                         </div>
                     )}
                     {userId ? (

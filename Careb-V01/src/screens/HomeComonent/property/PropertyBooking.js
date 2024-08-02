@@ -412,8 +412,7 @@ const PropertyBooking = ({ propertyData, selectedValue, onClose }) => {
       return updatedServices;
     });
   };
-const cancellationPolicy=propertyData?.cancellationPolicy
-;
+const cancellationPolicy=propertyData?.cancellationPolicy;
 // console.log('pros',cancellationPolicy)
 const calculateTotalPrice = (newCheckOutDate = checkOutDate, newSelectedServices = selectedServices) => {
   const amount = newSelectedServices.reduce((sum, service) => sum + service.price, 0);
@@ -469,7 +468,7 @@ const calculateTotalPrice = (newCheckOutDate = checkOutDate, newSelectedServices
     const isLoggedIn = localStorage.user_id;
 
     if (!isLoggedIn) {
-      navigate('');
+      navigate('/UserLogin');
       return;
     }
 
@@ -485,7 +484,8 @@ const calculateTotalPrice = (newCheckOutDate = checkOutDate, newSelectedServices
 
     localStorage.setItem('bookingData', JSON.stringify(bookingData));
 
-    navigate('/VarifyBooking');
+    navigate('/Checkout');
+    // window.location.href = `/VarifyBooking`;
   };
   const [showDetails, setShowDetails] = useState(false);
 
@@ -495,7 +495,7 @@ const calculateTotalPrice = (newCheckOutDate = checkOutDate, newSelectedServices
 
 
   return (
-    <div className="booking-container mobile-res">
+    <div className="booking-containers mobile-res">
       <form className="booking-form">
         <div className="booking-content">
       

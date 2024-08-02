@@ -378,7 +378,7 @@ export default class ExtraService extends Component {
                   alert('Welcome aboard! 🚀 Your registration is complete. Explore our platform and make the most of your journey with us!');
                   const storedUserId = localStorage.getItem('user_id');
                   if (storedUserId) {
-                      // window.location.href = `/PandingApproval/${storedUserId}`;
+                      window.location.href = `/PandingApproval/${storedUserId}`;
                   } else {
                       console.error('User ID not found in local storage');
                   }
@@ -386,7 +386,7 @@ export default class ExtraService extends Component {
                   alert('Your property has been submitted and is pending For approval. You will be notified once it is approved.');
                   const storedUserId = localStorage.getItem('user_id');
                   if (storedUserId) {
-                      // window.location.href = `/PandingApproval/${storedUserId}`;
+                      window.location.href = `/PandingApproval/${storedUserId}`;
                   } else {
                       console.error('User ID not found in local storage');
                   }

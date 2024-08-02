@@ -12,7 +12,11 @@ ul.navbar-nav {
 ul.navbar-nav .nav-item a:target {
     color: #f26436;
 }
-
+.nav-item{
+    overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 img.hind-bs {
     width: 23px;
 }
@@ -68,7 +72,7 @@ img.hind-bs {
     opacity: 1;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
     .main-hd {
         width: 100% !important;
         padding: 0;

@@ -517,6 +517,8 @@ class UserDetails extends Component {
                     <h3 style={{ fontSize: 18, marginTop: 30 }}>Availability Calendar</h3>
                     <Calander callBack={(value) => { this.props.callBackFun(value) }} />
                     <Popup
+                                    shouldCloseOnOverlayClick={false}
+                                    // closeOnDocumentClick={false}
     trigger={
         <div>
             <button className='userbooking'>Book Property</button>
@@ -524,7 +526,7 @@ class UserDetails extends Component {
     }
     modal
     closeOnDocumentClick={false}
-    contentStyle={{ minHeight: "100px", width: '90%', overflow: 'scroll' }}
+    contentStyle={{ minHeight: "100px", width: '100%', overflow: 'auto' }}
 >
     {(close) => (
         <div style={{ height: 'auto', overflow: 'scroll' }}>

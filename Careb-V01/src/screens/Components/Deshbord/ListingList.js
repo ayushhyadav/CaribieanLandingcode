@@ -18,22 +18,22 @@ export default class ListingList extends Component {
         <div className="header">
           <label className="title"> Listings </label>
          <Link to='/AddProperty' >
-          <button className="add-property-button">Add New Property</button></Link>
+          <button style={{fontSize:12}} className="add-property-button">Add New Property</button></Link>
         </div>
-        <div className="grid-container">
+        <div className="grid-containers">
           {this.props.props_data?.map((property, index) => (
             <div key={index} className="listing-card">
             <div className="image-container">
   <img
-    style={{ width: '100%', height: '100%' }}
+  className="card-image"
     src={
       property.property_images &&
       property.property_images[0]?.filename &&
-      `${BaseUrl.Baseurl}/Images/${property.property_images[0]?.filename}`
+      `${BaseUrl.BaseUrl}/Images/${property.property_images[0]?.filename}`
     }
     alt="Background"
   />
-  <button className="edit-button">Edit</button>
+  {/* <button className="edit-button">Edit</button> */}
 </div>
               <div className="card-content">
                 <div className="card-row">

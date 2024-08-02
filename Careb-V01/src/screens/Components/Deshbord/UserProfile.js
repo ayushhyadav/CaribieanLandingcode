@@ -45,22 +45,22 @@ console.log(userid,'userid')
         <img
         className='img-pro'
           style={{ width: 120, height: 120 ,}}
-          src={`${BaseUrl.Baseurl}/${userData?.profile_url}`}
+          src={`${BaseUrl.BaseUrl}/${userData?.profile_url}`}
           alt='Profile'
         />
       )}
             <div className='pro-icon' style={{ marginLeft: 10, display: 'flex', flexDirection: 'column' }}>
               <label style={{ fontSize: 14, fontWeight: '700', color: '#0F172A' }}>{userData?.first_name}</label>
               {/*<label style={{ color: '#0f172a', fontSize: 23, fontWeight: '700' }}>{userData?.property_list[3]?.city} {userData?.property_list[3]?.country}John Doe</label>*/}
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {/* {this.state.rating.map((val, index) =>
+              {/* <div style={{ display: 'flex', alignItems: 'center' }}>
+                {this.state.rating.map((val, index) =>
                   <img key={index} style={{ width: 19, height: 18 }} src={require('../../../assets/Vector(1).png')} alt='' />
-                )} */}
+                )}
                   {rating.map((val, index) =>
                 <img key={index} style={{ width: 19, height: 18 }} src={require('../../../assets/Vector(1).png')} alt='' />
               )}
                 <label style={{ color: '#64748B', fontSize: 17, fontWeight: '600' }}>(200)</label>
-              </div>
+              </div> */}
             </div>
             <div className='btn-white' style={{ display: 'flex', justifyContent:'end',width:'28%' , marginBottom: 20 }}>
             <button style={{ height: 50,width:'100%', fontSize: 15, fontWeight: '600', color: '#0F172A', border: '1px solid', borderColor: '#0F172A', alignItems: 'center', justifyContent: 'center', borderRadius: 12,}} className="me-2 btn btn-outline-dark" type="submit">View Location</button>

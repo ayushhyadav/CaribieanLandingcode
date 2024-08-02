@@ -214,11 +214,18 @@ scrollbar-width: none;
   .booking-container {
     width: 100%;
      }
-   
+   .booking-content{
+    width: 100%;
+    min-width: 100%;
+   }
     }
 @media (max-width: 576px) {
   .booking-container {
     width: 100%;
+    min-width: 100%;
+     }
+     .booking-content{
+      width: 100%;
      }
    
   button.bookingoder {
