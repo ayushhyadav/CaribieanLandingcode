@@ -1,115 +1,94 @@
-import React from "react";
-import "./EarningScreen.css";
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import './EarningScreen.css';
+import Sidebar from './Components/Sidebar';
+import HomeHeader from './HomeComonent/HomeHeader';
 
-function EarningScreen() {
-  const [isOpen, setIsOpen] = useState(true); 
+function Jobs() {
+  const [message, setMessage] = useState('');
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  const toggleButton = () => {
-    setIsOpen(!isOpen);
+  useEffect(() => {
+    // Simulate an API call to fetch jobs
+    fetchJobs();
+  }, []);
+
+  const fetchJobs = async () => {
+    try {
+      // Replace with your API endpoint
+      const response = await fetch('https://api.example.com/jobs');
+      const data = await response.json();
+      setJobs(data);
+    } catch (err) {
+      setError('Failed to fetch jobs.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleWithdrawClick = () => {
+    setMessage('Your withdraw request has been submitted');
   };
 
   return (
     <div>
-      <div className="Earning-Page-1">
-        <div className="Earning-Page-2">
-          <button className="toggle-button" onClick={toggleButton}><h1 style={{ color: "white" }}>Earning</h1></button>
-          {isOpen && (
-            <>
-              <h1 >Earning</h1>
-              <h1>Personal Balance</h1>
-              <h1 style={{ fontSize: "25px", fontWeight: "bold", color: "green" }}>$310</h1>
-              <h1>Available</h1>
-              <p>4 Jobs ($200)</p>
-              <h1>Earned this Month</h1>
-              <p>$400</p>
-              <h1>Expected Earning</h1>
-              <p>$298</p>
-              <h1>Withdraw Method</h1>
-            </>
+      <HomeHeader />
+      <div className='app'>
+        <Sidebar />
+        <div className="jobs">
+          <div className="jobs-header">
+            <h2>Completed Jobs</h2>
+            <button
+              style={{ background: 'transparent', color: 'black', width: '110px', border: '1px solid black', borderRadius: '1px' }}
+              className="withdraw-btn"
+              onClick={handleWithdrawClick}
+            >
+              Withdraw
+            </button>
+          </div>
+          {message && <p className="withdraw-message">{message}</p>}
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p className="no-earnings">No earnings available</p>
+          ) : jobs.length === 0 ? (
+            <p className="no-earnings">No earnings available</p>
+          ) : (
+            <table className="jobs-table">
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Date & Time</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {jobs.map((job, index) => (
+                  <tr key={index}>
+                    <td className="service-cell">
+                      <img src={job.profile} alt="Profile" className="profile-pic" />
+                      <div>
+                        <p>{job.service}</p>
+                        <p>Service by: {job.provider} <span className="view-profile">View Profile</span></p>
+                      </div>
+                    </td>
+                    <td>
+                      <p>{job.startDate}</p>
+                      <p>{job.endDate}</p>
+                    </td>
+                    <td>{job.rate}</td>
+                    <td><span className="status completed">{job.status}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           )}
         </div>
-        <div className="Earning-Page-3">
-          <div className="button" style={{ width: "100%", display: "flex", justifyContent: "end", paddingRight: "4rem" }}>
-            <button style={{ display: "flex", fontWeight: "bold", border: "1px solid ", padding: "8px 35px", borderRadius: "10px" }}>Withdraw</button>
-          </div>
-          <table class="table-auto" >
-            <thead>
-            </thead>
-            <tbody>
-              <tr>
-                <th > SERVICE</th>
-                <th></th>
-                <th>Date & Time</th>
-                <th>Total</th>
-                <th >Status</th>
-              </tr>
-              <tr>
-                <td><img src="assets/Ellipse 54.png"></img></td>
-                <td>5xNight+ Raffting
-                  <p>Service by:Paul. View Profile </p>
-                </td>
-                <td>12 Apirl 2022  13:00
-                  <p>13 Apirl 2022  15:00 </p>
-                </td>
-                <td style={{ fontSize: "20px", color: "green", fontWeight: "bold" }}>$20/hr</td>
-                <td style={{ color: "green" }}>Completed</td>
-              </tr>
-              <tr>
-                <td><img src="assets/Ellipse 54.png"></img></td>
-                <td>5xNight+ Raffting
-                  <p>Service by:Paul. View Profile </p>
-                </td>
-                <td>12 Apirl 2022  13:00
-                  <p>13 Apirl 2022  15:00 </p>
-                </td>
-                <td style={{ fontSize: "20px", color: "green", fontWeight: "bold" }}>$20/hr</td>
-                <td style={{ color: "green" }}>Completed</td>
-              </tr>
-              <tr>
-                <td><img src="assets/Ellipse 54.png"></img></td>
-                <td>5xNight+ Raffting
-                  <p>Service by:Paul. View Profile </p>
-                </td>
-                <td>12 Apirl 2022  13:00
-                  <p>13 Apirl 2022  15:00 </p>
-                </td>
-                <td style={{ fontSize: "20px", color: "green", fontWeight: "bold" }}>$20/hr</td>
-                <td style={{ color: "green" }}>Completed</td>
-              </tr>
-              <tr>
-                <td><img src="assets/Ellipse 54.png"></img></td>
-                <td>5xNight+ Raffting
-                  <p>Service by:Paul. View Profile </p>
-                </td>
-                <td>12 Apirl 2022  13:00
-                  <p>13 Apirl 2022  15:00 </p>
-                </td>
-                <td style={{ fontSize: "20px", color: "green", fontWeight: "bold" }}>$20/hr</td>
-                <td style={{ color: "green" }}>Completed</td>
-              </tr>
-              <tr>
-                <td><img src="assets/Ellipse 54.png"></img></td>
-                <td>5xNight+ Raffting
-                  <p>Service by:Paul. View Profile </p>
-                </td>
-                <td>12 Apirl 2022  13:00
-                  <p>13 Apirl 2022  15:00 </p>
-                </td>
-                <td style={{ fontSize: "20px", color: "green", fontWeight: "bold" }}>$20/hr</td>
-                <td style={{ color: "green" }}>Completed</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
       </div>
     </div>
-
-
-
-
   );
 }
 
-export default EarningScreen;
+export default Jobs;

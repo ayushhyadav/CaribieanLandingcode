@@ -1,0 +1,50 @@
+.sidebar {
+    width: 25%;
+    padding: 20px;
+    background-color: #f8f9fa;
+    text-align: left;
+  }
+  .methods{
+    display: flex;
+    gap: 10px;
+  }
+  .earningcontent{
+    /* position: absolute; */
+    margin-left: 50px;
+  }
+  .balance h1{
+    color:#047857;
+  }
+  
+  .balance, .withdraw-method {
+    line-height: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .withdraw-method img {
+    width: 50px;
+    margin-right: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: auto;
+    }
+  }
+
+  .success-message {
+    color: green;
+    margin-top: 10px;
+  }
+
+  .ff{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .popup-overlay786{
+    margin-left: 50px;
+  }
+  .popup-content786 h2{
+    font-size:15px ;
+  }

@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const Users = require('../../SignupModule/Signupmodules');
@@ -103,7 +102,6 @@ router.post('/property_add', PropertyImages.fields([
   }
 });
 
-
 // Function to find the property by ID and update its availability dates
 async function updateAvailabilityDates(userId, propertyId, availabilityDates) {
   let user = await Users.findOne({ user_id: userId });
@@ -123,7 +121,6 @@ async function updateAvailabilityDates(userId, propertyId, availabilityDates) {
 }
 
 // Endpoint to update availability dates for a property
-
 router.put('/property/:propertyId/availability', async (req, res) => {
   try {
     const { propertyId } = req.params;
@@ -146,5 +143,62 @@ router.put('/property/:propertyId/availability', async (req, res) => {
   }
 });
 
+// Function to find and update a property
+async function updatePropertyData(userId, propertyId, updatedData) {
+  let user = await Users.findOne({ user_id: userId });
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  let property = user.property_list.find(prop => prop.property_id === propertyId);
+  if (!property) {
+    throw new Error('Property not found');
+  }
+
+  // Update property fields
+  Object.keys(updatedData).forEach(key => {
+    if (key !== 'property_images') {
+      property[key] = updatedData[key];
+    }
+  });
+
+  // If there are new images, add them to the property
+  if (updatedData.property_images) {
+    property.property_images = updatedData.property_images;
+  }
+
+  await user.save();
+  return property;
+}
+
+// Endpoint to update property data
+router.put('/property/:propertyId', PropertyImages.fields([
+  { name: 'property_images', maxCount: 10 },
+]), async (req, res) => {
+  try {
+    const { propertyId } = req.params;
+    const { user_id } = req.body;
+
+    let updatedData = req.body;
+
+    if (req.files && req.files.property_images) {
+      updatedData.property_images = req.files.property_images;
+    }
+
+    const updatedProperty = await updatePropertyData(user_id, propertyId, updatedData);
+
+    res.status(200).json({ 
+      message: 'Property updated successfully',
+      property: updatedProperty 
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router;
+
+
 

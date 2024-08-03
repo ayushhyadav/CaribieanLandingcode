@@ -9,13 +9,24 @@ export default class Card extends Component {
         this.state = {
             weatherData: {}
         };
+        this.fetchedCities = new Set(); // To keep track of cities that have been fetched
     }
 
     componentDidMount() {
-        // Fetch weather data for all properties
+        this.fetchAllWeatherData();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.props_data !== this.props.props_data) {
+            this.fetchAllWeatherData();
+        }
+    }
+
+    fetchAllWeatherData() {
         this.props.props_data.forEach(property => {
-            if (property.city) {
+            if (property.city && !this.fetchedCities.has(property.city)) {
                 this.fetchWeatherData(property.city);
+                this.fetchedCities.add(property.city);
             }
         });
     }

@@ -59,13 +59,13 @@ export default function BookingHistory() {
       
       <div>
         <div className="main-wid" style={{ display: "flex", width: '90%', margin: '0 auto' }}>
-          <div className="booking-iocn" style={{ width: '20%', borderRight: '2px solid #E2E8F0' }}>
+          <div className="booking-iocn" style={{ width: '20%', borderRight: '2px solid #E2E8F0', }}>
             <label style={{ width: "100%", fontSize: 23, fontWeight: '600', color: '#0F172A', borderBottom: '1px solid #E2E8F0', padding: '30px 10px 12px 40px' }}>
-              Bookings <img src={searchIcon} alt="" />
+              Booking
             </label>
             <br />
             <div className="all-book" style={{ flexDirection: 'column', display: 'flex', width: '100%' }}>
-              <label style={{ fontSize: 14, fontWeight: '600', color: '#0F172A', padding: '19px 40px', borderBottom: '1px solid rgba(226, 232, 240, 1)', height: 60 }}>All Booking</label>
+              <label style={{ fontSize: 14, fontWeight: '600', color: '#0F172A', padding: '19px 40px', height: 60 }}>All Booking</label>
               <div className="active-book">
                 <a onClick={() => handleBookingTypeChange('active_booking')} style={{ 
                   fontSize: 14, cursor: 'pointer', fontWeight: '600', border: 0, 
@@ -81,11 +81,11 @@ export default function BookingHistory() {
             </div>
           </div>
           <section className="container">
-           <input type="checkbox" id="menuBtn" />
-           <label className="menu__button" htmlFor="menuBtn"></label>
-           <label className="menu__close" htmlFor="menuBtn"></label>
+           {/* <input type="checkbox" id="menuBtn" /> */}
+           {/* <label className="menu__button" htmlFor="menuBtn"></label>
+           <label className="menu__close" htmlFor="menuBtn"></label> */}
 
-           <div className="menu">
+           {/* <div className="menu">
              <div className="menu__container">
                <div className="booking-iocn mobile-nav" style={{ width: '20%', borderRight: '2px solid #E2E8F0' }}>
                  <label style={{ width: "100%", fontSize: 23, fontWeight: '600', color: '#0F172A', borderBottom: '1px solid #E2E8F0', padding: '30px 10px 12px 40px' }}>Bookings
@@ -109,7 +109,7 @@ export default function BookingHistory() {
                  </div>
                </div>
              </div>
-           </div>
+           </div> */}
           </section>
 
           {/* Display ActiveBookingList or CencelBookingList based on activeBt */}

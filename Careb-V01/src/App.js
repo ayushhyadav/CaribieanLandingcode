@@ -71,7 +71,7 @@ const App = () => {
         <Route path='/PandingApproval/:userid' element={<PandingApprovalProperty />} style={{width: '100vw'}}/>
         {/*<Route path='/PandingApproval/:userid' element={<TermsCondition />} style={{width: '100vw'}}/>*/}
      {/* <Route path='/Propertylist' element={<Propertylist />} style={{width: '100vw'}}/> */}
-     {/* <Route path='/earning/:userId ' element={<EarningScreen/>}/> */}
+     <Route path='/earning/:userid' element={<EarningScreen/>}/>
      <Route path='/aboutus' element={<Aboutus />} style={{width: '100vw'}}/>
      <Route path='/TermConditions' element={<TermConditions />} style={{width: '100vw'}}/>
      <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} style={{width: '100vw'}}/>

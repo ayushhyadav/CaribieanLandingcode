@@ -61,7 +61,7 @@ const HomeHeader = () => {
 
     return (
         <nav style={{ borderBottom: '1px solid #E5E7EB', padding: 20 }} className="navbar navbar-expand-lg navbar-white">
-            <div style={{ width: '90%', justifyContent: 'space-between' }} className="container-fluid main-hd">
+            <div style={{ width: '100%', justifyContent: 'space-between' }} className="container-fluid main-hd">
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <img style={{ width: 50, height: 45 }} alt='' src={require('../Image/Group1.png')} />
                     <Link to='/' style={{ height: '30px', width: '155px', marginTop: 6 }}>
@@ -91,7 +91,7 @@ const HomeHeader = () => {
                                     <Link to={userId ? `/booking/${userId}` : '/login'} onClick={handleBookingClick} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Booking History</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Earnings</Link>
+                                    <Link to={`/earning/${userId}`}  style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">Earnings</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to={`/mylisting/${userId}`} style={{ fontSize: 18, fontWeight: '500', display: 'flex', justifyContent: 'flex-end' }} className="nav-link">My Listings</Link>
@@ -138,7 +138,7 @@ const HomeHeader = () => {
                             <Link style={{ marginLeft: 20 }} to='/usersignup'>
                                 <button style={{
                                     height: 48,
-                                    width: '10rem',
+                                    width: '9rem',
                                     border: 'none',
                                     borderRadius: 11,
                                     color: 'white',
