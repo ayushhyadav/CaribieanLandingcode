@@ -22,7 +22,7 @@ function Profile({ imageUrl, name, location , cancellationPolicy , rating, revie
           />
           <div className="superhost-badge">+</div>
           {/* <div className="edit">Edit</div> */}
-          <a className="close" onClick={handleClose}>X</a>
+        
         </div>
         <div className="card-body">
           <h2>{name}</h2>

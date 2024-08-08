@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import Profile from './Profile';
 import Calander from '../../Components/Deshbord/Calander';
 import ReactCountryFlag from "react-country-flag";
@@ -11,7 +11,10 @@ import './userDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import Editprofile from './Editprofile';
-
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 i18nIsoCountries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 const Feature = [
@@ -34,6 +37,7 @@ class UserDetails extends Component {
             extra_service_description: '',
             start_date: '',
             end_date: '',
+            profileOpen: false,
         };
 
         i18nIsoCountries.registerLocale(require('i18n-iso-countries/langs/en.json'));
@@ -55,9 +59,12 @@ class UserDetails extends Component {
     }
 
     handleProfileClose = () => {
-        window.location.reload();
+        this.setState({ profileOpen: false });
     }
 
+    handleProfileOpen = () => {
+        this.setState({ profileOpen: true });
+    }
     render() {
         const { propertyData } = this.props;
         console.log('produser',propertyData)
@@ -105,72 +112,40 @@ class UserDetails extends Component {
                    
                 </div>
                 <div style={{ borderBottom: '1px solid #E5E7EB', display: 'flex', flexDirection: 'row', textAlign: 'center', alignSelf: 'center', justifyContent: 'space-between', width: '90%', margin: '0 auto', padding: 10, marginTop: 30 }}>
-                    <div style={{display:'flex'}}>
-                    <Popup
-                        shouldCloseOnOverlayClick={false}
-                        trigger={
-                            <div style={{ cursor: 'pointer' }}>
-                                <img 
-                                    style={{ width: 40, borderRadius: 100, height: 40 }} 
-                                    src={`${BaseUrl.BaseUrl}/${propertyData?.profile_url}`} 
-                                    alt="Profile"
-                                />
-                                
-                                <label style={{ marginLeft: 10, color: '#000000', fontSize: 18, fontWeight: '500', cursor: 'pointer' }}>
-                                    {propertyData?.first_name} {propertyData?.last_name}
-                                </label>
-                               
-                            </div>
-                        }
-                        modal
-                        closeOnDocumentClick={false}
-                        contentStyle={{ minHeight: "100px", width: '100%', overflow: 'auto', background: 'transparent' }}
-                    >
-                        {(close) => (
-                            <div style={{ height: 'auto', overflow: 'scroll' }}>
-                                <Profile 
-                                    imageUrl={`${BaseUrl.BaseUrl}/${propertyData?.profile_url}`}
-                                    name={`${propertyData?.first_name} ${propertyData?.last_name}`}
-                                    location={`${propertyData?.property?.country}`}
-                                    cancellationPolicy={`${propertyData?.property?.cancellationPolicy}`}
-                                    rating="4.91"
-                                    reviews="318"
-                                    languages="English"
-                                    onClose={() => { 
-                                        close(); 
-                                        this.handleProfileClose(); 
-                                    }} 
-                                />
-                            </div>
-                            
-                        )}
-                        
-                    </Popup>
-                    <FontAwesomeIcon 
-                            icon={faEdit} 
-                            style={{ marginLeft: 10, cursor: 'pointer' }} 
-                        
-                        />
+                    <div style={{ display: 'flex' }}>
+                        <div style={{ cursor: 'pointer' }} onClick={this.handleProfileOpen}>
+                            <img
+                                style={{ width: 40, borderRadius: 100, height: 40 }}
+                                src={`${BaseUrl.BaseUrl}/${propertyData?.profile_url}`}
+                                alt="Profile"
+                            />
+                            <label style={{ marginLeft: 10, color: '#000000', fontSize: 18, fontWeight: '500', cursor: 'pointer' }}>
+                                {propertyData?.first_name} {propertyData?.last_name}
+                            </label>
                         </div>
-                    
-                    <button className='messa'
-                            style={{
-                                width: '75px',
-                                background: 'transparent',
-                                color: 'black',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center',
-                                // padding: ' 5px 20px 7px',
-                                padding:'10px',
-                              fontSize:'15px',
-                                height: '35px',
-                                border: '2px solid',
-                                borderImage: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%) 1',
-                            }}
+                        <FontAwesomeIcon
+                            icon={faEdit}
+                            style={{ marginLeft: 10, cursor: 'pointer' }}
+                        />
+                    </div>
+                    <Button
+                        className='messa'
+                        style={{
+                            width: '100px',
+                            background: 'transparent',
+                            color: 'black',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            padding: '10px',
+                            fontSize: '15px',
+                            height: '35px',
+                            border: '2px solid',
+                            borderImage: 'linear-gradient(95.31deg, #56BBFF 1.59%, #55BBFF 1.6%, #061BEB 97.36%) 1',
+                        }}
                     >
                         Message
-                    </button>
+                    </Button>
                 </div>
                 <div style={{ marginTop: 20, width: '90%', margin: '0 auto' }}>
                     <h2 style={{ marginTop: 10, fontSize: 18, fontWeight: 600 }}>Description</h2>
@@ -262,6 +237,35 @@ class UserDetails extends Component {
                 <div style={{ width: '90%', margin: '0 auto', padding: 20, justifyContent: 'center', marginBottom: 20, alignItems: 'center' }}>
                     <label style={{ textAlign: 'center' }}>No Comments yet......</label>
                 </div>
+                <Dialog
+                    open={this.state.profileOpen}
+                    onClose={this.handleProfileClose}
+                    PaperProps={{
+                        style: {
+                            overflow:'hidden',
+                            width: '100%', // Adjust the width as needed
+                           height:'420px',
+                            maxWidth: '500px', // Maximum width
+                            // padding: '20px', // Padding inside the dialog
+                        },
+                    }}
+                >
+                    {/* <DialogTitle>Profile</DialogTitle> */}
+                    <a className="close" onClick={this.handleProfileClose}>X</a>
+                    <DialogContent>
+                    <Profile 
+                                    imageUrl={`${BaseUrl.BaseUrl}/${propertyData?.profile_url}`}
+                                    name={`${propertyData?.first_name} ${propertyData?.last_name}`}
+                                    location={`${propertyData?.property?.country}`}
+                                    cancellationPolicy={`${propertyData?.property?.cancellationPolicy}`}
+                                    rating="4.91"
+                                    reviews="318"
+                                    languages="English"
+                                   
+                                />
+
+                    </DialogContent>
+                </Dialog>
             </div>
         );
     }
