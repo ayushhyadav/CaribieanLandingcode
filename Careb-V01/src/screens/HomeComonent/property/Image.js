@@ -72,7 +72,6 @@ export default class Image extends Component {
                 />
                 
             ))}
-           
           </div>
         </div>
     );

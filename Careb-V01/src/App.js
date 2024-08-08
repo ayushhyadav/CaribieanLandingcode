@@ -34,7 +34,10 @@ import PrivacyPolicy from './screens/HomeComonent/Footer/Privacypolicy.js';
 import RefundPolicy from './screens/HomeComonent/Footer/Refundpolicy.js';
 import CookiePolicy from './screens/HomeComonent/Footer/Cookiepolicy.js';
 import CancellationPolicy from './screens/HomeComonent/Footer/Cancellationpolicy.js';
-   import Aboutus from './screens/HomeComonent/Footer/Aboutus.js';                                                                                                   
+   import Aboutus from './screens/HomeComonent/Footer/Aboutus.js'; 
+   
+
+
 const App = () => {
   return (
    <>

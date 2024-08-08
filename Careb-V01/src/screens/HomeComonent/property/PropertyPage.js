@@ -8,6 +8,7 @@ import BaseUrl from '../../Server/BaseUrl';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Footer from '../Footer/Footer';
+import Profile from './Profile';
 
 export default function PropertyPage() {
   const location = useLocation();

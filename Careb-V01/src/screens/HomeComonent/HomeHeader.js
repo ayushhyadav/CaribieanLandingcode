@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './HomeHeader.css';
 import BaseUrl from '../Server/BaseUrl';
+import Dropdown from './property/DropDown';
 
 const HomeHeader = () => {
     const navigate = useNavigate();
     const [hasProperty, setHasProperty] = useState(false);
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const userId = localStorage.user_id;
 
     useEffect(() => {
@@ -57,6 +59,10 @@ const HomeHeader = () => {
             event.preventDefault(); // Prevent the default link behavior
             navigate('/login'); // Redirect to login if userId is not present
         }
+    };
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
     };
 
     return (
@@ -112,7 +118,8 @@ const HomeHeader = () => {
 
                 <div className='ahost' style={{ display: 'flex', alignItems: 'center' }}>
                     <Link className='hind-bs' to='/'><img src={require('../../assets/sms.png')} alt='' /></Link>
-                    <img className='hind-bs' style={{ marginLeft: 15 }} src={require('../../assets/notification.png')} alt='' />
+                    <img className='hind-bs' style={{ marginLeft: 15 }} src={require('../../assets/notification.png')} alt='' onClick={toggleDropdown} />
+                    {isDropdownOpen && <Dropdown />}
                     {hasProperty ? (
                         <div className='Become'>
                             <button onClick={handleBecomeuserClick} style={{ marginLeft: 10, height: 48, background: 'none', border: '2px solid #000', padding: 0, fontWeight: 500, borderRadius: 11,whiteSpace:'nowrap' }} className="me-2 btn host" type="button">Become a User</button>
